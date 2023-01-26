@@ -13,6 +13,8 @@ Todo:
 
 WAY LATER:
 - Mobile Responsive 100%, reminder that there exists only 4 pages, home, search, library, playlist view
+- https://chakra-ui.com/docs/hooks/use-media-query This hook will help
+- https://chakra-ui.com/docs/components/drawer/usage Drawer + useDisclosure for the menu bar potentially save big room
 
 In the project directory, you can run:
 
