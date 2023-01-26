@@ -71,6 +71,9 @@ const Sidebar = ({ sidebarwidth }) => {
               pb={3}
               as={Link}
               to="/"
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
             >
               <MdHomeFilled
                 color={
@@ -106,6 +109,7 @@ const Sidebar = ({ sidebarwidth }) => {
               as={Link}
               to="/search"
               onClick={() => {
+                window.scrollTo(0, 0);
                 setTimeout(() => {
                   document.querySelector(".searchbartarget").focus();
                 }, 200);
@@ -186,6 +190,9 @@ const Sidebar = ({ sidebarwidth }) => {
               pb={3}
               as={Link}
               to="/library"
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
             >
               <BiLibrary
                 color={
