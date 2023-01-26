@@ -1,6 +1,7 @@
 # Spotifree
 
 Todo:
+
 - Sample playlists w/ songs in localStorage
 - liked songs on localStorage
 - Repeat Button
@@ -10,11 +11,14 @@ Todo:
 - ## Your Library UI (Playlists and liked songs, these two only)
 - ## Home (generic recommendations hard coded in, bieber pop doja etc, then your playlists, these two)
 - playlists bar on left disable scrollbar
+- tooltip on the playbutton and search ("Try playing this song now!") ("Try searching any song, yes, ANY song!")
 
 WAY LATER:
+
 - Mobile Responsive 100%, reminder that there exists only 4 pages, home, search, library, playlist view
 - https://chakra-ui.com/docs/hooks/use-media-query This hook will help
 - https://chakra-ui.com/docs/components/drawer/usage Drawer + useDisclosure for the menu bar potentially save big room
+- include a gif of the mobile responsive design
 
 In the project directory, you can run:
 
