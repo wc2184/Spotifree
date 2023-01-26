@@ -18,6 +18,7 @@ WAY LATER:
 - Mobile Responsive 100%, reminder that there exists only 4 pages, home, search, library, playlist view
 - https://chakra-ui.com/docs/hooks/use-media-query This hook will help
 - https://chakra-ui.com/docs/components/drawer/usage Drawer + useDisclosure for the menu bar potentially save big room
+- navbar on bottom, just play button and song and pic on bottom, drawer for search or modal? [inspo pic reference](https://www.spotifyvault.com/m/3f3d43ab0ab036b7/original/Library-mockup.png) MUCH EASIER THAN YOU FEEL 
 - include a gif of the mobile responsive design
 - default to /search 
 
