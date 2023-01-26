@@ -1,0 +1,29 @@
+.sidebar {
+  position: relative;
+  z-index: 11;
+}
+
+.addIconParent:hover .addIcon,
+.addIconParent:hover .addIconText {
+  color: white;
+}
+/* hover over create playlist and lights up both the icon and the text -william
+https://stackoverflow.com/questions/7217244/style-child-element-when-hover-on-parent */
+
+playlistsScroll {
+  scrollbar-width: 18px; /*thin;*/
+  scrollbar-color: skyblue #000066;
+}
+playlistsScroll::-webkit-scrollbar {
+  width: 18px;
+}
+
+playlistsScroll::-webkit-scrollbar-track {
+  background: #000066 !important; /* color of the tracking area */
+}
+
+playlistsScroll::-webkit-scrollbar-thumb {
+  background-color: skyblue; /* color of the scroll thumb */
+  border-radius: 1px; /* roundness of the scroll thumb */
+  /* border: 1px solid #000066;  */ /* creates padding around scroll thumb */
+}

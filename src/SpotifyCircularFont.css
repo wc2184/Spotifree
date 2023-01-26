@@ -1,0 +1,40 @@
+/* These are Spotify's internal fonts, called Circular */
+@font-face {
+  font-family: "Circular";
+  font-weight: 400;
+  src: local("Circular"), url(./fonts/CircularStd-Book.otf) format("opentype");
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+@font-face {
+  font-family: "Circular";
+  font-weight: 700;
+
+  src: local("Circular"), url(./fonts/CircularStd-Bold.otf) format("opentype");
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+@font-face {
+  font-family: "Circular";
+  font-weight: 900;
+
+  src: local("Circular"), url(./fonts/CircularStd-Black.otf) format("opentype");
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+@font-face {
+  font-family: "Circular";
+  font-weight: 500;
+
+  src: local("Circular"), url(./fonts/CircularStd-Medium.otf) format("opentype");
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+@font-face {
+  font-family: "Circular";
+  font-weight: 300;
+
+  src: local("Circular"), url(./fonts/CircularStd-Light.otf) format("opentype");
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}

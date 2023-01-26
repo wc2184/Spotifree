@@ -1,0 +1,105 @@
+.player-wrapper {
+  position: fixed;
+  bottom: 0;
+  height: 93px;
+  width: 100%;
+  background-color: rgb(24, 24, 24);
+  padding: 0 16px;
+  /* z-index: 3; */
+  display: flex;
+  border-top: 2px solid rgb(50, 50, 50);
+  box-shadow: -10px -5px 24px rgb(0, 0, 0, 0.6);
+  z-index: 12;
+}
+.reactplayer {
+  height: 0px;
+  /* 0px to make it invis, otherwise 300 h 500 w */
+  width: 0px;
+}
+
+.coreplayer {
+  display: flex;
+}
+
+.detailsFlexPortion {
+  flex: 1 0 33%;
+  display: flex;
+  align-items: center;
+}
+.detailsContainer {
+  display: flex;
+  align-items: center;
+}
+.playerFlexPortion {
+  flex: 1 0 33%;
+  display: flex;
+  margin-top: 3px;
+  flex-direction: column;
+  justify-content: center;
+}
+.volumeFlexPortion {
+  flex: 1 0 33%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.tophalfplayer {
+  /* text-align: center; */
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 21px;
+}
+
+.bottomhalfplayer {
+  margin-top: 2px;
+  margin-bottom: 3px;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-5deg);
+  }
+  20% {
+    transform: translate(-1px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(5deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-5deg);
+  }
+  60% {
+    transform: translate(-1px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(1px, 1px) rotate(-5deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(5deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-5deg);
+  }
+}
+
+.noselect {
+  /* source: https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting */
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}

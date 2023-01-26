@@ -1,0 +1,26 @@
+.topcontainersignin {
+  height: 40%;
+  width: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#username {
+  display: block;
+  /* margin-left: auto; */
+}
+
+.testt2 {
+  font-family: Circular;
+  font-weight: 700;
+  text-align: center;
+  font-size: 14px;
+  /* letter-spacing: -1.75px; */
+  margin-top: 0;
+}
+
+a {
+  text-decoration: dashed;
+}

@@ -1,0 +1,26 @@
+.topcontainer {
+  height: 40%;
+  width: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#username {
+  display: block;
+  /* margin-left: auto; */
+}
+
+.testt {
+  font-family: Circular;
+  font-weight: 700;
+  text-align: center;
+  font-size: 32px;
+  letter-spacing: -1.75px;
+  margin-top: 0;
+}
+
+a {
+  text-decoration: dashed;
+}
