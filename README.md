@@ -1,5 +1,19 @@
 # Spotifree
 
+Todo:
+- Sample playlists w/ songs in localStorage
+- liked songs on localStorage
+- Repeat Button
+- ## Playlist functionality (add, back song, forward song, shuffle)
+- potentially rewrite entire playlist code
+- add "who made this" to top right, created by William Chan with github link or portfolio link
+- ## Your Library UI (Playlists and liked songs, these two only)
+- ## Home (generic recommendations hard coded in, bieber pop doja etc, then your playlists, these two)
+- playlists bar on left disable scrollbar
+
+WAY LATER:
+- Mobile Responsive 100%, reminder that there exists only 4 pages, home, search, library, playlist view
+
 In the project directory, you can run:
 
 ### `npm start`
