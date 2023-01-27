@@ -3,7 +3,7 @@
   Spotifree 
   <br/>
   <sub>Search and listen to any song- 100% free.</sub>
-  <br/> <sub><sub>A nearly identical Spotify clone</sub></sub>
+  <br/> <sub><sub>A near identical Spotify clone</sub></sub>
   <p></p>
  
 </h1>
