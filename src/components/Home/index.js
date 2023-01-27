@@ -577,7 +577,8 @@ const Home = () => {
             {searchLoading ? loadingComponent : null}
             {!submittedNoembed && !searchLoading ? (
               <div className="emptyQuery">
-                Please enter a search query above!
+                Please enter a search query above! Yes, you can listen to ANY
+                song for free.
               </div>
             ) : null}
             {!submittedNoembed || searchLoading ? null : (
