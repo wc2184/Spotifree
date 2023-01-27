@@ -27,6 +27,7 @@ input:focus {
 }
 
 /* ===== Scrollbar CSS ===== */
+/* creds to Stephen Paton https://codepen.io/stephenpaton-tech/full/JjRvGmY */
 /* Firefox */
 * {
   scrollbar-width: auto;
