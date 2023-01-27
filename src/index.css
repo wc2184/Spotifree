@@ -40,11 +40,14 @@ input:focus {
 }
 
 *::-webkit-scrollbar-track {
-  background: #121212;
+  background: #4e4c4c;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #666666;
+  background-color: #d2c7c7;
   border-radius: 0px;
   border: 0px solid #a6a6a6;
+}
+.player-wrapper {
+  overflow: auto;
 }
