@@ -172,11 +172,7 @@ function App() {
       </Route>
     </Switch>
   );
-  console.log(
-    location.pathname,
-    "pathname",
-    location.pathname != "/login" || location.pathname != "/signup"
-  );
+
   return (
     <div className="outermostwrapper" style={{ height: "100%" }}>
       {location.pathname != "/login" && location.pathname != "/signup" ? (

@@ -6,11 +6,11 @@ import {
 } from "@chakra-ui/react";
 
 const MyInput = ({ name, state, setState, text, handleSubmit, errors }) => {
-  //   console.log(errors, "this is errors");
+  //
   let ownerrors = errors.filter((arr) => {
     return arr.includes(name);
   });
-  console.log(ownerrors, "thsi is errors for ", name);
+
   return (
     <>
       <label

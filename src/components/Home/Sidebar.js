@@ -14,11 +14,11 @@ import { useDispatch, useSelector } from "react-redux";
 const Sidebar = ({ sidebarwidth }) => {
   const location = useLocation();
   const dispatch = useDispatch();
-  // console.log(location.pathname);
+  //
   const currentUser = useSelector((state) => state.session.user);
-  // console.log(currentUser, "in sidebar user");
+  //
   const playlists = useSelector((state) => state.playlist.list);
-  // console.log(
+  //
   //   playlists.sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt)),
   //   " in sidebar playlists"
   // );
@@ -35,7 +35,7 @@ const Sidebar = ({ sidebarwidth }) => {
   //     }),
   //   })
   //     .then((res) => res.json())
-  //     .then((data) => console.log(data, "da data fetchhhy"));
+  //     .then((data) =>
   // }, []);
 
   useEffect(() => {

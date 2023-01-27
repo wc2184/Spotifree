@@ -23,15 +23,15 @@ const Navbar = ({ sidebarwidth, submitted, setSubmitted }) => {
   const currentUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory();
-  // console.log(currentUser);
+  //
 
-  // console.log(searchTerm, "this is search term");
+  //
   // around 185, transparaent
 
   // 85 start opacity
 
   // if y > 85
-  // console.log(y, "this y");
+  //
   //* MUST BE 85
   // let opacityNav = y >= 85 ? 60 + (y - 85) * 0.35 : 50;
   let opacityNav = y >= 85 ? 30 + (y - 85) * 0.35 : 10;
@@ -39,7 +39,7 @@ const Navbar = ({ sidebarwidth, submitted, setSubmitted }) => {
   opacityNav = y >= 288 ? 100 : opacityNav;
 
   const location = useLocation();
-  // console.log(location.pathname, "location");
+  //
 
   return (
     <Box className="navbar">
@@ -88,13 +88,7 @@ const Navbar = ({ sidebarwidth, submitted, setSubmitted }) => {
               history.go(1);
             }}
           >
-            <AiOutlineRight
-              color="white"
-              fontSize={30}
-              onClick={() => {
-                console.log("hihii");
-              }}
-            />
+            <AiOutlineRight color="white" fontSize={30} onClick={() => {}} />
           </Box>
         </Flex>
         {location.pathname === "/search" ? (

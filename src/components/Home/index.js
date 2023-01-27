@@ -53,7 +53,7 @@ const Home = () => {
     const fetchNoembedData = async () => {
       let noembedArr = [];
       for (const ele of searchResults) {
-        //  console.log(ele, "da ele");
+        //
 
         let res = await fetch(
           `https://noembed.com/embed?url=https://www.youtube.com/watch?v=${ele.id.videoId}`
@@ -62,7 +62,7 @@ const Home = () => {
         if (!data.hasOwnProperty("error")) noembedArr.push(data);
       }
 
-      // console.log(noembedArr, "THE GUCCI ARR");
+      //
       setNoembedDatas(noembedArr);
       setSubmittedNoembed(true);
       dispatch(setSearchLoading(false));
@@ -71,9 +71,9 @@ const Home = () => {
       fetchNoembedData();
     }
   }, [searchResults]);
-  // console.log(noembedDatas, "GUCCI STATE ARR");
-  // console.log(searchResults, "search resultss");
-  console.log(submittedNoembed, "this submitted");
+  //
+  //
+
   const loadingComponent = (
     <div>
       <div id="wave">
@@ -186,8 +186,6 @@ const Home = () => {
                             transform: "scale(0.99)",
                           }}
                           onClick={() => {
-                            console.log(loading, "this his loading before");
-
                             dispatch(
                               setCurrentSong(searchResults[i].id.videoId)
                             );
@@ -199,14 +197,11 @@ const Home = () => {
 
                             const playVideoCheck = setInterval(() => {
                               // because setInterval and setTimeout has closure effects, there's literally no way to get the latest state without using the implicitly passed argument trick in the setState to retrieve the latest value and then just return the original state - william
-                              console.log("should play vid");
+
                               setLoading((loading) => {
-                                console.log(loading, "this is loading");
                                 if (!loading) {
                                   setPlayerTarget((playerTarget) => {
-                                    console.log("finally playing vid");
                                     setTimeout(() => {
-                                      console.log("plays video in first");
                                       playerTarget.playVideo();
                                     }, 400);
                                     return playerTarget;
@@ -398,8 +393,6 @@ const Home = () => {
                             transform: "scale(0.99)",
                           }}
                           onClick={() => {
-                            console.log(loading, "this his loading before");
-
                             dispatch(
                               setCurrentSong(searchResults[i].id.videoId)
                             );
@@ -411,14 +404,11 @@ const Home = () => {
 
                             const playVideoCheck = setInterval(() => {
                               // because setInterval and setTimeout has closure effects, there's literally no way to get the latest state without using the implicitly passed argument trick in the setState to retrieve the latest value and then just return the original state - william
-                              console.log("should play vid");
+
                               setLoading((loading) => {
-                                console.log(loading, "this is loading");
                                 if (!loading) {
                                   setPlayerTarget((playerTarget) => {
-                                    console.log("finally playing vid");
                                     setTimeout(() => {
-                                      console.log("plays video in first");
                                       playerTarget.playVideo();
                                     }, 400);
                                     return playerTarget;
@@ -638,8 +628,6 @@ const Home = () => {
                         transform: "scale(0.99)",
                       }}
                       onClick={() => {
-                        console.log(loading, "this his loading before");
-
                         dispatch(setCurrentSong(searchResults[0].id.videoId));
                         //BOOKMARK playerTarget.seekTo(val)
                         if (currentVideo === searchResults[0].id.videoId) {
@@ -649,14 +637,11 @@ const Home = () => {
 
                         const playVideoCheck = setInterval(() => {
                           // because setInterval and setTimeout has closure effects, there's literally no way to get the latest state without using the implicitly passed argument trick in the setState to retrieve the latest value and then just return the original state - william
-                          console.log("should play vid");
+
                           setLoading((loading) => {
-                            console.log(loading, "this is loading");
                             if (!loading) {
                               setPlayerTarget((playerTarget) => {
-                                console.log("finally playing vid");
                                 setTimeout(() => {
-                                  console.log("plays video in first");
                                   playerTarget.playVideo();
                                 }, 400);
                                 return playerTarget;
@@ -804,7 +789,7 @@ const Home = () => {
                     <Box>
                       {noembedDatas.slice(1, 5).map((ele) => {
                         {
-                          // console.log(ele, "this is ele");
+                          //
                         }
                         return (
                           <Box
@@ -828,8 +813,6 @@ const Home = () => {
                               transition: "ease 0.2s",
                             }}
                             onClick={() => {
-                              console.log(loading, "this his loading before");
-
                               dispatch(
                                 setCurrentSong(
                                   ele.url.replace(
@@ -850,14 +833,11 @@ const Home = () => {
                               }
                               const playVideoCheck = setInterval(() => {
                                 // because setInterval and setTimeout has closure effects, there's literally no way to get the latest state without using the implicitly passed argument trick in the setState to retrieve the latest value and then just return the original state - william
-                                console.log("should play vid");
+
                                 setLoading((loading) => {
-                                  console.log(loading, "this is loading");
                                   if (!loading) {
                                     setPlayerTarget((playerTarget) => {
-                                      console.log("finally playing vid");
                                       setTimeout(() => {
-                                        console.log("plays video in second");
                                         playerTarget.playVideo();
                                       }, 400);
                                       return playerTarget;
@@ -949,7 +929,7 @@ const Home = () => {
                       }}
                       dangerouslySetInnerHTML={{ __html: ele.snippet.title }}
                       onClick={() => {
-                        console.log(loading, "this his loading before");
+                        
                         dispatch(setCurrentSong(ele.id.videoId));
                         if (currentVideo === ele.id.videoId) {
                           playerTarget.seekTo(0);
@@ -957,12 +937,12 @@ const Home = () => {
                         }
                         const playVideoCheck = setInterval(() => {
                           // because setInterval and setTimeout has closure effects, there's literally no way to get the latest state without using the implicitly passed argument trick in the setState to retrieve the latest value and then just return the original state - william
-                          console.log("should play vid");
+                          
                           setLoading((loading) => {
-                            console.log(loading, "this is loading");
+                            
                             if (!loading) {
                               setPlayerTarget((playerTarget) => {
-                                console.log("finally playing vid");
+                                
                                 setTimeout(() => {
                                   playerTarget.playVideo();
                                 }, 200);
@@ -1003,7 +983,6 @@ const Home = () => {
                           transition: "ease 0.2s",
                         }}
                         onClick={() => {
-                          console.log(loading, "this his loading before");
                           dispatch(
                             setCurrentSong(
                               ele.url.replace(
@@ -1029,17 +1008,12 @@ const Home = () => {
                           // }
                           const playVideoCheck = setInterval(() => {
                             // because setInterval and setTimeout has closure effects, there's literally no way to get the latest state without using the implicitly passed argument trick in the setState to retrieve the latest value and then just return the original state - william
-                            console.log("should play vid");
 
                             setLoading((loading) => {
-                              console.log(loading, "this is loading");
                               if (!loading) {
-                                console.log("BIGG");
                                 // setLoading(true);
                                 setPlayerTarget((playerTarget) => {
-                                  console.log("finally playing vid");
                                   setTimeout(() => {
-                                    console.log("plays vid in 3rd THIRD");
                                     playerTarget.playVideo();
                                     setLoading(false); // bookmarko
                                   }, 400);
@@ -1225,8 +1199,6 @@ const Home = () => {
                         transform: "scale(0.99)",
                       }}
                       onClick={() => {
-                        console.log(loading, "this his loading before");
-
                         dispatch(setCurrentSong(searchResults[i].id.videoId));
                         //BOOKMARK playerTarget.seekTo(val)
                         if (currentVideo === searchResults[0].id.videoId) {
@@ -1236,14 +1208,11 @@ const Home = () => {
 
                         const playVideoCheck = setInterval(() => {
                           // because setInterval and setTimeout has closure effects, there's literally no way to get the latest state without using the implicitly passed argument trick in the setState to retrieve the latest value and then just return the original state - william
-                          console.log("should play vid");
+
                           setLoading((loading) => {
-                            console.log(loading, "this is loading");
                             if (!loading) {
                               setPlayerTarget((playerTarget) => {
-                                console.log("finally playing vid");
                                 setTimeout(() => {
-                                  console.log("plays video in first");
                                   playerTarget.playVideo();
                                 }, 400);
                                 return playerTarget;

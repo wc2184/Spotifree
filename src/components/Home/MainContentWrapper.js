@@ -1,5 +1,5 @@
 const MainContentWrapper = ({ children, sidebarwidth }) => {
-  // console.log(sidebarwidth, "sidebar wid");
+  //
   // window.onscroll = function () {
   //   window.scrollTo(0, window.scrollY);
   // };

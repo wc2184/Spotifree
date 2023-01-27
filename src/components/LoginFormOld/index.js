@@ -14,15 +14,13 @@ const LoginFormPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setServerErrors([]);
-    console.log("in form. credential", username);
+
     if (username === "" || password === "") {
-      console.log("yoo");
       return;
     }
     dispatch(login({ credential: username, password: password }))
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.errors, "this is login errors (if any)");
         setServerErrors(data.errors);
       });
   };

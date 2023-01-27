@@ -8,8 +8,7 @@ import ProfileButton from "./ProfileButton";
 const Navigation = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.session);
-  currentUser.user &&
-    console.log(currentUser.user.username, "curr user in navigation");
+
   const muhStyles = {
     display: "flex",
     children: {

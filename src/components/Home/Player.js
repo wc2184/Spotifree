@@ -44,22 +44,21 @@ const Player = ({
   const dispatch = useDispatch();
   const currentVideo = useSelector((state) => state.player.song);
 
-  //   console.log(currentVideo, "this is currVideo");
+  //
   const pressSpaceListener = (e) => {
     // e.preventDefault();
-    console.log(e.target, "REAL TARGET");
+
     if (
       (e.key == " " && e.target == document.body) ||
       e.target.nodeName == "A"
     ) {
       e.preventDefault();
     }
-    console.log(e.target.nodeName);
-    console.log(e.key, "THIS KEYYY");
+
     if (e.key == " " && e.target.nodeName !== "INPUT") {
       let playbutton = document.querySelector(".triangleplayerbutton");
       playbutton.click();
-      console.log(playbutton, "da button");
+
       //   playerTarget.playVideo();
       //   playerTarget.pauseVideo();
     }
@@ -67,7 +66,6 @@ const Player = ({
       let inputArea = document.querySelector(".searchbartarget");
       let stored = inputArea.value;
       inputArea.focus();
-      console.log(stored, "THIS STORED");
 
       setTimeout(() => {
         inputArea.value = stored;
@@ -105,7 +103,7 @@ const Player = ({
     //   autoplay: 1,
     // },
   };
-  //   console.log(playerTarget, "thsi is pLAYER TARGET");
+  //
   let iframeWindow;
 
   var lastTimeUpdate = 0;
@@ -119,14 +117,13 @@ const Player = ({
 
         if (time !== lastTimeUpdate) {
           lastTimeUpdate = time;
-          //   console.log(time);
+          //
           setCurrentTime(time);
         }
-        // console.log(playerTarget.getPlayerState(), "this is state info");
+        //
         setCurrentStatus(playerTarget.getPlayerState());
         // setVolume(playerTarget.getVolume());
         // playerTarget.setVolume(volume);
-        console.log(playerTarget.getVolume(), "this is REAL YT volume");
 
         if (playerTarget.getPlayerState() === 0) {
           // when video ends set to 0
@@ -136,7 +133,7 @@ const Player = ({
       }
     }
   }
-  //   if (playerTarget) console.log(playerTarget.getPlayerState(), "player state");
+  //   if (playerTarget)
   useEffect(() => {
     iframeWindow =
       playerTarget &&
@@ -151,7 +148,6 @@ const Player = ({
 
   useEffect(() => {
     if (currentVideo !== "") {
-      console.log("change is here BOI");
       setLoading(true);
       setVisualLoading(true);
       fetch(
@@ -159,19 +155,19 @@ const Player = ({
       )
         .then((res) => res.json())
         .then((data) => {
-          //   console.log(data, "this is data");
+          //
           setVideoDetails(data.items[0].snippet);
           setCurrentStatus(-1);
         });
     }
   }, [currentVideo]);
-  //   console.log(videoDetails, " THIS IS SNIPPETT");
-  //   console.log(currentTime, "current time", "/", maxTime, "maxTime");
-  //   console.log(currentTime / maxTime);
-  //   console.log(currentStatus, "this is curr status");
+  //
+  //
+  //
+  //
   if (videoDetails) {
-    // console.log(videoDetails.channelTitle);
-    // console.log(videoDetails.title.includes("VEVO"));
+    //
+    //
     //   ? videoDetails.title.replace(/([a-z0-9])([A-Z])/g, "$1 $2")
     //   : videoDetails.title)
   }
@@ -185,8 +181,8 @@ const Player = ({
         style={{ width: "0px", height: "0px" }}
         opts={opts}
         onReady={(e) => {
-          //   console.log(e, "this is e");
-          //   console.log("READY TO PLAY");
+          //
+          //
 
           setTimeout(() => {
             setLoading(false);
@@ -195,7 +191,7 @@ const Player = ({
           setTimeout(() => {
             setVisualLoading(false);
           }, 2000);
-          console.log(loading, "this is loadddding in the player");
+
           setPlayerTarget(e.target);
           setCurrentTime(e.target.getCurrentTime());
           setMaxTime(e.target.getDuration());
@@ -298,7 +294,6 @@ const Player = ({
               <>
                 <Button
                   onClick={() => {
-                    console.log(playerTarget, "this is playerTarget");
                     playerTarget.playVideo();
                   }}
                   sx={{
@@ -338,7 +333,6 @@ const Player = ({
             ) : (
               <Button
                 onClick={() => {
-                  console.log(playerTarget, "this is playerTarget");
                   playerTarget.pauseVideo();
                 }}
                 sx={{ borderRadius: "32px", width: "32px", padding: "0" }}
@@ -532,8 +526,8 @@ const Player = ({
                   change = 100;
                 }
                 playerTarget.setVolume(change);
-                // console.log(val, "the val");
-                // console.log(volume, "the react voool");
+                //
+                //
                 setVolume(val);
                 // playerTarget.unMute();
               }

@@ -41,22 +41,18 @@ export const signup = (user) => async (dispatch) => {
   const data2 = await response.clone(); // THIS IS KEY CRUX, CLONE THAT SHIT BEFORE YOU SENT IT
   const data = await response.json();
 
-  //   console.log(data, "this is data from signup");
-  console.log(data.errors === undefined);
-  if (data.errors !== undefined) {
-    console.log("didnt make one");
+  //
 
+  if (data.errors !== undefined) {
     storeCurrentUser(false);
     dispatch(setCurrentUser(null));
   } else {
-    console.log("did make one");
     storeCurrentUser(data.user);
     dispatch(setCurrentUser(data.user));
   }
 
   //   storeCurrentUser(data.user);
 
-  console.log(response, "this is response in the thing");
   return data2;
 };
 
@@ -65,7 +61,7 @@ export const logout = (user) => async (dispatch) => {
     method: "DELETE",
   });
   const data = await res.json();
-  console.log(data, "should be success is logged out");
+
   storeCurrentUser(false);
   dispatch(setCurrentUser(data.user));
 };
@@ -74,7 +70,7 @@ export const restoreSession = () => async (dispatch) => {
   const response = await csrfFetch("/api/session");
   storeCSRFToken(response);
   const data = await response.json();
-  console.log(data, "this is data");
+
   storeCurrentUser(data.user);
   dispatch(setCurrentUser(data.user));
   return response;

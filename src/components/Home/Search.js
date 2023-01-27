@@ -19,9 +19,8 @@ const Search = ({ submitted, setSubmitted }) => {
   const searchResults = useSelector((state) => state.search.searchResults);
   const searchLoading = useSelector((state) => state.search.searchLoading);
   const ref = useRef();
-  console.log(searchTerm, "thsi is search term");
+
   ref.current = searchTerm;
-  console.log(ref, "this is ref");
 
   useEffect(() => {
     document.querySelector(".searchbartarget").focus();
@@ -29,8 +28,8 @@ const Search = ({ submitted, setSubmitted }) => {
 
   //   useEffect(() => {
   //     const searchInterval = setInterval(() => {
-  //       console.log(searchTerm, "search termmy in intervally");
-  //       console.log(ref, "search ref inside ");
+  //
+  //
   //     }, 1000);
   //     return () => {
   //       clearInterval(searchInterval);
@@ -38,17 +37,17 @@ const Search = ({ submitted, setSubmitted }) => {
   //   }, [searchTerm]);
 
   //     const updateLive = () => {
-  //       console.log(searchTerm);
+  //
   //       return searchTerm;
   //     };
   //     const searchNowDebounce = () => {
-  //       console.log("search now");
+  //
   //       // let liveterm = useSelector((state) => state.search.search);
   //       (() => updateLive())();
-  //       // console.log(liveterm);
-  //       console.log(searchTerm, "buggy searchterm");
+  //       //
+  //
   //     };
-  //     console.log(searchTerm, "searchTerm");
+  //
   //     const debouncedSearch = useMemo(() => {
   //       return debounce(searchNow, 1000);
   //     }, []);
@@ -61,7 +60,7 @@ const Search = ({ submitted, setSubmitted }) => {
 
   const searchNow = () => {
     if (!searchTerm) return;
-    console.log(searchTerm, "this is searchTerm");
+
     dispatch(setSearchLoading(true));
     dispatch(searchYoutube(searchTerm)).then(() => {
       setTimeout(() => {
@@ -70,8 +69,8 @@ const Search = ({ submitted, setSubmitted }) => {
       window.scrollTo(0, 0);
     });
   };
-  //   console.log(searchTerm, "da search");
-  //   console.log(searchResults, "da search");
+  //
+  //
   return (
     <>
       <InputGroup

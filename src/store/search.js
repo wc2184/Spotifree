@@ -27,7 +27,6 @@ export const setSearchLoading = (bool) => {
 };
 
 export const searchYoutube = (text) => async (dispatch) => {
-  console.log("fetched once");
   const response = await fetch(
     `https://www.googleapis.com/youtube/v3/search?key=AIzaSyAJ2XLMnSvimbXpCBpUnoKr4RKZr4VwlGY&q=${
       text + " audio"

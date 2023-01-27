@@ -34,21 +34,19 @@ const LoginFormPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("hi");
+
     setSubmitted(true);
-    console.log("in form. credential", username);
+
     if (username === "" || password === "" || errors.length > 0) {
-      console.log("yoo");
       return;
     }
     return dispatch(login({ credential: username, password: password }))
       .then((res) => res.json())
       .then((data) => {
-        console.log(data, "dataaa");
         setServerErrors(data.errors);
       });
   };
-  console.log(width, "this is width");
+
   useEffect(() => {
     let errors = [];
 

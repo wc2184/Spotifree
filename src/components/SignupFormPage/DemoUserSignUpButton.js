@@ -28,7 +28,6 @@ const DemoUserSignUpButton = ({ style }) => {
         >
           <Button
             onClick={() => {
-              console.log("demo ");
               let rand = Math.random().toString(36).substring(2, 12);
               dispatch(
                 signup({
@@ -38,9 +37,7 @@ const DemoUserSignUpButton = ({ style }) => {
                 })
               )
                 .then((res) => res.json())
-                .then((data) => {
-                  console.log(data, "dataaa");
-                });
+                .then((data) => {});
             }}
             sx={{
               borderRadius: "500px",

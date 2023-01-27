@@ -12,9 +12,7 @@ const ProfileButton = () => {
   let dd = document.querySelector(".dropdown");
   useEffect(() => {
     function click(e) {
-      console.log(e.target);
       if (!Array.from(e.target.classList).includes("dropdown")) {
-        console.log("click");
         setShowMenu(false);
       }
     }
