@@ -16,7 +16,11 @@
 </p>
 <h1 align="center">
 <a href="https://spotifreeWilliam.vercel.app">Live Link</a>
+<p></p>
 </h1>
+<br/>
+<p></p>
+<br/><br/>
 Todo:
 
 - Sample playlists w/ songs in localStorage
