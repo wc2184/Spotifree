@@ -1,5 +1,26 @@
-# Spotifree
 
+<h1 align="center">
+  Spotifree 
+  <br/>
+  <sub>Search and listen to any song- 100% free.</sub>
+  <br/> <sub><sub>A near identical Spotify clone</sub></sub>
+  <p></p>
+ 
+</h1>
+
+<p align="center">
+  <img src="https://res.cloudinary.com/dkg7lxnj2/image/upload/v1674800873/Spotifree_ft6ebt.png" />
+</p>
+<p align="center">
+  <img src="https://res.cloudinary.com/dkg7lxnj2/image/upload/v1674802505/test_vrduhd.gif" />
+</p>
+<h1 align="center">
+<a href="https://spotifreeWilliam.vercel.app/search">Live Link</a>
+<p></p>
+</h1>
+<br/>
+<p></p>
+<br/><br/>
 Todo:
 
 - Sample playlists w/ songs in localStorage
