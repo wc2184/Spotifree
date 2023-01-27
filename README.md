@@ -11,7 +11,7 @@
 <p align="center">
   <img src="https://res.cloudinary.com/dkg7lxnj2/image/upload/v1674800873/Spotifree_ft6ebt.png" />
 </p>
-![logo](https://res.cloudinary.com/dkg7lxnj2/image/upload/v1674800873/Spotifree_ft6ebt.png)
+
 Todo:
 
 - Sample playlists w/ songs in localStorage
