@@ -11,7 +11,9 @@
 <p align="center">
   <img src="https://res.cloudinary.com/dkg7lxnj2/image/upload/v1674800873/Spotifree_ft6ebt.png" />
 </p>
-
+<p align="center">
+  <img src="https://res.cloudinary.com/dkg7lxnj2/image/upload/v1674802505/test_vrduhd.gif" />
+</p>
 Todo:
 
 - Sample playlists w/ songs in localStorage
