@@ -23,6 +23,10 @@ const Search = ({ submitted, setSubmitted }) => {
   ref.current = searchTerm;
   console.log(ref, "this is ref");
 
+  useEffect(() => {
+    document.querySelector(".searchbartarget").focus();
+  }, []);
+
   //   useEffect(() => {
   //     const searchInterval = setInterval(() => {
   //       console.log(searchTerm, "search termmy in intervally");

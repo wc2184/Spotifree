@@ -55,12 +55,24 @@ const Player = ({
       e.preventDefault();
     }
     console.log(e.target.nodeName);
+    console.log(e.key, "THIS KEYYY");
     if (e.key == " " && e.target.nodeName !== "INPUT") {
       let playbutton = document.querySelector(".triangleplayerbutton");
       playbutton.click();
       console.log(playbutton, "da button");
       //   playerTarget.playVideo();
       //   playerTarget.pauseVideo();
+    }
+    if (e.key == "/" && e.target.nodeName !== "INPUT") {
+      let inputArea = document.querySelector(".searchbartarget");
+      let stored = inputArea.value;
+      inputArea.focus();
+      console.log(stored, "THIS STORED");
+
+      setTimeout(() => {
+        inputArea.value = stored;
+        inputArea.select();
+      }, 0);
     }
   };
   useEffect(() => {
