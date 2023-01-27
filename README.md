@@ -1,6 +1,10 @@
 
 <h1 align="center">
-  Spotifree
+  Spotifree 
+  <br/>
+  <sub>Search and listen to any song- 100% free.</sub>
+  <br/> <sub><sub>A nearly identical Spotify clone</sub></sub>
+  <br/>&emsp;
 </h1>
 
 <p align="center">
