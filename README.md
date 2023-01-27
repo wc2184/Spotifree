@@ -14,6 +14,9 @@
 <p align="center">
   <img src="https://res.cloudinary.com/dkg7lxnj2/image/upload/v1674802505/test_vrduhd.gif" />
 </p>
+<h1 align="center">
+<a href="https://spotifreeWilliam.vercel.app">Live Link</a>
+</h1>
 Todo:
 
 - Sample playlists w/ songs in localStorage
