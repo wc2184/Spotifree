@@ -4,7 +4,8 @@
   <br/>
   <sub>Search and listen to any song- 100% free.</sub>
   <br/> <sub><sub>A nearly identical Spotify clone</sub></sub>
-  <br/>&emsp;
+  <p></p>
+ 
 </h1>
 
 <p align="center">
