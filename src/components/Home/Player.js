@@ -64,14 +64,22 @@ const Player = ({
     }
     if (e.key == "/" && e.target.nodeName !== "INPUT") {
       let inputArea = document.querySelector(".searchbartarget");
-      let stored = inputArea.value;
-      inputArea.focus();
 
       setTimeout(() => {
-        inputArea.value = stored;
+        inputArea.focus();
         inputArea.select();
-      }, 0);
+      }, 100);
     }
+    // if (e.key == "/" && e.target.nodeName !== "INPUT") {
+    //   let inputArea = document.querySelector(".searchbartarget");
+    //   let stored = inputArea.value;
+    //   inputArea.focus();
+
+    //   setTimeout(() => {
+    //     inputArea.value = stored;
+    //     inputArea.select();
+    //   }, 0);
+    // }
   };
   useEffect(() => {
     document.addEventListener("keydown", pressSpaceListener);

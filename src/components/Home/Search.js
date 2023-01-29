@@ -104,6 +104,7 @@ const Search = ({ submitted, setSubmitted }) => {
             // }
             if (e.key == "Enter") {
               searchNow(e);
+              document.querySelector(".searchbartarget").blur();
             }
           }}
         />
