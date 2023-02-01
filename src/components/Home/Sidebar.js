@@ -304,7 +304,7 @@ const Sidebar = ({ sidebarwidth }) => {
             {" "}
             <span style={{ color: "white" }}>Hello</span>
             {playlists.length > 0 &&
-              [...playlists].map((e) => {
+              [...playlists].reverse().map((e) => {
                 return (
                   <Box
                     pl={1}
