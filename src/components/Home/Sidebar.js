@@ -298,7 +298,7 @@ const Sidebar = ({ sidebarwidth }) => {
               // backgroundColor: "red",
             }}
           >
-            {playlists &&
+            {playlists.length > 0 &&
               playlists
                 .slice(0)
                 .reverse()
