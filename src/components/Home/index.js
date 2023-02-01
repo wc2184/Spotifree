@@ -161,7 +161,7 @@ const Home = () => {
                 }}
               >
                 {playlists &&
-                  playlists
+                  [...playlists]
                     .reverse()
                     .slice(0, 6)
                     .map((el, i) => {
