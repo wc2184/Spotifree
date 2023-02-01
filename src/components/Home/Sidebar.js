@@ -313,9 +313,12 @@ const Sidebar = ({ sidebarwidth }) => {
                       textOverflow: "ellipsis",
                       whiteSpace: "nowrap", // does the ... thingy if too long
                       // letterSpacing: "-.5px",
+                      color: location.pathname.includes(e.uniqID)
+                        ? "white"
+                        : "rgb(159, 159, 159)",
                     }}
                     fontSize="15px"
-                    color="rgb(159, 159, 159)"
+                    // color="rgb(159, 159, 159)"
                     pb="12px"
                     _hover={{
                       color: "white",

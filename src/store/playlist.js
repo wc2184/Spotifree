@@ -392,6 +392,7 @@ export const getPlaylists = () => async (dispatch) => {
     localStorage.setItem("playlists", JSON.stringify(initialPlaylists));
   }
   playlists = JSON.parse(localStorage.getItem("playlists"));
+  console.log("this thunk called");
   dispatch(hydratePlaylistsForOne(playlists));
 };
 export const createPlaylist = () => async (dispatch) => {
