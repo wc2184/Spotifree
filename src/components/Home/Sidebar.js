@@ -47,6 +47,7 @@ const Sidebar = ({ sidebarwidth }) => {
 
   useEffect(() => {
     console.log("Playlists are: ", playlists);
+    console.log("changes");
   }, [dispatch, playlists]);
 
   return (
@@ -299,35 +300,32 @@ const Sidebar = ({ sidebarwidth }) => {
             }}
           >
             {playlists.length > 0 &&
-              playlists
-                .slice(0)
-                .reverse()
-                .map((e) => {
-                  return (
-                    <Box
-                      pl={1}
-                      sx={{
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        whiteSpace: "nowrap", // does the ... thingy if too long
-                        // letterSpacing: "-.5px",
-                      }}
-                      fontSize="15px"
-                      color="rgb(159, 159, 159)"
-                      pb="12px"
-                      _hover={{
-                        color: "white",
-                        cursor: "pointer",
-                      }}
-                      onClick={() => {
-                        history.push(`/playlist/${e.uniqID}`);
-                        window.scrollTo(0, 0);
-                      }}
-                    >
-                      {e.name}
-                    </Box>
-                  );
-                })}
+              [...playlists].reverse().map((e) => {
+                return (
+                  <Box
+                    pl={1}
+                    sx={{
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap", // does the ... thingy if too long
+                      // letterSpacing: "-.5px",
+                    }}
+                    fontSize="15px"
+                    color="rgb(159, 159, 159)"
+                    pb="12px"
+                    _hover={{
+                      color: "white",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => {
+                      history.push(`/playlist/${e.uniqID}`);
+                      window.scrollTo(0, 0);
+                    }}
+                  >
+                    {e.name}
+                  </Box>
+                );
+              })}
           </Box>
         </Flex>
       </div>
