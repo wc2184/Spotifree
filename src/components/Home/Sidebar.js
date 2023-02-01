@@ -50,6 +50,8 @@ const Sidebar = ({ sidebarwidth }) => {
     console.log("changes");
   }, [dispatch, playlists]);
 
+  console.log(playlists, "changing");
+
   return (
     <Box className="sidebar">
       <div
