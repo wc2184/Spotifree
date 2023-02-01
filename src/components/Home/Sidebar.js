@@ -300,7 +300,7 @@ const Sidebar = ({ sidebarwidth }) => {
             }}
           >
             {playlists.length > 0 &&
-              [...playlists].reverse().map((e) => {
+              [...playlists].map((e) => {
                 return (
                   <Box
                     pl={1}
