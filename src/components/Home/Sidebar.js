@@ -4,16 +4,17 @@ import { MdHomeFilled } from "react-icons/md";
 import { RiSearchLine, RiSearchFill } from "react-icons/ri";
 import { BiLibrary } from "react-icons/bi";
 import { BsPlusSquareFill } from "react-icons/bs";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import "./Sidebar.css";
 import { useEffect } from "react";
 import csrfFetch from "../../store/csrf";
-import { createPlaylistForOne, getPlaylistsForOne } from "../../store/playlist";
+import { createPlaylist, getPlaylistsForOne } from "../../store/playlist";
 import { useDispatch, useSelector } from "react-redux";
 
 const Sidebar = ({ sidebarwidth }) => {
   const location = useLocation();
   const dispatch = useDispatch();
+  const history = useHistory();
   //
   const currentUser = useSelector((state) => state.session.user);
   //
@@ -39,10 +40,14 @@ const Sidebar = ({ sidebarwidth }) => {
   // }, []);
 
   useEffect(() => {
-    if (currentUser) {
-      dispatch(getPlaylistsForOne(currentUser.id));
-    }
+    // if (currentUser) {
+    //   // dispatch(getPlaylistsForOne(currentUser.id)); playlist rails
+    // }
   }, [dispatch, currentUser]);
+
+  useEffect(() => {
+    console.log("Playlists are: ", playlists);
+  }, [dispatch, playlists]);
 
   return (
     <Box className="sidebar">
@@ -238,7 +243,12 @@ const Sidebar = ({ sidebarwidth }) => {
             // instantly route to that new page, update your dispatchs as well
             // to="/" //UNCOMMENT LATER
             onClick={() => {
-              dispatch(createPlaylistForOne(currentUser.id, "My Playlist"));
+              // dispatch(createPlaylistForOne(currentUser.id, "My Playlist")); playlist rails
+              dispatch(createPlaylist()).then((data) => {
+                console.log(data, "is the newly created playlist");
+                history.push(`/playlist/${data}`);
+                window.scrollTo(0, 0);
+              });
             }}
           >
             <Icon
@@ -283,32 +293,41 @@ const Sidebar = ({ sidebarwidth }) => {
               height: "1000px",
 
               padding: "2px 20px",
+              marginBottom: "93px",
               // backgroundClip: "content-box", // just to visualize
               // backgroundColor: "red",
             }}
           >
-            {playlists.reverse().map((e) => {
-              return (
-                <Box
-                  pl={1}
-                  sx={{
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap", // does the ... thingy if too long
-                    // letterSpacing: "-.5px",
-                  }}
-                  fontSize="15px"
-                  color="rgb(159, 159, 159)"
-                  pb="12px"
-                  _hover={{
-                    color: "white",
-                    cursor: "pointer",
-                  }}
-                >
-                  {e.title}
-                </Box>
-              );
-            })}
+            {playlists &&
+              playlists
+                .slice(0)
+                .reverse()
+                .map((e) => {
+                  return (
+                    <Box
+                      pl={1}
+                      sx={{
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap", // does the ... thingy if too long
+                        // letterSpacing: "-.5px",
+                      }}
+                      fontSize="15px"
+                      color="rgb(159, 159, 159)"
+                      pb="12px"
+                      _hover={{
+                        color: "white",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => {
+                        history.push(`/playlist/${e.uniqID}`);
+                        window.scrollTo(0, 0);
+                      }}
+                    >
+                      {e.name}
+                    </Box>
+                  );
+                })}
           </Box>
         </Flex>
       </div>

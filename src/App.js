@@ -46,19 +46,20 @@ function App() {
         {!currentUser ? <SignupFormPage /> : <Redirect to="/" />}
       </Route>
       <Route path="/">
-        {!currentUser ? (
-          <Home />
-        ) : (
+        <Home />
+        {width <= 610 && (
           <div className="notloggedin">
+            <div id="smallDevice"></div>
             <Modal closeOnOverlayClick isOpen>
               <ModalOverlay />
               <ModalContent
                 sx={{
-                  height: "50vh",
+                  height: "95vh",
+                  display: "relative",
+                  top: -10,
+                  // minWidth: width < 900 ? `${width * 0.75}px` : "900px",
+                  width: "85vw",
 
-                  minWidth: width < 900 ? `${width * 0.75}px` : "900px",
-
-                  marginTop: "20vh",
                   borderRadius: "18px",
                 }}
               >
@@ -79,7 +80,7 @@ function App() {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-                      gap: "65px",
+
                       flexWrap: "wrap",
                     }}
                   >
@@ -90,15 +91,15 @@ function App() {
                         alignItems: "center",
                       }}
                     >
-                      {width < 900 ? null : (
+                      {width < 610 && (
                         <Image
                           sx={{
                             flex: "1",
-                            maxWidth: "300px",
-                            maxHeight: "300px",
+                            maxWidth: "200px",
+                            maxHeight: "200px",
                             borderRadius: "15px",
                           }}
-                          src="https://i.scdn.co/image/ab67616d0000b273b46f74097655d7f353caab14"
+                          src="https://res.cloudinary.com/dkg7lxnj2/image/upload/v1675209363/i-m-sorry-vector-illustration-advertising-background-banner-business-concept-design-element-here-i-m-sorry-icon-illustration-label-135531451_z4ft3z.png"
                         />
                       )}
                     </Box>
@@ -111,62 +112,41 @@ function App() {
                       }}
                     >
                       <Text
-                        fontSize="4xl"
+                        fontSize={width < 460 ? "1.5rem" : "2rem"}
                         fontWeight={700}
                         letterSpacing="-1.75px"
                         color="white"
                         sx={{
                           flex: "1",
-                          width: "340px",
+                          width: "70vw",
                           textAlign: "center",
                           marginBottom: "30px",
+                          marginTop: "-10vh",
                         }}
                       >
-                        Start listening with a free Spotifree account
+                        {" "}
+                        This website doesn't work on phones. <br />
+                        <br /> Safari's and Chrome for iOS webkit version breaks
+                        most functionality in the APIs used for this web app due
+                        to security concerns. We apologize that this site is not
+                        available in mobile. <br />- William Chan <br /> <br />
+                        <Box
+                          as="a"
+                          style={{
+                            textDecoration: "underline",
+                            color: "lightblue",
+                          }}
+                          href="https://github.com/wc2184"
+                          _hover={{ color: "teal !important" }}
+                        >
+                          Return to my github
+                        </Box>
                       </Text>
-                      <Button
-                        sx={{
-                          borderRadius: "20px",
-                          height: "45px",
-                          width: "150px",
-                          fontSize: "16px",
-                          backgroundColor: "rgb(30, 215, 96)",
-                          marginBottom: "20px",
-                        }}
-                        _hover={{
-                          backgroundColor: "none",
-                          transform: "scale(1.05)",
-                        }}
-                        onClick={() => {
-                          history.push("/signup");
-                        }}
-                      >
-                        SIGN UP FREE
-                      </Button>
-                      <Button
-                        sx={{
-                          borderRadius: "20px",
-                          height: "45px",
-                          fontSize: "16px",
-                        }}
-                        color="white"
-                        variant="outline"
-                        _hover={{
-                          backgroundColor: "none",
-                          transform: "scale(1.05)",
-                        }}
-                        onClick={() => {
-                          history.push("/login");
-                        }}
-                      >
-                        LOG IN
-                      </Button>
                     </Box>
                   </Box>
                 </ModalBody>
               </ModalContent>
             </Modal>
-            <Home />
           </div>
         )}
       </Route>

@@ -24,6 +24,8 @@ import Player from "./Player";
 import { setCurrentSong } from "../../store/player";
 import { BsPlayFill } from "react-icons/bs";
 import { setSearchLoading } from "../../store/search";
+import { getPlaylists } from "../../store/playlist";
+import Playlist from "./Playlist";
 
 // plan, use useEffect to update a array with all searchResults from useselector
 
@@ -73,6 +75,17 @@ const Home = () => {
   }, [searchResults]);
   //
   //
+  useEffect(() => {
+    let links = [];
+    for (let i of noembedDatas) {
+      links.push(i.url);
+    }
+    console.log(links);
+  }, [noembedDatas]);
+
+  useEffect(() => {
+    dispatch(getPlaylists());
+  }, []);
 
   const loadingComponent = (
     <div>
@@ -80,9 +93,9 @@ const Home = () => {
         <p style={{ marginBottom: "3vh", fontSize: "1.5rem" }}>
           We're finding your songs!
         </p>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
+        <span className="dot"></span>
+        <span className="dot"></span>
+        <span className="dot"></span>
       </div>
     </div>
   );
@@ -147,138 +160,143 @@ const Home = () => {
                   gap: "20px 20px",
                 }}
               >
-                {playlists
-                  .reverse()
-                  .slice(0, 6)
-                  .map((el, i) => {
-                    // return <div>{el.title}</div>;
-                    return (
-                      <Box
-                        style={
-                          {
-                            // display: "flex",
-                            // flex: "1 0 30%",
-                            // height: "260px",
-                          }
-                        }
-                      >
+                {playlists &&
+                  playlists
+                    .reverse()
+                    .slice(0, 6)
+                    .map((el, i) => {
+                      // return <div>{el.title}</div>;
+                      return (
                         <Box
-                          sx={{
-                            flex: "1 0 40%",
-                            display: "flex",
-                            width: "400px",
-                            padding: "20px",
-                            // border: "1px solid white",
-                            borderRadius: "8px",
-                            // padding: "20px",
-                            backgroundColor: "rgb(32, 32, 32)",
-                            // transition: "all .9 ease",
-                            WebkitTransition: "background-color .3s ease", // transition doesn't work for some reason, this is borrowed from spotify
-                            transition: "ease 0.3s",
-                          }}
-                          _hover={{
-                            backgroundColor: "rgb(53, 53, 53)",
-                            cursor: "pointer",
-                            transform: "scale(1.02)",
-                            transition: "ease 0.3s",
-                          }}
-                          _active={{
-                            transform: "scale(0.99)",
-                          }}
-                          onClick={() => {
-                            dispatch(
-                              setCurrentSong(searchResults[i].id.videoId)
-                            );
-                            //BOOKMARK playerTarget.seekTo(val)
-                            if (currentVideo === searchResults[0].id.videoId) {
-                              playerTarget.seekTo(0);
-                              return;
+                          style={
+                            {
+                              // display: "flex",
+                              // flex: "1 0 30%",
+                              // height: "260px",
                             }
-
-                            const playVideoCheck = setInterval(() => {
-                              // because setInterval and setTimeout has closure effects, there's literally no way to get the latest state without using the implicitly passed argument trick in the setState to retrieve the latest value and then just return the original state - william
-
-                              setLoading((loading) => {
-                                if (!loading) {
-                                  setPlayerTarget((playerTarget) => {
-                                    setTimeout(() => {
-                                      playerTarget.playVideo();
-                                    }, 400);
-                                    return playerTarget;
-                                  });
-                                  clearInterval(playVideoCheck);
-                                }
-                                return loading;
-                              });
-
-                              // playerTarget.playVideo();
-                            }, 300);
-                          }}
+                          }
                         >
-                          <Image
-                            w="120px"
-                            h="100px"
-                            // mb={5}
-                            mr={5}
-                            // borderRadius={10}
-                            boxShadow="0 8px 24px rgb(0, 0, 0, .5)" // goat box shadow
-                            src={
-                              noembedDatas.length > 0 &&
-                              noembedDatas[
-                                Math.floor(Math.random() * noembedDatas.length)
-                              ].thumbnail_url
-                            }
-                            // src={
-                            //   searchResults.length > 0 &&
-                            //   searchResults[0].snippet.thumbnails.default.url
-                            // }
-                          ></Image>
-                          {/* {searchResults.length > 0 && searchResults[0].snippet.title} */}
-                          <Box>
-                            {/* good parsed title and channel */}
-                            <Box
-                              fontSize="30px"
-                              fontWeight={700}
-                              letterSpacing="-1.5px"
-                              mb={1}
-                              sx={{
-                                textOverflow: "ellipsis", //overflow but just simply
-                                overflow: "hidden",
-                                whiteSpace: "nowrap",
-                                maxHeight: "50px",
-                                color: "white",
-                              }}
-                            >
-                              {el.title}
-                            </Box>
+                          <Box
+                            sx={{
+                              flex: "1 0 40%",
+                              display: "flex",
+                              width: "400px",
+                              padding: "20px",
+                              // border: "1px solid white",
+                              borderRadius: "8px",
+                              // padding: "20px",
+                              backgroundColor: "rgb(32, 32, 32)",
+                              // transition: "all .9 ease",
+                              WebkitTransition: "background-color .3s ease", // transition doesn't work for some reason, this is borrowed from spotify
+                              transition: "ease 0.3s",
+                            }}
+                            _hover={{
+                              backgroundColor: "rgb(53, 53, 53)",
+                              cursor: "pointer",
+                              transform: "scale(1.02)",
+                              transition: "ease 0.3s",
+                            }}
+                            _active={{
+                              transform: "scale(0.99)",
+                            }}
+                            onClick={() => {
+                              dispatch(
+                                setCurrentSong(searchResults[i].id.videoId)
+                              );
+                              //BOOKMARK playerTarget.seekTo(val)
+                              if (
+                                currentVideo === searchResults[0].id.videoId
+                              ) {
+                                playerTarget.seekTo(0);
+                                return;
+                              }
 
-                            <Box
-                              sx={{
-                                display: "flex",
-                                width: "100%",
-                                alignItems: "center",
-                              }}
-                            >
+                              const playVideoCheck = setInterval(() => {
+                                // because setInterval and setTimeout has closure effects, there's literally no way to get the latest state without using the implicitly passed argument trick in the setState to retrieve the latest value and then just return the original state - william
+
+                                setLoading((loading) => {
+                                  if (!loading) {
+                                    setPlayerTarget((playerTarget) => {
+                                      setTimeout(() => {
+                                        playerTarget.playVideo();
+                                      }, 400);
+                                      return playerTarget;
+                                    });
+                                    clearInterval(playVideoCheck);
+                                  }
+                                  return loading;
+                                });
+
+                                // playerTarget.playVideo();
+                              }, 300);
+                            }}
+                          >
+                            <Image
+                              w="120px"
+                              h="100px"
+                              // mb={5}
+                              mr={5}
+                              // borderRadius={10}
+                              boxShadow="0 8px 24px rgb(0, 0, 0, .5)" // goat box shadow
+                              src={
+                                noembedDatas.length > 0 &&
+                                noembedDatas[
+                                  Math.floor(
+                                    Math.random() * noembedDatas.length
+                                  )
+                                ].thumbnail_url
+                              }
+                              // src={
+                              //   searchResults.length > 0 &&
+                              //   searchResults[0].snippet.thumbnails.default.url
+                              // }
+                            ></Image>
+                            {/* {searchResults.length > 0 && searchResults[0].snippet.title} */}
+                            <Box>
+                              {/* good parsed title and channel */}
                               <Box
-                                mt="1px"
-                                ml="1px"
-                                fontSize={15}
-                                color="rgb(179, 179, 179)"
+                                fontSize="30px"
+                                fontWeight={700}
+                                letterSpacing="-1.5px"
+                                mb={1}
+                                sx={{
+                                  textOverflow: "ellipsis", //overflow but just simply
+                                  overflow: "hidden",
+                                  whiteSpace: "nowrap",
+                                  maxHeight: "50px",
+                                  color: "white",
+                                }}
                               >
-                                {noembedDatas.length > 0 &&
-                                  noembedDatas[
-                                    Math.floor(
-                                      Math.random() * noembedDatas.length
-                                    )
-                                  ].author_name
-                                    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-                                    .replace("VEVO", "")}
-                                {/* {searchResults.length > 0 &&
+                                {el.title}
+                              </Box>
+
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  width: "100%",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <Box
+                                  mt="1px"
+                                  ml="1px"
+                                  fontSize={15}
+                                  color="rgb(179, 179, 179)"
+                                >
+                                  {noembedDatas.length > 0 &&
+                                    noembedDatas[
+                                      Math.floor(
+                                        Math.random() * noembedDatas.length
+                                      )
+                                    ].author_name
+                                      .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+                                      .replace("VEVO", "")}
+                                  {/* {searchResults.length > 0 &&
                     searchResults[0].snippet.channelTitle
                       .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
                       .replace("VEVO", "")} */}
-                              </Box>
-                              {/* <Box
+                                </Box>
+                                {/* <Box
                             sx={{
                               fontWeight: "700",
                               fontSize: "13px",
@@ -294,7 +312,7 @@ const Home = () => {
                           >
                             PLAYLIST
                           </Box> */}
-                              {/* <Box
+                                {/* <Box
                           sx={{
                             width: "48px",
                             height: "48px",
@@ -320,12 +338,12 @@ const Home = () => {
                             size={30}
                           />
                         </Box> */}
+                              </Box>
                             </Box>
                           </Box>
                         </Box>
-                      </Box>
-                    );
-                  })}
+                      );
+                    })}
               </Box>
             </Box>
             <Box
@@ -1167,142 +1185,145 @@ const Home = () => {
                 gap: "60px 30px",
               }}
             >
-              {playlists.map((el, i) => {
-                // return <div>{el.title}</div>;
-                return (
-                  <Box
-                    style={{
-                      display: "flex",
-                      // flex: "1 0 30%",
-                      minHeight: "260px",
-                    }}
-                  >
+              {playlists &&
+                playlists.map((el, i) => {
+                  // return <div>{el.title}</div>;
+                  return (
                     <Box
-                      sx={{
-                        flex: "1 0 85%",
-                        width: "300px",
-                        // border: "1px solid white",
-                        borderRadius: "8px",
-                        padding: "20px",
-                        backgroundColor: "rgb(32, 32, 32)",
-                        // transition: "all .9 ease",
-                        WebkitTransition: "background-color .3s ease", // transition doesn't work for some reason, this is borrowed from spotify
-                        transition: "ease 0.3s",
-                      }}
-                      _hover={{
-                        backgroundColor: "rgb(53, 53, 53)",
-                        cursor: "pointer",
-                        transform: "scale(1.02)",
-                        transition: "ease 0.3s",
-                      }}
-                      _active={{
-                        transform: "scale(0.99)",
-                      }}
-                      onClick={() => {
-                        dispatch(setCurrentSong(searchResults[i].id.videoId));
-                        //BOOKMARK playerTarget.seekTo(val)
-                        if (currentVideo === searchResults[0].id.videoId) {
-                          playerTarget.seekTo(0);
-                          return;
-                        }
-
-                        const playVideoCheck = setInterval(() => {
-                          // because setInterval and setTimeout has closure effects, there's literally no way to get the latest state without using the implicitly passed argument trick in the setState to retrieve the latest value and then just return the original state - william
-
-                          setLoading((loading) => {
-                            if (!loading) {
-                              setPlayerTarget((playerTarget) => {
-                                setTimeout(() => {
-                                  playerTarget.playVideo();
-                                }, 400);
-                                return playerTarget;
-                              });
-                              clearInterval(playVideoCheck);
-                            }
-                            return loading;
-                          });
-
-                          // playerTarget.playVideo();
-                        }, 300);
+                      style={{
+                        display: "flex",
+                        // flex: "1 0 30%",
+                        minHeight: "260px",
                       }}
                     >
-                      <Image
-                        w="120px"
-                        h="100px"
-                        mb={5}
-                        borderRadius={10}
-                        boxShadow="0 8px 24px rgb(0, 0, 0, .5)" // goat box shadow
-                        src={
-                          noembedDatas.length > 0 &&
-                          noembedDatas[
-                            Math.floor(Math.random() * noembedDatas.length)
-                          ].thumbnail_url
-                        }
-                        // src={
-                        //   searchResults.length > 0 &&
-                        //   searchResults[0].snippet.thumbnails.default.url
-                        // }
-                      ></Image>
-                      {/* {searchResults.length > 0 && searchResults[0].snippet.title} */}
-                      <Box>
-                        {/* good parsed title and channel */}
-                        <Box
-                          fontSize="30px"
-                          fontWeight={700}
-                          letterSpacing="-1.5px"
-                          mb={1}
-                          sx={{
-                            textOverflow: "ellipsis", //overflow but just simply
-                            overflow: "hidden",
-                            whiteSpace: "nowrap",
-                            maxHeight: "50px",
-                            color: "white",
-                          }}
-                        >
-                          {el.title}
-                        </Box>
+                      <Box
+                        sx={{
+                          flex: "1 0 85%",
+                          width: "300px",
+                          // border: "1px solid white",
+                          borderRadius: "8px",
+                          padding: "20px",
+                          backgroundColor: "rgb(32, 32, 32)",
+                          // transition: "all .9 ease",
+                          WebkitTransition: "background-color .3s ease", // transition doesn't work for some reason, this is borrowed from spotify
+                          transition: "ease 0.3s",
+                        }}
+                        _hover={{
+                          backgroundColor: "rgb(53, 53, 53)",
+                          cursor: "pointer",
+                          transform: "scale(1.02)",
+                          transition: "ease 0.3s",
+                        }}
+                        _active={{
+                          transform: "scale(0.99)",
+                        }}
+                        onClick={() => {
+                          dispatch(setCurrentSong(searchResults[i].id.videoId));
+                          //BOOKMARK playerTarget.seekTo(val)
+                          if (currentVideo === searchResults[0].id.videoId) {
+                            playerTarget.seekTo(0);
+                            return;
+                          }
 
-                        <Box
-                          sx={{
-                            display: "flex",
-                            width: "100%",
-                            alignItems: "center",
-                          }}
-                        >
+                          const playVideoCheck = setInterval(() => {
+                            // because setInterval and setTimeout has closure effects, there's literally no way to get the latest state without using the implicitly passed argument trick in the setState to retrieve the latest value and then just return the original state - william
+
+                            setLoading((loading) => {
+                              if (!loading) {
+                                setPlayerTarget((playerTarget) => {
+                                  setTimeout(() => {
+                                    playerTarget.playVideo();
+                                  }, 400);
+                                  return playerTarget;
+                                });
+                                clearInterval(playVideoCheck);
+                              }
+                              return loading;
+                            });
+
+                            // playerTarget.playVideo();
+                          }, 300);
+                        }}
+                      >
+                        <Image
+                          w="120px"
+                          h="100px"
+                          mb={5}
+                          borderRadius={10}
+                          boxShadow="0 8px 24px rgb(0, 0, 0, .5)" // goat box shadow
+                          src={
+                            noembedDatas.length > 0 &&
+                            noembedDatas[
+                              Math.floor(Math.random() * noembedDatas.length)
+                            ].thumbnail_url
+                          }
+                          // src={
+                          //   searchResults.length > 0 &&
+                          //   searchResults[0].snippet.thumbnails.default.url
+                          // }
+                        ></Image>
+                        {/* {searchResults.length > 0 && searchResults[0].snippet.title} */}
+                        <Box>
+                          {/* good parsed title and channel */}
                           <Box
-                            mt="1px"
-                            ml="1px"
-                            fontSize={15}
-                            color="rgb(179, 179, 179)"
+                            fontSize="30px"
+                            fontWeight={700}
+                            letterSpacing="-1.5px"
+                            mb={1}
+                            sx={{
+                              textOverflow: "ellipsis", //overflow but just simply
+                              overflow: "hidden",
+                              whiteSpace: "nowrap",
+                              maxHeight: "50px",
+                              color: "white",
+                            }}
                           >
-                            {noembedDatas.length > 0 &&
-                              noembedDatas[
-                                Math.floor(Math.random() * noembedDatas.length)
-                              ].author_name
-                                .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-                                .replace("VEVO", "")}
-                            {/* {searchResults.length > 0 &&
+                            {el.title}
+                          </Box>
+
+                          <Box
+                            sx={{
+                              display: "flex",
+                              width: "100%",
+                              alignItems: "center",
+                            }}
+                          >
+                            <Box
+                              mt="1px"
+                              ml="1px"
+                              fontSize={15}
+                              color="rgb(179, 179, 179)"
+                            >
+                              {noembedDatas.length > 0 &&
+                                noembedDatas[
+                                  Math.floor(
+                                    Math.random() * noembedDatas.length
+                                  )
+                                ].author_name
+                                  .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+                                  .replace("VEVO", "")}
+                              {/* {searchResults.length > 0 &&
                     searchResults[0].snippet.channelTitle
                       .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
                       .replace("VEVO", "")} */}
-                          </Box>
-                          <Box
-                            sx={{
-                              fontWeight: "700",
-                              fontSize: "13px",
-                              backgroundColor: "rgb(19, 19, 19)",
-                              width: "80px",
-                              borderRadius: "20px",
-                              padding: "3px 3px",
-                              textAlign: "center",
-                              marginLeft: "8px",
-                              marginTop: "2px",
-                            }}
-                            color="white"
-                          >
-                            PLAYLIST
-                          </Box>
-                          {/* <Box
+                            </Box>
+                            <Box
+                              sx={{
+                                fontWeight: "700",
+                                fontSize: "13px",
+                                backgroundColor: "rgb(19, 19, 19)",
+                                width: "80px",
+                                borderRadius: "20px",
+                                padding: "3px 3px",
+                                textAlign: "center",
+                                marginLeft: "8px",
+                                marginTop: "2px",
+                              }}
+                              color="white"
+                            >
+                              PLAYLIST
+                            </Box>
+                            {/* <Box
                           sx={{
                             width: "48px",
                             height: "48px",
@@ -1328,12 +1349,12 @@ const Home = () => {
                             size={30}
                           />
                         </Box> */}
+                          </Box>
                         </Box>
                       </Box>
                     </Box>
-                  </Box>
-                );
-              })}
+                  );
+                })}
             </Box>
             ;
           </Box>
@@ -1355,6 +1376,18 @@ const Home = () => {
               Log out
             </Button> 
           </div> */}
+        </MainContentWrapper>
+      </Route>
+      <Route path="/playlist/:id">
+        <MainContentWrapper sidebarwidth={sidebarwidth}>
+          <Playlist
+            playerTarget={playerTarget}
+            setPlayerTarget={setPlayerTarget}
+            loading={loading}
+            setLoading={setLoading}
+            visualLoading={visualLoading}
+            setVisualLoading={setVisualLoading}
+          />
         </MainContentWrapper>
       </Route>
     </div>

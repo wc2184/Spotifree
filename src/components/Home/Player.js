@@ -90,7 +90,12 @@ const Player = ({
   }, []);
 
   useEffect(() => {
-    dispatch(setCurrentSong("FkxEE7wZ83c")); // default song is michael jackson
+    if (localStorage.getItem("currentSong") === null) {
+      dispatch(setCurrentSong("FkxEE7wZ83c"));
+    } else {
+      dispatch(setCurrentSong(localStorage.getItem("currentSong")));
+    }
+    // default song is michael jackson
   }, [dispatch]);
   //   const [currentVideo, setCurrentVideo] = useState("AuVMFXOjsNU");
   const [currentTime, setCurrentTime] = useState(0);
@@ -208,6 +213,7 @@ const Player = ({
             return vol;
             // set the volume
           });
+          localStorage.setItem("currentSong", currentVideo);
           // e.target.setVolume(100);
         }}
       />
