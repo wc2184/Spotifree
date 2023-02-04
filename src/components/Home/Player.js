@@ -19,7 +19,11 @@ import { BsPlayFill } from "react-icons/bs";
 import { IoMdPause } from "react-icons/io";
 import { AiOutlineHeart, AiOutlinePlus } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentSong } from "../../store/player";
+import {
+  setAlreadyListened,
+  setCurrentSong,
+  setIndex,
+} from "../../store/player";
 import { FaStepBackward, FaStepForward } from "react-icons/fa";
 import { ImShuffle } from "react-icons/im";
 import { TbRepeat } from "react-icons/tb";
@@ -40,10 +44,22 @@ const Player = ({
   //   const [currentVideo, setCurrentVideo] = useState("bsgBUM2Mnsw");
   // changmo
   const [volume, setVolume] = useState(100);
+  const [disabledForwardBack, setDisabledForwardBack] = useState(false);
   // const [touched, setTouched] = useState(false);
   const dispatch = useDispatch();
-  const currentVideo = useSelector((state) => state.player.song);
+  const {
+    song: currentVideo,
+    queue,
+    index: currentIndex,
+    alreadyListened,
+  } = useSelector((state) => state.player);
 
+  useEffect(() => {
+    console.log(currentVideo, "this is current video");
+    console.log(queue, "this the queue");
+    console.log(currentIndex, "this is index");
+    console.log(alreadyListened, "this is already listened");
+  }, [currentVideo]);
   //
   const pressSpaceListener = (e) => {
     // e.preventDefault();
@@ -178,19 +194,15 @@ const Player = ({
   //
   //
   //
-  if (videoDetails) {
-    //
-    //
-    //   ? videoDetails.title.replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-    //   : videoDetails.title)
-  }
 
   return (
     <>
+      <div style={{ display: "none" }}>{currentVideo}</div>
       <Youtube
         // videoId="i1nindf1meE"
         videoId={currentVideo}
         iframeClassName="reactplayer"
+        id={currentVideo}
         style={{ width: "0px", height: "0px" }}
         opts={opts}
         onReady={(e) => {
@@ -213,6 +225,7 @@ const Player = ({
             return vol;
             // set the volume
           });
+
           localStorage.setItem("currentSong", currentVideo);
           // e.target.setVolume(100);
         }}
@@ -299,10 +312,86 @@ const Player = ({
               preserveAspectRatio="none"
               color="rgb(186, 186, 186)"
             />
-            <FaStepBackward
+            <Box
+              as={FaStepBackward}
               style={{ width: "23px", height: "18px" }}
               preserveAspectRatio="none"
               color="rgb(186, 186, 186)"
+              _hover={{
+                transform: "scale(1.05)",
+                cursor: "pointer",
+                color: "rgb(226, 226, 226)",
+              }}
+              _active={{
+                //   transform: "translateY(1px)",
+                transform: "scale(0.99) translateY(1px)",
+              }}
+              onClick={() => {
+                // currentVideo is the curr song
+                // queue, currentIndex, alreadyListened
+                if (disabledForwardBack) return;
+                setDisabledForwardBack(true);
+                setTimeout(() => {
+                  setDisabledForwardBack(false);
+                }, 650);
+                let newIndex;
+                if (currentIndex == 0) {
+                  newIndex = 0;
+                  playerTarget.seekTo(0);
+                  playerTarget.playVideo();
+                  return;
+                } else {
+                  newIndex = currentIndex - 1;
+                }
+
+                dispatch(setIndex(newIndex));
+                dispatch(
+                  setAlreadyListened([...alreadyListened, currentIndex])
+                );
+                dispatch(
+                  setCurrentSong(
+                    queue[newIndex][0].url.replace(
+                      "https://www.youtube.com/watch?v=",
+                      ""
+                    )
+                  )
+                );
+                const pauseFix = setInterval(() => {
+                  console.log("((checkking");
+                  let playbutton = document.querySelector("#playbutton");
+                  console.log(playbutton, "nope");
+                  if (playbutton) {
+                    console.log("found it", playbutton);
+                    setTimeout(() => {
+                      playbutton = document.querySelector("#playbutton");
+                      playbutton.click();
+                    }, 600);
+
+                    clearInterval(pauseFix);
+                    console.log("((RANN BOIII --------");
+                  }
+
+                  return playerTarget;
+                }, 200);
+                const playVideoCheck = setInterval(() => {
+                  // because setInterval and setTimeout has closure effects, there's literally no way to get the latest state without using the implicitly passed argument trick in the setState to retrieve the latest value and then just return the original state - william
+
+                  setLoading((loading) => {
+                    if (!loading) {
+                      setPlayerTarget((playerTarget) => {
+                        setTimeout(() => {
+                          playerTarget.playVideo();
+                        }, 400);
+                        return playerTarget;
+                      });
+                      clearInterval(playVideoCheck);
+                    }
+                    return loading;
+                  });
+
+                  // playerTarget.playVideo();
+                }, 100);
+              }}
             />
             {(playerTarget && currentStatus === 2) || currentStatus === -1 ? (
               <>
@@ -323,6 +412,7 @@ const Player = ({
                     transform: "scale(1.05)",
                   }}
                   className="triangleplayerbutton"
+                  id={visualLoading || loading ? "loading" : "playbutton"}
                 >
                   <Box pl="2px">
                     {visualLoading || loading ? (
@@ -355,16 +445,96 @@ const Player = ({
                   transform: "scale(1.05)  translateY(3px)",
                 }}
                 className="triangleplayerbutton"
+                id="pausebutton"
               >
                 <Box>
                   <IoMdPause size={20} />
                 </Box>
               </Button>
             )}
-            <FaStepForward
+            <Box
+              as={FaStepForward}
               style={{ width: "23px", height: "18px" }}
               preserveAspectRatio="none"
               color="rgb(186, 186, 186)"
+              _hover={{
+                transform: "scale(1.05)",
+                cursor: "pointer",
+                color: "rgb(226, 226, 226)",
+              }}
+              _active={{
+                //   transform: "translateY(1px)",
+                transform: "scale(0.99) translateY(1px)",
+              }}
+              onClick={() => {
+                // currentVideo is the curr song
+                // queue, currentIndex, alreadyListened
+                // disableChange;
+                console.log(playerTarget.getPlayerState(), "stat B444");
+                if (disabledForwardBack) return;
+                setDisabledForwardBack(true);
+                setTimeout(() => {
+                  setDisabledForwardBack(false);
+                }, 650);
+                let newIndex;
+                if (currentIndex == queue.length - 1) {
+                  newIndex = 0;
+                  playerTarget.seekTo(0);
+                  playerTarget.playVideo();
+                } else {
+                  newIndex = currentIndex + 1;
+                }
+
+                dispatch(setIndex(newIndex));
+                dispatch(
+                  setAlreadyListened([...alreadyListened, currentIndex])
+                );
+                console.log(queue, newIndex, "pew");
+                dispatch(
+                  setCurrentSong(
+                    queue[newIndex][0].url.replace(
+                      "https://www.youtube.com/watch?v=",
+                      ""
+                    )
+                  )
+                );
+                const pauseFix = setInterval(() => {
+                  console.log("((checkking");
+                  let playbutton = document.querySelector("#playbutton");
+                  console.log(playbutton, "nope");
+                  if (playbutton) {
+                    console.log("found it", playbutton);
+                    setTimeout(() => {
+                      playbutton = document.querySelector("#playbutton");
+                      playbutton.click();
+                    }, 600);
+
+                    clearInterval(pauseFix);
+                    console.log("((RANN BOIII --------");
+                  }
+
+                  return playerTarget;
+                }, 200);
+
+                const playVideoCheck = setInterval(() => {
+                  // because setInterval and setTimeout has closure effects, there's literally no way to get the latest state without using the implicitly passed argument trick in the setState to retrieve the latest value and then just return the original state - william
+
+                  setLoading((loading) => {
+                    if (!loading) {
+                      setPlayerTarget((playerTarget) => {
+                        setTimeout(() => {
+                          playerTarget.playVideo();
+                        }, 400);
+                        return playerTarget;
+                      });
+                      clearInterval(playVideoCheck);
+                    }
+                    return loading;
+                  });
+
+                  // playerTarget.playVideo();
+                }, 100);
+              }}
             />
             <TbRepeat
               style={{ width: "20px", height: "20px" }}

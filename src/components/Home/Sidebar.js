@@ -45,12 +45,12 @@ const Sidebar = ({ sidebarwidth }) => {
     // }
   }, [dispatch, currentUser]);
 
-  useEffect(() => {
-    console.log("Playlists are: ", playlists);
-    console.log("changes");
-  }, [dispatch, playlists]);
+  // useEffect(() => {
+  //   console.log("Playlists are: ", playlists);
+  //   console.log("changes");
+  // }, [dispatch, playlists]);
 
-  console.log(playlists, "changing");
+  // console.log(playlists, "changing");
 
   return (
     <Box className="sidebar">
@@ -248,7 +248,6 @@ const Sidebar = ({ sidebarwidth }) => {
             onClick={() => {
               // dispatch(createPlaylistForOne(currentUser.id, "My Playlist")); playlist rails
               dispatch(createPlaylist()).then((data) => {
-                console.log(data, "is the newly created playlist");
                 history.push(`/playlist/${data}`);
                 window.scrollTo(0, 0);
               });

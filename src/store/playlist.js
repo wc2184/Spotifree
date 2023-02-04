@@ -7,7 +7,7 @@ const SET_PLAYLIST_SONGS_AND_OBJ = "playlist/setPlaylistSongsAndObj";
 const SET_PLAYLIST = "playlist/setPlaylist";
 const initialPlaylists = [
   {
-    name: "K-Pop Hits",
+    name: "K-pop Hits",
     uniqID: "8e0f1dfb-a5f0-4eef-b684-8b6de07123ef",
     songs: [
       {
@@ -32,6 +32,10 @@ const initialPlaylists = [
       },
       {
         link: "https://www.youtube.com/watch?v=qoK934-VghI",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=3rr3Sx3BuB0",
         time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
       },
       {
@@ -108,10 +112,7 @@ const initialPlaylists = [
         link: "https://www.youtube.com/watch?v=Z-T_O_vl-8Y",
         time: "Wed Feb 01 2023 11:43:09 GMT-0500 (Eastern Standard Time)",
       },
-      {
-        link: "https://www.youtube.com/watch?v=RwFflrGOsv8",
-        time: "Wed Feb 01 2023 11:43:09 GMT-0500 (Eastern Standard Time)",
-      },
+
       {
         link: "https://www.youtube.com/watch?v=oh64haEP9g8",
         time: "Wed Feb 01 2023 11:43:09 GMT-0500 (Eastern Standard Time)",
@@ -297,7 +298,7 @@ const initialPlaylists = [
         time: "Wed Feb 01 2023 11:44:20 GMT-0500 (Eastern Standard Time)",
       },
       {
-        link: "https://www.youtube.com/watch?v=Y_8mUx4VOmo",
+        link: "https://www.youtube.com/watch?v=0wnuTGGuAVs",
         time: "Wed Feb 01 2023 11:44:20 GMT-0500 (Eastern Standard Time)",
       },
       {
@@ -392,7 +393,6 @@ export const getPlaylists = () => async (dispatch) => {
     localStorage.setItem("playlists", JSON.stringify(initialPlaylists));
   }
   playlists = JSON.parse(localStorage.getItem("playlists"));
-  console.log("this thunk called");
   dispatch(hydratePlaylistsForOne(playlists));
 };
 export const createPlaylist = () => async (dispatch) => {

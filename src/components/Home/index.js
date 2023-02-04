@@ -75,13 +75,13 @@ const Home = () => {
   }, [searchResults]);
   //
   //
-  useEffect(() => {
-    let links = [];
-    for (let i of noembedDatas) {
-      links.push(i.url);
-    }
-    console.log(links);
-  }, [noembedDatas]);
+  // useEffect(() => {
+  //   let links = [];
+  //   for (let i of noembedDatas) {
+  //     links.push(i.url);
+  //   }
+  //   // console.log(links);
+  // }, [noembedDatas]);
 
   useEffect(() => {
     dispatch(getPlaylists());
@@ -208,6 +208,7 @@ const Home = () => {
                                 currentVideo === searchResults[0].id.videoId
                               ) {
                                 playerTarget.seekTo(0);
+                                playerTarget.playVideo();
                                 return;
                               }
 
@@ -417,6 +418,7 @@ const Home = () => {
                             //BOOKMARK playerTarget.seekTo(val)
                             if (currentVideo === searchResults[0].id.videoId) {
                               playerTarget.seekTo(0);
+                              playerTarget.playVideo();
                               return;
                             }
 
@@ -650,6 +652,7 @@ const Home = () => {
                         //BOOKMARK playerTarget.seekTo(val)
                         if (currentVideo === searchResults[0].id.videoId) {
                           playerTarget.seekTo(0);
+                          playerTarget.playVideo();
                           return;
                         }
 
@@ -847,6 +850,7 @@ const Home = () => {
                                 )
                               ) {
                                 playerTarget.seekTo(0);
+                                playerTarget.playVideo();
                                 return;
                               }
                               const playVideoCheck = setInterval(() => {
@@ -1018,6 +1022,7 @@ const Home = () => {
                             )
                           ) {
                             playerTarget.seekTo(0);
+                            playerTarget.playVideo();
                             return;
                           }
                           // if (currentVideo === ele.id.videoId) {
@@ -1222,6 +1227,7 @@ const Home = () => {
                           //BOOKMARK playerTarget.seekTo(val)
                           if (currentVideo === searchResults[0].id.videoId) {
                             playerTarget.seekTo(0);
+                            playerTarget.playVideo();
                             return;
                           }
 
