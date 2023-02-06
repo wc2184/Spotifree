@@ -6,6 +6,7 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useScrollYPosition } from "react-use-scroll-position";
@@ -17,12 +18,14 @@ import { useEffect, useMemo } from "react";
 import Search from "./Search";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/session";
+import AboutMe from "./AboutMe";
 
 const Navbar = ({ sidebarwidth, submitted, setSubmitted }) => {
   const y = useScrollYPosition();
   const currentUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   //
 
   //
@@ -132,11 +135,7 @@ const Navbar = ({ sidebarwidth, submitted, setSubmitted }) => {
                 borderRadius={30}
                 height="34px"
                 color="white"
-                onClick={() => {
-                  if (!currentUser) {
-                    history.push("/login");
-                  }
-                }}
+                onClick={onOpen}
                 _active={{
                   backgroundColor: "none",
                   transform: "scale(0.96)",
@@ -146,41 +145,13 @@ const Navbar = ({ sidebarwidth, submitted, setSubmitted }) => {
                   // transform: "scale(1.03)",
                 }}
               >
-                {currentUser ? currentUser.username : "Sign In"}
+                {currentUser ? currentUser.username : "Who made this?"}
               </MenuButton>
-              <MenuList
-                borderColor="rgb(40,40, 40)"
-                backgroundColor="rgb(40,40, 40)"
-              >
-                <MenuItem
-                  _hover={{
-                    backgroundColor: "gray",
-                  }}
-                  fontSize={16}
-                  color="white"
-                >
-                  Profile
-                </MenuItem>
-                <MenuItem
-                  _hover={{
-                    backgroundColor: "gray",
-                  }}
-                  fontSize={16}
-                  color="white"
-                  onClick={() => {
-                    dispatch(logout()).then(() => {
-                      history.push("/login");
-                    });
-                  }}
-                >
-                  Log Out
-                </MenuItem>
-                {/* <MenuItem></MenuItem> */}
-              </MenuList>
             </Menu>
           </Box>
         </Box>
       </div>
+      <AboutMe isOpen={isOpen} onClose={onClose} />
     </Box>
   );
 };

@@ -8,6 +8,100 @@ const SET_PLAYLIST = "playlist/setPlaylist";
 // date is obtained via new Date(), just copied the string, parse back in downloads/timeparser.js - will
 const initialPlaylists = [
   {
+    name: "Rap Music",
+    uniqID: "beb4776f-b2f5-4f29-a8f6-3a45f4dfd942",
+    songs: [
+      {
+        link: "https://www.youtube.com/watch?v=HIwAI05Y1fU",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=v6HBZC9pZHQ",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=Vi2XaiKhgiU",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=JFm7YDVlqnI",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=woSEPCPW7gQ",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=zI383uEwA6Q",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=cmc8q2dcIMs",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=XbGs_qK2PQA",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=np9Ub1LilKU",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=U6k5dIhB6AM",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=JocAXINz-YE",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=tvTRZJ-4EyI",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=kiB9qk4gnt4",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=gtqqaHbLS-E",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=fJZZ_TcFGo4",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=sw4r0k8WWqU",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=RaDxlQDwbfQ",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=tfSS1e3kYeo",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=pohWmgZgn-U",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=WILNIXZr2oc",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=mjaayCARwro",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=MQJVc3Yoi_o",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+    ],
+  },
+  {
     name: "K-pop Hits",
     uniqID: "8e0f1dfb-a5f0-4eef-b684-8b6de07123ef",
     songs: [
@@ -353,6 +447,193 @@ const initialPlaylists = [
       {
         link: "https://www.youtube.com/watch?v=GsHZBisKwxg",
         time: "Wed Feb 01 2023 11:44:20 GMT-0500 (Eastern Standard Time)",
+      },
+    ],
+  },
+  {
+    name: "Modern Pop",
+    uniqID: "26554316-1a9b-454b-a4ab-d0faeaa0cdd0",
+    songs: [
+      {
+        link: "https://www.youtube.com/watch?v=VF-FGf_ZZiI",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=H5v3kku4y6Q",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+
+      {
+        link: "https://www.youtube.com/watch?v=mRD0-GxqHVo",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=b1kbLwvqugk",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=SQnc1QibapQ",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=61ymOWwOwuk",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+
+      {
+        link: "https://www.youtube.com/watch?v=MSRcC626prw",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=Uq9gPaIzbe8",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=b1kbLwvqugk",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=Odh9ddPUkEY",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=Z8vDU6vUTj4",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=kTJczUoc26U",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=61ymOWwOwuk",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=IXXxciRUMzE",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=4VaqA-5aQTM",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=G7KNmW9a75Y",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=7aekxC_monc",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=j5uAR9w7LBg",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=uPD0QOGTmMI",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=NgsWGfUlwJI",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+    ],
+  },
+  {
+    name: "80's Greatest Hits",
+
+    uniqID: "39096d7d-af79-43e1-b914-2f8982473556",
+    songs: [
+      {
+        link: "https://www.youtube.com/watch?v=1w7OgIMMRc4",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=pIgZ7gMze7A",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=izGwDsrQ1eQ",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=Cv6tuzHUuuk",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=Q5wPHxqgQH0",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=1k8craCGpgs",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=4ZKqbPZ6tug",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=KWIVfjjUWu4",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=PqUenEMwsdQ",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=_nxrYwT0SIo",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=iFx-5PGLgb4",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=7CTJcHjkq0E",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=BwEce9uNgu4",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=xUScFNXAq0w",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=qBiA_po8TYM",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=v2AC41dglnM",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=djV11Xbc914",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=OMD8hBsA-RI",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=Rbm6GXllBiw",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=sZTpLvsYYHw",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=M-0Z_2j1a1U",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=Z9NYDgbKsBE",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
       },
     ],
   },

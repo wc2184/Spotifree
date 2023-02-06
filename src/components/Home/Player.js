@@ -241,18 +241,48 @@ const Player = ({
             return;
           }
           let newIndex;
+          let resetAlreadyListened = false;
           if (currentIndex == queue.length - 1) {
             newIndex = 0;
             playerTarget.seekTo(0);
             playerTarget.playVideo();
           } else {
             newIndex = currentIndex + 1;
+            if (shuffle) {
+              let newNum = Math.floor(Math.random() * queue.length);
+
+              console.log(newNum, "shuffle num");
+              while (alreadyListened.includes(newNum)) {
+                if (queue.length == 1) {
+                  // the case where theres only 1 song in the playlist
+
+                  newIndex = 0;
+                  break;
+                }
+                if (alreadyListened.length == queue.length) {
+                  // means every song has been listened to
+                  // just make one different from current and reset already Listened
+                  while (newNum == currentIndex) {
+                    newNum = Math.floor(Math.random() * queue.length);
+                  }
+                  resetAlreadyListened = true;
+                  break;
+                }
+                newNum = Math.floor(Math.random() * queue.length);
+                console.log(newNum, "REROLL shuffle num");
+              }
+              console.log(newNum, "UNIQUE shuffle numm");
+              newIndex = newNum;
+            }
           }
 
           dispatch(setIndex(newIndex));
           dispatch(
-            setAlreadyListened([...new Set([...alreadyListened, newIndex])])
+            resetAlreadyListened
+              ? setAlreadyListened([...new Set([newIndex])])
+              : setAlreadyListened([...new Set([...alreadyListened, newIndex])])
           );
+
           dispatch(
             setCurrentSong(
               queue[newIndex][0].url.replace(
@@ -261,8 +291,12 @@ const Player = ({
               )
             )
           );
-          if (repeat == 0) return;
-          // if repeat is off then don't run the next lines
+          if (
+            (repeat == 0 && alreadyListened.length == queue.length) ||
+            (!shuffle && repeat == 0 && currentIndex == queue.length - 1)
+          )
+            return;
+          // if repeat is off AND THE ENTIRE PLAYLIST IS DONE alreadyListened.length == queue.length || !shuffle && (currentIndex == queue.length - 1) then don't run the next lines FIX THIS
           const playVideoCheck = setInterval(() => {
             // because setInterval and setTimeout has closure effects, there's literally no way to get the latest state without using the implicitly passed argument trick in the setState to retrieve the latest value and then just return the original state - william
 
@@ -393,6 +427,7 @@ const Player = ({
                 userSelect: "none",
               }}
               onClick={() => {
+                //FastBackward
                 // currentVideo is the curr song
                 // queue, currentIndex, alreadyListened
                 if (disabledForwardBack) return;
@@ -401,20 +436,51 @@ const Player = ({
                   setDisabledForwardBack(false);
                 }, 650);
                 let newIndex;
-                if (currentIndex == 0) {
+                let resetAlreadyListened = false;
+                if (currentIndex == 0 && !shuffle) {
                   newIndex = 0;
                   playerTarget.seekTo(0);
                   playerTarget.playVideo();
                   return;
                 } else {
                   newIndex = currentIndex - 1;
+                  if (shuffle) {
+                    if (alreadyListened.length > 1) {
+                      console.log(
+                        alreadyListened.at(-2),
+                        "shuffle backward activated element"
+                      );
+                      newIndex = alreadyListened.at(-2);
+                      resetAlreadyListened = true;
+                    } else {
+                      let newNum = Math.floor(Math.random() * queue.length);
+                      while (newNum == currentIndex) {
+                        newNum = Math.floor(Math.random() * queue.length);
+                      }
+                      resetAlreadyListened = true;
+                      newIndex = newNum;
+                      console.log(
+                        currentIndex,
+                        newNum,
+                        newIndex,
+                        alreadyListened,
+                        "inside back thing"
+                      );
+                    }
+                  }
                 }
 
                 dispatch(setIndex(newIndex));
                 dispatch(
-                  setAlreadyListened([
-                    ...new Set([...alreadyListened, newIndex]),
-                  ])
+                  resetAlreadyListened
+                    ? setAlreadyListened(
+                        alreadyListened.length > 1
+                          ? [...new Set([...alreadyListened.slice(0, -1)])]
+                          : [...new Set([newIndex])]
+                      )
+                    : setAlreadyListened([
+                        ...new Set([...alreadyListened, newIndex]),
+                      ])
                 );
                 dispatch(
                   setCurrentSong(
@@ -543,6 +609,7 @@ const Player = ({
                 userSelect: "none",
               }}
               onClick={() => {
+                // FastFoward
                 // currentVideo is the curr song
                 // queue, currentIndex, alreadyListened
                 // disableChange;
@@ -553,19 +620,48 @@ const Player = ({
                   setDisabledForwardBack(false);
                 }, 650);
                 let newIndex;
+                let resetAlreadyListened = false;
                 if (currentIndex == queue.length - 1) {
                   newIndex = 0;
                   playerTarget.seekTo(0);
                   playerTarget.playVideo();
                 } else {
                   newIndex = currentIndex + 1;
+                  if (shuffle) {
+                    let newNum = Math.floor(Math.random() * queue.length);
+
+                    console.log(newNum, "shuffle num");
+                    while (alreadyListened.includes(newNum)) {
+                      if (queue.length == 1) {
+                        // the case where theres only 1 song in the playlist
+
+                        newIndex = 0;
+                        break;
+                      }
+                      if (alreadyListened.length == queue.length) {
+                        // means every song has been listened to
+                        // just make one different from current and reset already Listened
+                        while (newNum == currentIndex) {
+                          newNum = Math.floor(Math.random() * queue.length);
+                        }
+                        resetAlreadyListened = true;
+                        break;
+                      }
+                      newNum = Math.floor(Math.random() * queue.length);
+                      console.log(newNum, "REROLL shuffle num");
+                    }
+                    console.log(newNum, "UNIQUE shuffle numm");
+                    newIndex = newNum;
+                  }
                 }
 
                 dispatch(setIndex(newIndex));
                 dispatch(
-                  setAlreadyListened([
-                    ...new Set([...alreadyListened, newIndex]),
-                  ])
+                  resetAlreadyListened
+                    ? setAlreadyListened([...new Set([newIndex])])
+                    : setAlreadyListened([
+                        ...new Set([...alreadyListened, newIndex]),
+                      ])
                 );
                 console.log(queue, newIndex, "pew");
                 dispatch(
@@ -577,25 +673,20 @@ const Player = ({
                   )
                 );
                 const pauseFix = setInterval(() => {
-                  console.log("((checkking");
                   let playbutton = document.querySelector("#playbutton");
                   let pausebutton = document.querySelector("#pausebutton");
-                  console.log(playbutton, "nope");
                   if (playbutton) {
-                    console.log("found it", playbutton);
                     setTimeout(() => {
                       playbutton = document.querySelector("#playbutton");
                       playbutton.click();
                     }, 600);
 
                     clearInterval(pauseFix);
-                    console.log("((RANN BOIII --------");
                     return;
                   }
 
                   if (pausebutton) {
                     clearInterval(pauseFix);
-                    console.log("((CANCEL CUZ NO NEED --------");
                     return;
                   }
                 }, 200);
