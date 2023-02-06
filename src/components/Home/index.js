@@ -591,10 +591,15 @@ const Home = () => {
             <Box mb={5}>{/* Searching for "{searchTerm}" */}</Box>
             {searchLoading ? loadingComponent : null}
             {!submittedNoembed && !searchLoading ? (
-              <div className="emptyQuery">
-                Please enter a search query above! Yes, you can listen to ANY
-                song for free.
-              </div>
+              <>
+                <div className="emptyQuery">
+                  Please enter a search query above! Yes, you can listen to ANY
+                  song for free.
+                </div>
+                <div className="emptyQuery">
+                  Try searching: "Adele" or "The Beatles"
+                </div>
+              </>
             ) : null}
             {!submittedNoembed || searchLoading ? null : (
               <Box
@@ -719,12 +724,30 @@ const Home = () => {
                           dangerouslySetInnerHTML={{
                             __html:
                               noembedDatas.length > 0 &&
-                              noembedDatas[0].title.replace(
-                                noembedDatas[0].author_name
-                                  .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-                                  .replace("VEVO", "") + "- ",
-                                ""
-                              ),
+                              noembedDatas[0].title
+                                .replace(
+                                  noembedDatas[0].author_name
+                                    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+                                    .replace("VEVO", "") + "- ",
+                                  ""
+                                )
+                                .replace(/\(audio\)/i, "")
+                                .replace("(Official Video)", "")
+                                .replace(/\(audio\)/i, "")
+                                .replace(/\(Official audio\)/i, "")
+                                .replace(/\(official music video\)/i, "")
+                                .replace(/\(lyrics\)/i, "")
+                                .replace(/\(visualizer\)/i, "")
+                                .replace(/\(official lyric video\)/i, "")
+                                .replace(/\[official music video\]/i, "")
+                                .replace(/\(official lyric video\)/i, "")
+                                .replace(/\(lyric video\)/i, "")
+                                .replace(/\[official video\]/i, "")
+                                .replace(/\(music video\)/i, "")
+                                .replace(/\[official audio\]/i, "")
+                                .replace(/\[official visualizer\]/i, "")
+                                .replace(/「Official Audio」/i, "")
+                                .replace(/「Audio」/, ""),
                             //  + "noembed",
                           }}
                           // old stuff
@@ -757,7 +780,9 @@ const Home = () => {
                             {noembedDatas.length > 0 &&
                               noembedDatas[0].author_name
                                 .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-                                .replace("VEVO", "")}
+                                .replace("VEVO", "")
+                                .replace("- Topic", "")
+                                .replace("– topic", "")}
                             {/* {searchResults.length > 0 &&
                               searchResults[0].snippet.channelTitle
                                 .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
@@ -916,12 +941,33 @@ const Home = () => {
                                 dangerouslySetInnerHTML={{
                                   __html:
                                     noembedDatas.length > 0 &&
-                                    ele.title.replace(
-                                      ele.author_name
-                                        .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-                                        .replace("VEVO", "") + "- ",
-                                      ""
-                                    ),
+                                    ele.title
+                                      .replace(
+                                        ele.author_name
+                                          .replace(
+                                            /([a-z0-9])([A-Z])/g,
+                                            "$1 $2"
+                                          )
+                                          .replace("VEVO", "") + "- ",
+                                        ""
+                                      )
+                                      .replace(/\(audio\)/i, "")
+                                      .replace("(Official Video)", "")
+                                      .replace(/\(audio\)/i, "")
+                                      .replace(/\(Official audio\)/i, "")
+                                      .replace(/\(official music video\)/i, "")
+                                      .replace(/\(lyrics\)/i, "")
+                                      .replace(/\(visualizer\)/i, "")
+                                      .replace(/\(official lyric video\)/i, "")
+                                      .replace(/\[official music video\]/i, "")
+                                      .replace(/\(official lyric video\)/i, "")
+                                      .replace(/\(lyric video\)/i, "")
+                                      .replace(/\[official video\]/i, "")
+                                      .replace(/\(music video\)/i, "")
+                                      .replace(/\[official audio\]/i, "")
+                                      .replace(/\[official visualizer\]/i, "")
+                                      .replace(/「Official Audio」/i, "")
+                                      .replace(/「Audio」/, ""),
                                   // + "noembed",
                                 }}
                                 // dangerouslySetInnerHTML={{
@@ -944,7 +990,8 @@ const Home = () => {
                                     noembedDatas.length > 0 &&
                                     ele.author_name
                                       .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-                                      .replace("VEVO", ""),
+                                      .replace("VEVO", "")
+                                      .replace("- Topic", ""),
                                 }}
                               ></Box>
                             </Box>
@@ -1055,12 +1102,31 @@ const Home = () => {
                             dangerouslySetInnerHTML={{
                               __html:
                                 noembedDatas.length > 0 &&
-                                ele.title.replace(
-                                  ele.author_name
-                                    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-                                    .replace("VEVO", "") + "- ",
-                                  ""
-                                ),
+                                ele.title
+                                  .replace(
+                                    ele.author_name
+                                      .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+                                      .replace("VEVO", "") + "- ",
+                                    ""
+                                  )
+                                  .replace(/\(audio\)/i, "")
+                                  .replace(/\[official music video\]/i, "")
+                                  .replace("(Official Video)", "")
+                                  .replace(/\(audio\)/i, "")
+                                  .replace(/\(Official audio\)/i, "")
+                                  .replace(/\(official music video\)/i, "")
+                                  .replace(/\(lyrics\)/i, "")
+                                  .replace(/\(visualizer\)/i, "")
+                                  .replace(/\(official lyric video\)/i, "")
+                                  .replace(/\[official music video\]/i, "")
+                                  .replace(/\(official lyric video\)/i, "")
+                                  .replace(/\(lyric video\)/i, "")
+                                  .replace(/\[official video\]/i, "")
+                                  .replace(/\(music video\)/i, "")
+                                  .replace(/\[official audio\]/i, "")
+                                  .replace(/\[official visualizer\]/i, "")
+                                  .replace(/「Official Audio」/i, "")
+                                  .replace(/「Audio」/, ""),
                               // + "noembed",
                             }}
                             // dangerouslySetInnerHTML={{
@@ -1083,7 +1149,8 @@ const Home = () => {
                                 noembedDatas.length > 0 &&
                                 ele.author_name
                                   .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-                                  .replace("VEVO", ""),
+                                  .replace("VEVO", "")
+                                  .replace("- Topic", ""),
                             }}
                             // dangerouslySetInnerHTML={{
                             //   __html:

@@ -50,6 +50,10 @@ function Root() {
 }
 
 const renderApplication = () => {
+  if (localStorage.getItem("version") != 1) {
+    localStorage.clear();
+    localStorage.setItem("version", 1);
+  }
   ReactDOM.render(
     <React.StrictMode>
       <Root />

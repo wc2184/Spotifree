@@ -8,7 +8,95 @@ const SET_PLAYLIST = "playlist/setPlaylist";
 // date is obtained via new Date(), just copied the string, parse back in downloads/timeparser.js - will
 const initialPlaylists = [
   {
+    name: "Lo-Fi Study Beats 📚",
+    description: "Beats for you to study for that upcoming final.",
+    uniqID: "430abe4c-1bc3-4f11-bf97-da7d47d77868",
+    songs: [
+      {
+        link: "https://www.youtube.com/watch?v=jfKfPfyJRdk",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=q0ff3e-A7DY",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=lTRiuFIWV54",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=AzV77KFsLn4",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=n61ULEU7CO0",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=Zi5H7UwZrGg",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=CLeZyIID9Bo",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=tgY1b0AX7B8",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=W6YI3ZFOL0A",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=_zL0AAf-01I",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=BrnDlRmW5hs",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=4Hg1Kudd_x4",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=E0Om1LC-XeU",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=XN41UJ7EZ4E",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=cd2YHFncn3Y",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=92yeS0L9zn4",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=t8-V81NPnr4",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=iUVNspaiBAo",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=Elb5UkdGPkw",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=_Kqtj14rxes",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+    ],
+  },
+  {
     name: "Rap Music",
+    description: "The hardest beats of this era.",
     uniqID: "beb4776f-b2f5-4f29-a8f6-3a45f4dfd942",
     songs: [
       {
@@ -103,6 +191,7 @@ const initialPlaylists = [
   },
   {
     name: "K-pop Hits",
+    description: "Korean music to fill your soul!",
     uniqID: "8e0f1dfb-a5f0-4eef-b684-8b6de07123ef",
     songs: [
       {
@@ -193,6 +282,7 @@ const initialPlaylists = [
   },
   {
     name: "SZA's Songs",
+    description: "The best hits of SZA.",
     uniqID: "3c1496d8-1275-45fc-aada-263e1b86e0d4",
     songs: [
       {
@@ -276,6 +366,7 @@ const initialPlaylists = [
   },
   {
     name: "Ariana Grande's Songs",
+    description: "The best hits of Ariana Grande.",
     uniqID: "9c957145-ab71-479b-a5b9-b7d3e3d3008e",
     songs: [
       {
@@ -366,6 +457,7 @@ const initialPlaylists = [
   },
   {
     name: "Michael Jackson's Songs",
+    description: "The best hits of Michael Jackson.",
     uniqID: "8573cbd0-727e-46ab-a56d-a55953d3d414",
     songs: [
       {
@@ -452,10 +544,11 @@ const initialPlaylists = [
   },
   {
     name: "Modern Pop",
+    description: "Popular songs that you'd hear over the radio today.",
     uniqID: "26554316-1a9b-454b-a4ab-d0faeaa0cdd0",
     songs: [
       {
-        link: "https://www.youtube.com/watch?v=VF-FGf_ZZiI",
+        link: "https://www.youtube.com/watch?v=S2PVsv2K1Bg",
         time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
       },
       {
@@ -465,6 +558,10 @@ const initialPlaylists = [
 
       {
         link: "https://www.youtube.com/watch?v=mRD0-GxqHVo",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=wnWxeBfV2ZQ",
         time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
       },
       {
@@ -540,7 +637,8 @@ const initialPlaylists = [
   },
   {
     name: "80's Greatest Hits",
-
+    description:
+      "80s music sounds so 80s now. But in the 80s, it just sounded like music.",
     uniqID: "39096d7d-af79-43e1-b914-2f8982473556",
     songs: [
       {
@@ -637,6 +735,85 @@ const initialPlaylists = [
       },
     ],
   },
+  {
+    name: "Chill Songs",
+    description: "Songs to relax and vibe to.",
+    uniqID: "9fa4f757-e2b4-4c6b-b625-a934a4d4902a",
+    songs: [
+      {
+        link: "https://www.youtube.com/watch?v=r7Rn4ryE_w8",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=U7pem9Yl5SY",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=qtgf-sidZrU",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=lzQpS1rH3zI",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=gGdGFtwCNBE",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=X6Kma_HdVHk",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=k5PO17AC3Kg",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=VbrEsOLu75c",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=7aekxC_monc",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=zEVzgqga3lo",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=V5VYKkx7N-g",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=kZFrj2ORq5U",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=4EQkYVtE-28",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=owTWCbq_nSk",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=XsMpXczOIPs",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=COz9lDCFHjw",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=Kp7eSUU9oy8",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=AUAxlOfw2O0",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+    ],
+  },
 ];
 
 // this is after the thunk, so the argument passed in is ACTUALLY a json blob
@@ -682,6 +859,7 @@ export const createPlaylist = () => async (dispatch) => {
   let newId = crypto.randomUUID();
   let newPlaylist = {
     name: `Playlist #${playlists.length + 1}`,
+    description: "",
     uniqID: newId,
     songs: [],
   };
@@ -698,6 +876,12 @@ export const createPlaylist = () => async (dispatch) => {
   // return data2;
   // this data2 if .json() will contain the route ('/playlists/12') for your create playlist to go to
 };
+
+export const editPlaylist =
+  (uniqID, title, description) => (dispatch, getState) => {
+    let playlists = JSON.parse(localStorage.getItem("playlists"));
+  };
+// potentially remove song from playlist, add song to playlist
 
 const initialState = {
   list: [], // all playlists

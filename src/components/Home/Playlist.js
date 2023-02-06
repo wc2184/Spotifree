@@ -1,8 +1,18 @@
-import { Box, Divider, Flex, Image, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Divider,
+  Flex,
+  Icon,
+  Image,
+  Input,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { BsPlayFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { AiOutlineEdit } from "react-icons/ai";
 import {
   setAlreadyListened,
   setCurrentSong,
@@ -11,6 +21,8 @@ import {
 } from "../../store/player";
 import { getCurrentPlaylist, setPlaylist } from "../../store/playlist";
 import "./Playlist.css";
+import MyTooltip from "./MyTooltip";
+import EditPlaylistModal from "./EditPlaylistModal";
 
 const Playlist = ({
   playerTarget,
@@ -29,6 +41,13 @@ const Playlist = ({
   const { id } = useParams();
   const dispatch = useDispatch();
   const [playlistLoading, setPlaylistLoading] = useState(true);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: TitleIsOpen,
+    onOpen: TitleOnOpen,
+    onClose: TitleOnClose,
+  } = useDisclosure();
   useEffect(() => {
     setPlaylistLoading(true);
     dispatch(getCurrentPlaylist(id));
@@ -62,7 +81,13 @@ const Playlist = ({
 
   return (
     <Box mb="93px" mt="64px" color="white">
-      <Box display="flex" gap={5} alignItems="flex-end" pb={6}>
+      <Box
+        display="flex"
+        gap={5}
+        alignItems="flex-end"
+        pb={6}
+        className="playlistHeading"
+      >
         {!playlistLoading && currentList && (
           <Box
             sx={{
@@ -196,6 +221,11 @@ const Playlist = ({
               <Text mt={3} fontSize={14}>
                 PLAYLIST
               </Text>
+              <EditPlaylistModal
+                title
+                isOpen={TitleIsOpen}
+                onClose={TitleOnClose}
+              />
               <Text
                 ml="-5px"
                 letterSpacing="-2px"
@@ -203,6 +233,36 @@ const Playlist = ({
                 fontWeight={700}
               >
                 {currentList.name}
+
+                <MyTooltip
+                  gutter={4}
+                  placement="bottom"
+                  text="Edit Playlist Title"
+                >
+                  <Box
+                    sx={{ display: "none" }}
+                    className="editButton"
+                    as="span"
+                  >
+                    <Icon
+                      ml={3}
+                      onClick={TitleOnOpen}
+                      boxSize={7}
+                      as={AiOutlineEdit}
+                      color="rgb(149, 149, 149)"
+                      _hover={{
+                        transform: "scale(1.05)",
+                        cursor: "pointer",
+                        filter: "brightness(1.2)",
+                      }}
+                      _active={{
+                        //   transform: "translateY(1px)",
+                        transform: "scale(0.99) translateY(1px)",
+                        userSelect: "none",
+                      }}
+                    />
+                  </Box>
+                </MyTooltip>
               </Text>
             </Box>
             <Box
@@ -211,8 +271,46 @@ const Playlist = ({
               justifyContent="flex-end"
               flexDir="column"
             >
+              {/*  Description */}
+              <EditPlaylistModal isOpen={isOpen} onClose={onClose} />
               <Text mb={2} color="#b3b3b3">
-                Description here
+                <Box sx={{ display: "inline-block" }}>
+                  {currentList.description.length > 0
+                    ? currentList.description
+                    : "Add a description"}
+                </Box>
+                <MyTooltip
+                  gutter={4}
+                  placement="bottom"
+                  text="Edit Description"
+                >
+                  <Box
+                    sx={{ position: "relative", top: "4px", display: "none" }}
+                    clas
+                    as="span"
+                    pt={8}
+                    className="editButton"
+                  >
+                    <Icon
+                      ml={2}
+                      onClick={onOpen}
+                      mt={3}
+                      boxSize={5}
+                      as={AiOutlineEdit}
+                      color="rgb(149, 149, 149)"
+                      _hover={{
+                        transform: "scale(1.05)",
+                        cursor: "pointer",
+                        filter: "brightness(1.2)",
+                      }}
+                      _active={{
+                        //   transform: "translateY(1px)",
+                        transform: "scale(0.99) translateY(1px)",
+                        userSelect: "none",
+                      }}
+                    />
+                  </Box>
+                </MyTooltip>
               </Text>
               <Text mb={5}>{noembedDatas.length} songs</Text>
             </Box>
@@ -381,12 +479,29 @@ const Playlist = ({
                   // }}
                 >
                   {noembedDatas.length > 0 &&
-                    ele.title.replace(
-                      ele.author_name
-                        .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-                        .replace("VEVO", "") + "- ",
-                      ""
-                    )}
+                    ele.title
+                      .replace(
+                        ele.author_name
+                          .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+                          .replace("VEVO", "") + "- ",
+                        ""
+                      )
+                      .replace("(Official Video)", "")
+                      .replace(/\(audio\)/i, "")
+                      .replace(/\(Official audio\)/i, "")
+                      .replace(/\(official music video\)/i, "")
+                      .replace(/\(lyrics\)/i, "")
+                      .replace(/\(visualizer\)/i, "")
+                      .replace(/\(official lyric video\)/i, "")
+                      .replace(/\[official music video\]/i, "")
+                      .replace(/\(official lyric video\)/i, "")
+                      .replace(/\(lyric video\)/i, "")
+                      .replace(/\[official video\]/i, "")
+                      .replace(/\(music video\)/i, "")
+                      .replace(/\[official audio\]/i, "")
+                      .replace(/\[official visualizer\]/i, "")
+                      .replace(/「Official Audio」/i, "")
+                      .replace(/「Audio」/, "")}
                 </Box>
                 <Box
                   sx={{
@@ -403,7 +518,8 @@ const Playlist = ({
                   {noembedDatas.length > 0 &&
                     ele.author_name
                       .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-                      .replace("VEVO", "")}
+                      .replace("VEVO", "")
+                      .replace("- Topic", "")}
                 </Box>
               </Box>
               <Box ml="auto" color="#b3b3b3" mt={3} mr="3px">

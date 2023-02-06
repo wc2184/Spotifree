@@ -324,16 +324,35 @@ const Player = ({
               boxSize="56px"
               src={videoDetails && videoDetails.thumbnails.default.url}
             ></Image>
-            <Box style={{ margin: "0 14px 0 14px" }}>
+            <Box style={{ margin: "0 22px 0 14px" }}>
               {/* middle portion */}
               <Text color="white" fontSize="14.5px">
                 {videoDetails &&
-                  videoDetails.title.replace(
-                    videoDetails.channelTitle
-                      .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-                      .replace("VEVO", "") + "- ",
-                    ""
-                  )}
+                  videoDetails.title
+                    .replace(
+                      videoDetails.channelTitle
+                        .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+                        .replace("VEVO", "") + "- ",
+                      ""
+                    )
+                    .replace(/\(audio\)/i, "")
+                    .replace(/\[official music video\]/i, "")
+                    .replace("(Official Video)", "")
+                    .replace(/\(audio\)/i, "")
+                    .replace(/\(Official audio\)/i, "")
+                    .replace(/\(official music video\)/i, "")
+                    .replace(/\(lyrics\)/i, "")
+                    .replace(/\(visualizer\)/i, "")
+                    .replace(/\(official lyric video\)/i, "")
+                    .replace(/\[official music video\]/i, "")
+                    .replace(/\(official lyric video\)/i, "")
+                    .replace(/\(lyric video\)/i, "")
+                    .replace(/\[official video\]/i, "")
+                    .replace(/\(music video\)/i, "")
+                    .replace(/\[official audio\]/i, "")
+                    .replace(/\[official visualizer\]/i, "")
+                    .replace(/「Official Audio」/i, "")
+                    .replace(/「Audio」/, "")}
               </Text>
               <Text fontWeight={300} fontSize="12px" color="rgb(179, 179, 179)">
                 {videoDetails &&
@@ -341,7 +360,8 @@ const Player = ({
                     ? videoDetails.channelTitle
                         .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
                         .replace("VEVO", "")
-                    : videoDetails.channelTitle)}
+                        .replace("- Topic", "")
+                    : videoDetails.channelTitle.replace("- Topic", ""))}
               </Text>
             </Box>
 

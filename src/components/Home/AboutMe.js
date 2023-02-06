@@ -51,6 +51,7 @@ const AboutMe = ({ isOpen, onClose }) => {
             target="_blank"
             _hover={{
               cursor: "pointer",
+              transform: "scale(1.03)",
             }}
             backgroundColor="#0d1117"
             color="white"
@@ -66,6 +67,7 @@ const AboutMe = ({ isOpen, onClose }) => {
             target="_blank"
             _hover={{
               cursor: "pointer",
+              transform: "scale(1.03)",
             }}
             colorScheme="linkedin"
             fontSize={isLessThan1372 ? "14px" : "1.15rem"}
@@ -80,6 +82,7 @@ const AboutMe = ({ isOpen, onClose }) => {
             target="_blank"
             _hover={{
               cursor: "pointer",
+              transform: "scale(1.03)",
             }}
             colorScheme="yellow"
             fontSize={isLessThan1372 ? "14px" : "1.15rem"}
