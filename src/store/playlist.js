@@ -5,6 +5,7 @@ const POPULATE_NEW_USER = "playlist/populateNewUser";
 const HYDRATE_PLAYLISTS_FOR_ONE = "playlist/hydratePlaylistsForOne";
 const SET_PLAYLIST_SONGS_AND_OBJ = "playlist/setPlaylistSongsAndObj";
 const SET_PLAYLIST = "playlist/setPlaylist";
+// date is obtained via new Date(), just copied the string, parse back in downloads/timeparser.js - will
 const initialPlaylists = [
   {
     name: "K-pop Hits",

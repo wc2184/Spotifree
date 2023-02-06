@@ -34,6 +34,7 @@
   margin-top: 25vh;
   font-size: 1.5rem;
   text-align: center;
+  user-select: none;
 }
 
 /* Three dots bouncing animations, credits to mattonit @ https://codepen.io/mattonit/pen/vLoddq ; note: had to convert from scss to css*/

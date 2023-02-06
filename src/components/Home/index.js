@@ -21,7 +21,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/session";
 import { useCallback, useEffect, useState } from "react";
 import Player from "./Player";
-import { setCurrentSong } from "../../store/player";
+import {
+  setAlreadyListened,
+  setCurrentSong,
+  setIndex,
+  setQueue,
+} from "../../store/player";
 import { BsPlayFill } from "react-icons/bs";
 import { setSearchLoading } from "../../store/search";
 import { getPlaylists } from "../../store/playlist";
@@ -655,6 +660,12 @@ const Home = () => {
                           playerTarget.playVideo();
                           return;
                         }
+                        let properNoembedDatas = noembedDatas.map((el) => {
+                          return [el];
+                        });
+                        dispatch(setQueue(properNoembedDatas));
+                        dispatch(setIndex(0));
+                        dispatch(setAlreadyListened([0]));
 
                         const playVideoCheck = setInterval(() => {
                           // because setInterval and setTimeout has closure effects, there's literally no way to get the latest state without using the implicitly passed argument trick in the setState to retrieve the latest value and then just return the original state - william
@@ -808,7 +819,7 @@ const Home = () => {
                       Songs
                     </Text>
                     <Box>
-                      {noembedDatas.slice(1, 5).map((ele) => {
+                      {noembedDatas.slice(1, 5).map((ele, i) => {
                         {
                           //
                         }
@@ -853,6 +864,14 @@ const Home = () => {
                                 playerTarget.playVideo();
                                 return;
                               }
+                              let properNoembedDatas = noembedDatas.map(
+                                (el) => {
+                                  return [el];
+                                }
+                              );
+                              dispatch(setQueue(properNoembedDatas));
+                              dispatch(setIndex(i + 1));
+                              dispatch(setAlreadyListened([i + 1]));
                               const playVideoCheck = setInterval(() => {
                                 // because setInterval and setTimeout has closure effects, there's literally no way to get the latest state without using the implicitly passed argument trick in the setState to retrieve the latest value and then just return the original state - william
 
@@ -937,51 +956,7 @@ const Home = () => {
                 </Box>
 
                 <Box mt={3} ml={3} mb="200px">
-                  {/* {searchResults.slice(5).map((ele) => {
-                  return (
-                    <Box
-                      _hover={{
-                        // pointer: "cursor",
-                        cursor: "pointer",
-                      }}
-                      sx={{
-                        height: "30px",
-                        border: "1px solid white",
-                        zIndex: 5,
-                      }}
-                      dangerouslySetInnerHTML={{ __html: ele.snippet.title }}
-                      onClick={() => {
-                        
-                        dispatch(setCurrentSong(ele.id.videoId));
-                        if (currentVideo === ele.id.videoId) {
-                          playerTarget.seekTo(0);
-                          return;
-                        }
-                        const playVideoCheck = setInterval(() => {
-                          // because setInterval and setTimeout has closure effects, there's literally no way to get the latest state without using the implicitly passed argument trick in the setState to retrieve the latest value and then just return the original state - william
-                          
-                          setLoading((loading) => {
-                            
-                            if (!loading) {
-                              setPlayerTarget((playerTarget) => {
-                                
-                                setTimeout(() => {
-                                  playerTarget.playVideo();
-                                }, 200);
-                                return playerTarget;
-                              });
-                              clearInterval(playVideoCheck);
-                            }
-                            return loading;
-                          });
-
-                          // playerTarget.playVideo();
-                        }, 300);
-                      }}
-                    ></Box>
-                  );
-                })} */}
-                  {noembedDatas.slice(5).map((ele) => {
+                  {noembedDatas.slice(5).map((ele, i) => {
                     return (
                       <Box
                         _hover={{
@@ -1025,10 +1000,12 @@ const Home = () => {
                             playerTarget.playVideo();
                             return;
                           }
-                          // if (currentVideo === ele.id.videoId) {
-                          //   playerTarget.seekTo(0);
-                          //   return;
-                          // }
+                          let properNoembedDatas = noembedDatas.map((el) => {
+                            return [el];
+                          });
+                          dispatch(setQueue(properNoembedDatas));
+                          dispatch(setIndex(i + 5));
+                          dispatch(setAlreadyListened([i + 5]));
                           const playVideoCheck = setInterval(() => {
                             // because setInterval and setTimeout has closure effects, there's literally no way to get the latest state without using the implicitly passed argument trick in the setState to retrieve the latest value and then just return the original state - william
 

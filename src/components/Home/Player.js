@@ -23,10 +23,12 @@ import {
   setAlreadyListened,
   setCurrentSong,
   setIndex,
+  setRepeat,
+  setShuffle,
 } from "../../store/player";
 import { FaStepBackward, FaStepForward } from "react-icons/fa";
 import { ImShuffle } from "react-icons/im";
-import { TbRepeat } from "react-icons/tb";
+import { TbRepeat, TbRepeatOff, TbRepeatOnce } from "react-icons/tb";
 import { AiOutlineSound } from "react-icons/ai";
 import MyTooltip from "./MyTooltip";
 
@@ -52,6 +54,8 @@ const Player = ({
     queue,
     index: currentIndex,
     alreadyListened,
+    shuffle,
+    repeat,
   } = useSelector((state) => state.player);
 
   useEffect(() => {
@@ -225,9 +229,56 @@ const Player = ({
             return vol;
             // set the volume
           });
+          console.log(alreadyListened, "already listened latest");
 
           localStorage.setItem("currentSong", currentVideo);
           // e.target.setVolume(100);
+        }}
+        onEnd={() => {
+          if (repeat == 2) {
+            playerTarget.seekTo(0);
+            playerTarget.playVideo();
+            return;
+          }
+          let newIndex;
+          if (currentIndex == queue.length - 1) {
+            newIndex = 0;
+            playerTarget.seekTo(0);
+            playerTarget.playVideo();
+          } else {
+            newIndex = currentIndex + 1;
+          }
+
+          dispatch(setIndex(newIndex));
+          dispatch(
+            setAlreadyListened([...new Set([...alreadyListened, newIndex])])
+          );
+          dispatch(
+            setCurrentSong(
+              queue[newIndex][0].url.replace(
+                "https://www.youtube.com/watch?v=",
+                ""
+              )
+            )
+          );
+          if (repeat == 0) return;
+          // if repeat is off then don't run the next lines
+          const playVideoCheck = setInterval(() => {
+            // because setInterval and setTimeout has closure effects, there's literally no way to get the latest state without using the implicitly passed argument trick in the setState to retrieve the latest value and then just return the original state - william
+
+            setLoading((loading) => {
+              if (!loading) {
+                setPlayerTarget((playerTarget) => {
+                  setTimeout(() => {
+                    playerTarget.playVideo();
+                  }, 400);
+                  return playerTarget;
+                });
+                clearInterval(playVideoCheck);
+              }
+              return loading;
+            });
+          }, 300);
         }}
       />
       <div className="player-wrapper">
@@ -307,14 +358,28 @@ const Player = ({
         <Box className="playerFlexPortion">
           <Box className="tophalfplayer">
             {/* top half */}
-            <ImShuffle
-              style={{ width: "18px", height: "20px" }}
+            <Box
+              as={ImShuffle}
+              style={{ width: "21px", height: "23px" }}
               preserveAspectRatio="none"
-              color="rgb(186, 186, 186)"
+              color={shuffle ? "lightgreen" : "rgb(216, 216, 216)"}
+              _hover={{
+                transform: "scale(1.05)",
+                cursor: "pointer",
+                filter: "brightness(1.3)",
+              }}
+              _active={{
+                //   transform: "translateY(1px)",
+                transform: "scale(0.99) translateY(1px)",
+                userSelect: "none",
+              }}
+              onClick={() => {
+                dispatch(setShuffle(!shuffle));
+              }}
             />
             <Box
               as={FaStepBackward}
-              style={{ width: "23px", height: "18px" }}
+              style={{ width: "28px", height: "23px" }}
               preserveAspectRatio="none"
               color="rgb(186, 186, 186)"
               _hover={{
@@ -325,6 +390,7 @@ const Player = ({
               _active={{
                 //   transform: "translateY(1px)",
                 transform: "scale(0.99) translateY(1px)",
+                userSelect: "none",
               }}
               onClick={() => {
                 // currentVideo is the curr song
@@ -346,7 +412,9 @@ const Player = ({
 
                 dispatch(setIndex(newIndex));
                 dispatch(
-                  setAlreadyListened([...alreadyListened, currentIndex])
+                  setAlreadyListened([
+                    ...new Set([...alreadyListened, newIndex]),
+                  ])
                 );
                 dispatch(
                   setCurrentSong(
@@ -359,6 +427,8 @@ const Player = ({
                 const pauseFix = setInterval(() => {
                   console.log("((checkking");
                   let playbutton = document.querySelector("#playbutton");
+                  let pausebutton = document.querySelector("#pausebutton");
+
                   console.log(playbutton, "nope");
                   if (playbutton) {
                     console.log("found it", playbutton);
@@ -371,6 +441,11 @@ const Player = ({
                     console.log("((RANN BOIII --------");
                   }
 
+                  if (pausebutton) {
+                    clearInterval(pauseFix);
+                    console.log("((CANCEL CUZ NO NEED --------");
+                    return;
+                  }
                   return playerTarget;
                 }, 200);
                 const playVideoCheck = setInterval(() => {
@@ -454,7 +529,7 @@ const Player = ({
             )}
             <Box
               as={FaStepForward}
-              style={{ width: "23px", height: "18px" }}
+              style={{ width: "28px", height: "23px" }}
               preserveAspectRatio="none"
               color="rgb(186, 186, 186)"
               _hover={{
@@ -465,6 +540,7 @@ const Player = ({
               _active={{
                 //   transform: "translateY(1px)",
                 transform: "scale(0.99) translateY(1px)",
+                userSelect: "none",
               }}
               onClick={() => {
                 // currentVideo is the curr song
@@ -487,7 +563,9 @@ const Player = ({
 
                 dispatch(setIndex(newIndex));
                 dispatch(
-                  setAlreadyListened([...alreadyListened, currentIndex])
+                  setAlreadyListened([
+                    ...new Set([...alreadyListened, newIndex]),
+                  ])
                 );
                 console.log(queue, newIndex, "pew");
                 dispatch(
@@ -501,6 +579,7 @@ const Player = ({
                 const pauseFix = setInterval(() => {
                   console.log("((checkking");
                   let playbutton = document.querySelector("#playbutton");
+                  let pausebutton = document.querySelector("#pausebutton");
                   console.log(playbutton, "nope");
                   if (playbutton) {
                     console.log("found it", playbutton);
@@ -511,9 +590,14 @@ const Player = ({
 
                     clearInterval(pauseFix);
                     console.log("((RANN BOIII --------");
+                    return;
                   }
 
-                  return playerTarget;
+                  if (pausebutton) {
+                    clearInterval(pauseFix);
+                    console.log("((CANCEL CUZ NO NEED --------");
+                    return;
+                  }
                 }, 200);
 
                 const playVideoCheck = setInterval(() => {
@@ -536,10 +620,27 @@ const Player = ({
                 }, 100);
               }}
             />
-            <TbRepeat
-              style={{ width: "20px", height: "20px" }}
+            <Box
+              as={repeat == 0 || repeat == 1 ? TbRepeat : TbRepeatOnce}
+              style={{ width: "23px", height: "23px" }}
               preserveAspectRatio="none"
-              color="rgb(186, 186, 186)"
+              color={
+                [1, 2].includes(repeat) ? "lightgreen" : "rgb(216, 216, 216)"
+              }
+              _hover={{
+                transform: "scale(1.05)",
+                cursor: "pointer",
+                filter: "brightness(1.3)",
+              }}
+              _active={{
+                //   transform: "translateY(1px)",
+                transform: "scale(0.99) translateY(1px)",
+                userSelect: "none",
+              }}
+              onClick={() => {
+                dispatch(setRepeat());
+                console.log(repeat, "repeat state here");
+              }}
             />
           </Box>
           <Box className="bottomhalfplayer">

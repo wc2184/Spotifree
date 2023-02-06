@@ -75,6 +75,7 @@ const Playlist = ({
               transition: "ease 0.3s",
               position: "relative",
               marginRight: "10px",
+              userSelect: "none",
             }}
             _hover={{
               backgroundColor: "rgb(83, 83, 83)",
@@ -198,7 +199,7 @@ const Playlist = ({
               <Text
                 ml="-5px"
                 letterSpacing="-2px"
-                fontSize="7xl"
+                fontSize="6xl"
                 fontWeight={700}
               >
                 {currentList.name}
@@ -258,8 +259,8 @@ const Playlist = ({
           style={{ textAlign: "center", marginTop: "30px", fontSize: "26px" }}
         >
           {" "}
-          You have no songs. Add songs by clicking the arrow on the bottom left
-          of the page!
+          You have no songs. Add songs by clicking the 'plus sign' on the bottom
+          left of the page!
         </div>
       ) : null}
       {!playlistLoading &&
