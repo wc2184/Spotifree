@@ -123,6 +123,14 @@ const Player = ({
     } else {
       dispatch(setCurrentSong(localStorage.getItem("currentSong")));
     }
+    dispatch({
+      type: "player/setRepeat",
+      repeat: localStorage.getItem("repeat"),
+    });
+    dispatch({
+      type: "player/setShuffle",
+      repeat: localStorage.getItem("shuffle"),
+    });
     // default song is michael jackson
   }, [dispatch]);
   //   const [currentVideo, setCurrentVideo] = useState("AuVMFXOjsNU");
