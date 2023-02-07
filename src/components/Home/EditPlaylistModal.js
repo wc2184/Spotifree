@@ -51,6 +51,9 @@ const EditPlaylistModal = ({ title, isOpen, onClose }) => {
                     onClose();
                   }
                 }}
+                onFocus={(e) => {
+                  e.target.select();
+                }}
               />
             </ModalBody>
 
