@@ -1,4 +1,11 @@
-import { Box, Divider, Flex, Icon, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Divider,
+  Flex,
+  Icon,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import SpotifyLogo from "../../SpotifyLogo";
 import { MdHomeFilled } from "react-icons/md";
 import { RiSearchLine, RiSearchFill } from "react-icons/ri";
@@ -10,6 +17,7 @@ import { useEffect } from "react";
 import csrfFetch from "../../store/csrf";
 import { createPlaylist, getPlaylistsForOne } from "../../store/playlist";
 import { useDispatch, useSelector } from "react-redux";
+import EditPlaylistModal from "./EditPlaylistModal";
 
 const Sidebar = ({ sidebarwidth }) => {
   const location = useLocation();
@@ -19,6 +27,7 @@ const Sidebar = ({ sidebarwidth }) => {
   const currentUser = useSelector((state) => state.session.user);
   //
   const playlists = useSelector((state) => state.playlist.list);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   //
   //   playlists.sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt)),
   //   " in sidebar playlists"
@@ -230,7 +239,7 @@ const Sidebar = ({ sidebarwidth }) => {
           </Box>
 
           {/* <Box color="white">Create Playlist</Box> */}
-
+          <EditPlaylistModal title isOpen={isOpen} onClose={onClose} />
           <Box
             className="addIconParent"
             display="flex"
@@ -250,6 +259,9 @@ const Sidebar = ({ sidebarwidth }) => {
               dispatch(createPlaylist()).then((data) => {
                 history.push(`/playlist/${data}`);
                 window.scrollTo(0, 0);
+                setTimeout(() => {
+                  onOpen();
+                }, 200);
               });
             }}
           >
