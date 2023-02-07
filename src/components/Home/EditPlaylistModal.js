@@ -18,6 +18,8 @@ const EditPlaylistModal = ({ title, isOpen, onClose }) => {
   const currentList = useSelector((state) => state.playlist.currentList);
   const dispatch = useDispatch();
   console.log(title, "titl");
+  console.log(currentList, "curr list");
+  if (!currentList) return;
   if (title)
     return (
       <>
