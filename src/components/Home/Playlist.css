@@ -1,3 +1,4 @@
 .playlistHeading:hover .editButton {
-  display: inline !important;
+  /* display: inline !important; */
+  visibility: visible;
 }

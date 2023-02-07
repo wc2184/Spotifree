@@ -278,6 +278,10 @@ const initialPlaylists = [
         link: "https://www.youtube.com/watch?v=6744glqD6lk",
         time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
       },
+      {
+        link: "https://www.youtube.com/watch?v=WmqHBLD9OiU",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
     ],
   },
   {
@@ -880,6 +884,14 @@ export const createPlaylist = () => async (dispatch) => {
 export const editPlaylist =
   (uniqID, title, description) => (dispatch, getState) => {
     let playlists = JSON.parse(localStorage.getItem("playlists"));
+    let currentListIndex = playlists.findIndex((list) => uniqID == list.uniqID);
+    let toEdit = playlists[currentListIndex];
+    toEdit.name = title;
+    toEdit.description = description;
+    console.log(playlists[currentListIndex], "from redux editPlaylist");
+    console.log(playlists, "all redux");
+    localStorage.setItem("playlists", JSON.stringify(playlists));
+    dispatch(hydratePlaylistsForOne(playlists));
   };
 // potentially remove song from playlist, add song to playlist
 

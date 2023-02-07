@@ -50,10 +50,10 @@ function Root() {
 }
 
 const renderApplication = () => {
-  if (localStorage.getItem("version") != 2) {
+  if (localStorage.getItem("version") != 1) {
     localStorage.clear();
-    localStorage.setItem("version", 2);
-    localStorage.setItem("repeat", 0);
+    localStorage.setItem("version", 1);
+    localStorage.setItem("repeat", 1);
     localStorage.setItem("shuffle", false);
   }
   ReactDOM.render(

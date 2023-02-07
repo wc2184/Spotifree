@@ -10,11 +10,13 @@ import {
   ModalOverlay,
   Textarea,
 } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { editPlaylist } from "../../store/playlist";
 import Lorem from "./Lorem";
 
 const EditPlaylistModal = ({ title, isOpen, onClose }) => {
   const currentList = useSelector((state) => state.playlist.currentList);
+  const dispatch = useDispatch();
   console.log(title, "titl");
   if (title)
     return (
@@ -39,6 +41,13 @@ const EditPlaylistModal = ({ title, isOpen, onClose }) => {
                 onKeyDown={(e) => {
                   if (e.key == "Enter") {
                     console.log(e.target.value, "ee");
+                    dispatch(
+                      editPlaylist(
+                        currentList.uniqID,
+                        e.target.value,
+                        currentList.description
+                      )
+                    );
                     onClose();
                   }
                 }}
@@ -78,6 +87,13 @@ const EditPlaylistModal = ({ title, isOpen, onClose }) => {
               onKeyDown={(e) => {
                 if (e.key == "Enter") {
                   console.log(e.target.value, "ee");
+                  dispatch(
+                    editPlaylist(
+                      currentList.uniqID,
+                      currentList.name,
+                      e.target.value
+                    )
+                  );
                   onClose();
                 }
               }}

@@ -75,14 +75,22 @@ const Player = ({
       e.preventDefault();
     }
 
-    if (e.key == " " && e.target.nodeName !== "INPUT") {
+    if (
+      e.key == " " &&
+      e.target.nodeName !== "INPUT" &&
+      e.target.nodeName !== "TEXTAREA"
+    ) {
       let playbutton = document.querySelector(".triangleplayerbutton");
       playbutton.click();
 
       //   playerTarget.playVideo();
       //   playerTarget.pauseVideo();
     }
-    if (e.key == "/" && e.target.nodeName !== "INPUT") {
+    if (
+      e.key == "/" &&
+      e.target.nodeName !== "INPUT" &&
+      e.target.nodeName !== "TEXTAREA"
+    ) {
       let inputArea = document.querySelector(".searchbartarget");
 
       setTimeout(() => {

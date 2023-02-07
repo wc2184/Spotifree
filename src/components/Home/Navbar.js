@@ -6,6 +6,7 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Text,
   useDisclosure,
 } from "@chakra-ui/react";
 import { useHistory, useLocation } from "react-router-dom";
@@ -19,6 +20,7 @@ import Search from "./Search";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/session";
 import AboutMe from "./AboutMe";
+import "./Navbar.css";
 
 const Navbar = ({ sidebarwidth, submitted, setSubmitted }) => {
   const y = useScrollYPosition();
@@ -26,6 +28,7 @@ const Navbar = ({ sidebarwidth, submitted, setSubmitted }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const currentList = useSelector((state) => state.playlist.currentList);
   //
 
   //
@@ -101,7 +104,20 @@ const Navbar = ({ sidebarwidth, submitted, setSubmitted }) => {
         <div style={{ color: "yellow", width: "200px" }}>Hello</div>
         <div style={{ color: "yellow", width: "200px" }}>Hello</div>
         <div style={{ color: "yellow", width: "200px" }}>Hello</div> */}
-
+        {location.pathname.includes("/playlist") && y > 288 ? (
+          <Text
+            ml={4}
+            mt={1}
+            fontWeight={700}
+            fontSize="1.30rem"
+            letterSpacing={-1.5}
+            alignSelf="center"
+            className="fadeIn"
+            color="white"
+          >
+            {currentList.name}
+          </Text>
+        ) : null}
         <Box
           sx={{
             minWidth: "300px",

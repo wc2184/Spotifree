@@ -240,7 +240,7 @@ const Playlist = ({
                   text="Edit Playlist Title"
                 >
                   <Box
-                    sx={{ display: "none" }}
+                    sx={{ visibility: "hidden" }}
                     className="editButton"
                     as="span"
                   >
@@ -285,7 +285,11 @@ const Playlist = ({
                   text="Edit Description"
                 >
                   <Box
-                    sx={{ position: "relative", top: "4px", display: "none" }}
+                    sx={{
+                      position: "relative",
+                      top: "4px",
+                      visibility: "hidden",
+                    }}
                     clas
                     as="span"
                     pt={8}
