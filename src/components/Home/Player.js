@@ -125,11 +125,12 @@ const Player = ({
     }
     dispatch({
       type: "player/setRepeat",
-      repeat: localStorage.getItem("repeat"),
+      repeat: Number(localStorage.getItem("repeat")),
     });
+
     dispatch({
       type: "player/setShuffle",
-      repeat: localStorage.getItem("shuffle"),
+      repeat: Boolean(localStorage.getItem("shuffle")),
     });
     // default song is michael jackson
   }, [dispatch]);
