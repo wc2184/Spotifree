@@ -22,11 +22,11 @@ const MainContentWrapper = ({
       style={{
         // width: `calc(100% - ${sidebarwidth}px)`,
         width: `calc(100% - ${sidebarwidth}px)`,
-        paddingRight: "100px",
+        padding: "20px 100px 20px 20px",
         // maxWidth: `calc(1517px - ${sidebarwidth + 10}px)`,
         // overflowX: "hidden",
         minHeight: "100vh",
-        padding: "20px",
+
         // backgroundColor: "rgb(29, 29, 29)", //* UNCOMMENT THIS AFTER finishing code
         // overscrollBehaviorY: "none",
         // overflow: "auto",
