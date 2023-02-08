@@ -31,6 +31,8 @@ const Playlist = ({
   setLoading,
   visualLoading,
   setVisualLoading,
+  playlistLoading,
+  setPlaylistLoading,
 }) => {
   const playlists = useSelector((state) => state.playlist.list);
   const currentList = useSelector((state) => state.playlist.currentList);
@@ -40,7 +42,6 @@ const Playlist = ({
 
   const { id } = useParams();
   const dispatch = useDispatch();
-  const [playlistLoading, setPlaylistLoading] = useState(true);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
@@ -83,6 +84,7 @@ const Playlist = ({
     <Box mb="93px" mt="64px" color="white">
       <Box
         display="flex"
+        backgroundColor="transparent"
         gap={5}
         alignItems="flex-end"
         pb={6}
@@ -211,6 +213,7 @@ const Playlist = ({
             display="flex"
             flexDir="column"
             justifyContent="space-between"
+            zIndex={2}
           >
             <Box
               flex={1}
@@ -323,7 +326,7 @@ const Playlist = ({
       </Box>
       {!playlistLoading && currentList && id == currentList.uniqID && (
         <>
-          <Flex>
+          <Flex position="relative" zIndex={2}>
             <Box
               p="9px"
               color="#b3b3b3"
@@ -450,6 +453,7 @@ const Playlist = ({
                 alignItems="center"
                 ml={1}
                 mr={5}
+                zIndex="2"
               >
                 {i + 1}
               </Box>
@@ -461,9 +465,10 @@ const Playlist = ({
                 mr="14px"
                 boxShadow="0 8px 24px rgb(0, 0, 0, .5)" // goat box shadow
                 src={noembedDatas.length > 0 && ele.thumbnail_url}
+                zIndex="2"
               ></Image>
 
-              <Box>
+              <Box zIndex={2}>
                 <Box
                   sx={{
                     whiteSpace: "nowrap",
@@ -526,7 +531,7 @@ const Playlist = ({
                       .replace("- Topic", "")}
                 </Box>
               </Box>
-              <Box ml="auto" color="#b3b3b3" mt={3} mr="3px">
+              <Box zIndex={2} ml="auto" color="#b3b3b3" mt={3} mr="3px">
                 {dateCreated}
               </Box>
             </Box>

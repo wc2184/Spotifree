@@ -10,6 +10,7 @@ import {
   ModalOverlay,
   Textarea,
 } from "@chakra-ui/react";
+import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editPlaylist } from "../../store/playlist";
 import Lorem from "./Lorem";
@@ -17,8 +18,9 @@ import Lorem from "./Lorem";
 const EditPlaylistModal = ({ title, isOpen, onClose }) => {
   const currentList = useSelector((state) => state.playlist.currentList);
   const dispatch = useDispatch();
-  console.log(title, "titl");
-  console.log(currentList, "curr list");
+  const refTitle = useRef();
+  const refDesc = useRef();
+
   if (!currentList) return;
   if (title)
     return (
@@ -35,7 +37,9 @@ const EditPlaylistModal = ({ title, isOpen, onClose }) => {
             <ModalCloseButton />
             <ModalBody>
               <Input
+                maxLength={25}
                 defaultValue={currentList.name}
+                ref={refTitle}
                 autoFocus
                 fontSize="28px"
                 size="lg"
@@ -60,10 +64,25 @@ const EditPlaylistModal = ({ title, isOpen, onClose }) => {
             </ModalBody>
 
             <ModalFooter pt={1}>
-              <Button colorScheme="green" mr={3} onClick={onClose}>
+              <Button
+                colorScheme="green"
+                mr={3}
+                onClick={() => {
+                  dispatch(
+                    editPlaylist(
+                      currentList.uniqID,
+                      refTitle.current.value,
+                      currentList.description
+                    )
+                  );
+                  onClose();
+                }}
+              >
                 Save
               </Button>
-              <Button variant="ghost">Cancel</Button>
+              <Button onClick={onClose} variant="ghost">
+                Cancel
+              </Button>
             </ModalFooter>
           </ModalContent>
         </Modal>
@@ -78,6 +97,8 @@ const EditPlaylistModal = ({ title, isOpen, onClose }) => {
           <ModalCloseButton />
           <ModalBody>
             <Textarea
+              ref={refDesc}
+              maxLength={90}
               autoFocus
               onFocus={(e) => {
                 e.currentTarget.setSelectionRange(
@@ -106,10 +127,25 @@ const EditPlaylistModal = ({ title, isOpen, onClose }) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="green" mr={3} onClick={onClose}>
+            <Button
+              colorScheme="green"
+              mr={3}
+              onClick={() => {
+                dispatch(
+                  editPlaylist(
+                    currentList.uniqID,
+                    currentList.name,
+                    refDesc.current.value
+                  )
+                );
+                onClose();
+              }}
+            >
               Save
             </Button>
-            <Button variant="ghost">Cancel</Button>
+            <Button onClick={onClose} variant="ghost">
+              Cancel
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

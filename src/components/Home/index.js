@@ -14,7 +14,7 @@ import "./Home.css";
 import SpotifyLogo from "../../SpotifyLogo";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation, useParams } from "react-router-dom";
 import Lorem from "./Lorem";
 import MainContentWrapper from "./MainContentWrapper";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,7 +29,7 @@ import {
 } from "../../store/player";
 import { BsPlayFill } from "react-icons/bs";
 import { setSearchLoading } from "../../store/search";
-import { getPlaylists } from "../../store/playlist";
+import { getPlaylists, setPlaylistSongsAndObj } from "../../store/playlist";
 import Playlist from "./Playlist";
 
 // plan, use useEffect to update a array with all searchResults from useselector
@@ -45,6 +45,7 @@ const Home = () => {
   const [submittedNoembed, setSubmittedNoembed] = useState(false);
   const playlists = useSelector((state) => state.playlist.list);
   const currentUser = useSelector((state) => state.session.user);
+  const currentList = useSelector((state) => state.playlist.currentList);
   const searchResults = useSelector(
     (state) => state.search.searchResults.items
   );
@@ -104,12 +105,49 @@ const Home = () => {
       </div>
     </div>
   );
+  // Gradient Section
+  const [playlistLoading, setPlaylistLoading] = useState(true);
+  function hashCode(str) {
+    // hash function for spotifree color gradient consistency
+    return str
+      .split("")
+      .reduce(
+        (prevHash, currVal) =>
+          ((prevHash << 5) - prevHash + currVal.charCodeAt(0)) | 0,
+        0
+      );
+  }
+  const colors = [
+    "#eb4034",
+    "#cc923b",
+    "#8bcc3b",
+    "#3bcc99",
+    "#3baacc",
+    "#000077",
+    "#4c3bcc",
+    "#cc3b84",
+    "#d60f19",
+    "#80d0e8",
+  ];
+  // End
+  const location = useLocation();
+  // console.log(location, location == undefined, "id in index", currentList);
+
+  useEffect(() => {
+    // console.log("is this even runnings/???");
+    // console.log(location, location == undefined, "id in index", currentList);
+    if (!location.pathname.includes("playlist")) {
+      dispatch(setPlaylistSongsAndObj([], null));
+    }
+  }, [dispatch, location.pathname]);
   return (
     <div className="globalwrapper" style={{ maxWidth: "100vw" }}>
       <Navbar
         sidebarwidth={sidebarwidth}
         submitted={submittedNoembed}
         setSubmitted={setSubmittedNoembed}
+        hashCode={hashCode}
+        colors={colors}
       />
       <Sidebar sidebarwidth={sidebarwidth} />
       <Player
@@ -128,7 +166,11 @@ const Home = () => {
         </Box> */}
 
       <Route exact path="/">
-        <MainContentWrapper sidebarwidth={sidebarwidth}>
+        <MainContentWrapper
+          sidebarwidth={sidebarwidth}
+          hashCode={hashCode}
+          colors={colors}
+        >
           <Box
             mt="100px"
             width={`calc(100vw - ${sidebarwidth}px)`}
@@ -578,7 +620,11 @@ const Home = () => {
         </MainContentWrapper>
       </Route>
       <Route exact path="/search">
-        <MainContentWrapper sidebarwidth={sidebarwidth}>
+        <MainContentWrapper
+          sidebarwidth={sidebarwidth}
+          hashCode={hashCode}
+          colors={colors}
+        >
           <div
             style={{
               width: "100%",
@@ -1202,7 +1248,11 @@ const Home = () => {
         </MainContentWrapper>
       </Route>
       <Route exact path="/library">
-        <MainContentWrapper sidebarwidth={sidebarwidth}>
+        <MainContentWrapper
+          sidebarwidth={sidebarwidth}
+          hashCode={hashCode}
+          colors={colors}
+        >
           <Box
             sx={{
               display: "flex",
@@ -1429,7 +1479,13 @@ const Home = () => {
         </MainContentWrapper>
       </Route>
       <Route path="/playlist/:id">
-        <MainContentWrapper sidebarwidth={sidebarwidth}>
+        <MainContentWrapper
+          sidebarwidth={sidebarwidth}
+          playlistLoading={playlistLoading}
+          setPlaylistLoading={setPlaylistLoading}
+          hashCode={hashCode}
+          colors={colors}
+        >
           <Playlist
             playerTarget={playerTarget}
             setPlayerTarget={setPlayerTarget}
@@ -1437,6 +1493,8 @@ const Home = () => {
             setLoading={setLoading}
             visualLoading={visualLoading}
             setVisualLoading={setVisualLoading}
+            playlistLoading={playlistLoading}
+            setPlaylistLoading={setPlaylistLoading}
           />
         </MainContentWrapper>
       </Route>

@@ -22,7 +22,13 @@ import { logout } from "../../store/session";
 import AboutMe from "./AboutMe";
 import "./Navbar.css";
 
-const Navbar = ({ sidebarwidth, submitted, setSubmitted }) => {
+const Navbar = ({
+  sidebarwidth,
+  submitted,
+  setSubmitted,
+  colors,
+  hashCode,
+}) => {
   const y = useScrollYPosition();
   const currentUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
@@ -40,13 +46,39 @@ const Navbar = ({ sidebarwidth, submitted, setSubmitted }) => {
   //
   //* MUST BE 85
   // let opacityNav = y >= 85 ? 60 + (y - 85) * 0.35 : 50;
-  let opacityNav = y >= 85 ? 30 + (y - 85) * 0.35 : 10;
+  let opacityNav = y >= 85 ? 30 + (y - 85) * 0.35 : 0;
   //* for every 10 difference, increase opacity by 5
   opacityNav = y >= 288 ? 100 : opacityNav;
 
   const location = useLocation();
-  //
+  // color hex to rgb parser
+  function hexToRgbA(hex) {
+    var c;
+    if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+      c = hex.substring(1).split("");
+      if (c.length == 3) {
+        c = [c[0], c[0], c[1], c[1], c[2], c[2]];
+      }
+      c = "0x" + c.join("");
+      return (
+        "rgba(" + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(",")
+        // + ",1)"
+      );
+    }
+    throw new Error("Bad Hex");
+  }
+  if (currentList)
+    console.log(
+      hexToRgbA(colors[Math.abs(hashCode(currentList.uniqID) % colors.length)]),
+      "helloooo navv"
+    );
 
+  if (currentList)
+    console.log(
+      `${hexToRgbA(
+        colors[Math.abs(hashCode(currentList.uniqID) % colors.length)]
+      )}, ${opacityNav / 100})`
+    );
   return (
     <Box className="navbar">
       <div
@@ -54,11 +86,19 @@ const Navbar = ({ sidebarwidth, submitted, setSubmitted }) => {
           minWidth: `calc(100vw - ${sidebarwidth}px)`, //THISI S THE CRUX, the issue was that 100% is not the entire screen
           // minWidth: `100%`,
           marginLeft: sidebarwidth + "px",
-          backgroundColor: `rgb(9, 9, 9, ${opacityNav / 100}`,
+          // backgroundColor: `rgb(9, 9, 9, ${opacityNav / 100}`,
+          backgroundColor: currentList
+            ? `${hexToRgbA(
+                colors[Math.abs(hashCode(currentList.uniqID) % colors.length)]
+              )}, ${opacityNav / 100})`
+            : `rgb(9, 9, 9, ${opacityNav / 100}`,
           // opacity: `${opacityNav}%`,
+          backgroundImage: y >= 85 ? "linear-gradient(rgb(0 0 0/35%) 0 0)" : "", //lightens it a little so the playlist name doesnt have to reduce in color
           height: "64px",
           zIndex: "-1",
           display: "flex",
+          // backgroundColor:
+          //   colors[Math.abs(hashCode(currentList.uniqID) % colors.length)],
         }}
       >
         <Flex gap={4} alignItems="center" ml={7}>
@@ -68,8 +108,8 @@ const Navbar = ({ sidebarwidth, submitted, setSubmitted }) => {
               width: "34px",
               height: "34px",
               backgroundColor: "black",
-              paddingTop: "2px",
-              paddingLeft: "2px",
+              paddingTop: "5px",
+              paddingLeft: "3px",
             }}
             _hover={{ cursor: "pointer" }}
             _active={{ transform: "scale(1.05)" }}
@@ -77,7 +117,7 @@ const Navbar = ({ sidebarwidth, submitted, setSubmitted }) => {
               history.go(-1);
             }}
           >
-            <AiOutlineLeft color="white" fontSize={30} />
+            <AiOutlineLeft color="white" fontSize={25} />
           </Box>
           <Box
             sx={{
@@ -85,8 +125,8 @@ const Navbar = ({ sidebarwidth, submitted, setSubmitted }) => {
               width: "34px",
               height: "34px",
               backgroundColor: "black",
-              paddingTop: "2px",
-              paddingLeft: "3px",
+              paddingTop: "5px",
+              paddingLeft: "6px",
             }}
             _hover={{ cursor: "pointer" }}
             _active={{ transform: "scale(1.05)" }}
@@ -94,7 +134,7 @@ const Navbar = ({ sidebarwidth, submitted, setSubmitted }) => {
               history.go(1);
             }}
           >
-            <AiOutlineRight color="white" fontSize={30} onClick={() => {}} />
+            <AiOutlineRight color="white" fontSize={25} />
           </Box>
         </Flex>
         {location.pathname === "/search" ? (
@@ -107,15 +147,15 @@ const Navbar = ({ sidebarwidth, submitted, setSubmitted }) => {
         {location.pathname.includes("/playlist") && y > 288 ? (
           <Text
             ml={4}
-            mt={1}
+            mt="3px"
             fontWeight={700}
-            fontSize="1.30rem"
-            letterSpacing={-1.5}
+            fontSize="1.45rem"
+            letterSpacing={-1}
             alignSelf="center"
             className="fadeIn"
             color="white"
           >
-            {currentList.name}
+            {currentList && currentList.name}
           </Text>
         ) : null}
         <Box
