@@ -128,10 +128,10 @@ const Player = ({
       repeat: Number(localStorage.getItem("repeat")),
     });
 
-    dispatch({
-      type: "player/setShuffle",
-      repeat: Boolean(localStorage.getItem("shuffle")),
-    });
+    // dispatch({
+    //   type: "player/setShuffle",
+    //   repeat: Boolean(localStorage.getItem("shuffle")), // the get item returns a string
+    // });
     // default song is michael jackson
   }, [dispatch]);
   //   const [currentVideo, setCurrentVideo] = useState("AuVMFXOjsNU");

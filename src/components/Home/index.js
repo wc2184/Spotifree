@@ -642,8 +642,8 @@ const Home = () => {
                   Please enter a search query above! Yes, you can listen to ANY
                   song for free.
                 </div>
-                <div className="emptyQuery">
-                  Try searching: "Adele" or "The Beatles"
+                <div className="emptyQuery2">
+                  Try searching: "Adele" or "The Beatles" 😊
                 </div>
               </>
             ) : null}

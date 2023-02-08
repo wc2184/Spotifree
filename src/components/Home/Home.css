@@ -36,6 +36,12 @@
   text-align: center;
   user-select: none;
 }
+.emptyQuery2 {
+  margin-top: 10vh;
+  font-size: 1.6rem;
+  text-align: center;
+  user-select: none;
+}
 
 /* Three dots bouncing animations, credits to mattonit @ https://codepen.io/mattonit/pen/vLoddq ; note: had to convert from scss to css*/
 
