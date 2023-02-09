@@ -26,9 +26,9 @@ const AddToPlaylist = ({ redirect = false, song }) => {
           maxWidth={270}
           backgroundColor="#f2f2f2"
           zIndex="dropdown"
-          position="absolute"
-          top={0}
-          left={0}
+          //   position="absolute"
+          //   top={0}
+          //   left={0}
           //   transition="ease 0.2s"
         >
           <MenuGroup userSelect="none" ml={3} title="Choose a Playlist">
