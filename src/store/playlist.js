@@ -569,7 +569,7 @@ const initialPlaylists = [
         time: "Wed Feb 01 2023 11:44:20 GMT-0500 (Eastern Standard Time)",
       },
       {
-        link: "https://www.youtube.com/watch?v=0wnuTGGuAVs",
+        link: "https://www.youtube.com/watch?v=FkxEE7wZ83c",
         time: "Wed Feb 01 2023 11:44:20 GMT-0500 (Eastern Standard Time)",
       },
       {
