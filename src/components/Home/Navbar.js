@@ -67,18 +67,7 @@ const Navbar = ({
     }
     throw new Error("Bad Hex");
   }
-  if (currentList)
-    console.log(
-      hexToRgbA(colors[Math.abs(hashCode(currentList.uniqID) % colors.length)]),
-      "helloooo navv"
-    );
 
-  if (currentList)
-    console.log(
-      `${hexToRgbA(
-        colors[Math.abs(hashCode(currentList.uniqID) % colors.length)]
-      )}, ${opacityNav / 100})`
-    );
   return (
     <Box className="navbar">
       <div

@@ -86,7 +86,7 @@ const Home = () => {
   //   for (let i of noembedDatas) {
   //     links.push(i.url);
   //   }
-  //   // console.log(links);
+  //   //
   // }, [noembedDatas]);
 
   useEffect(() => {
@@ -131,11 +131,11 @@ const Home = () => {
   ];
   // End
   const location = useLocation();
-  // console.log(location, location == undefined, "id in index", currentList);
+  //
 
   useEffect(() => {
-    // console.log("is this even runnings/???");
-    // console.log(location, location == undefined, "id in index", currentList);
+    //
+    //
     if (!location.pathname.includes("playlist")) {
       dispatch(setPlaylistSongsAndObj([], null));
     }

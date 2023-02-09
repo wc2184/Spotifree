@@ -449,7 +449,6 @@ export default function songReducer(state = initialState, action) {
 
   switch (action.type) {
     case SET_CURRENT_SONG:
-      console.log("REDUX ACTION SONG CHANGE", action.id);
       return { ...state, song: action.id };
     case SET_QUEUE:
       return { ...state, queue: action.queue };

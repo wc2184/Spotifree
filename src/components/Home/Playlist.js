@@ -77,7 +77,6 @@ const Playlist = ({
     if (currentList && id == currentList.uniqID) {
       fetchNoembedData();
     }
-    console.log(noembedDatas, "noembed");
   }, [songs]);
 
   return (

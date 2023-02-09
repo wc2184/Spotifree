@@ -3,6 +3,12 @@ import {
   Button,
   Icon,
   Image,
+  Menu,
+  MenuButton,
+  MenuGroup,
+  MenuItem,
+  MenuList,
+  Portal,
   Slider,
   SliderFilledTrack,
   SliderThumb,
@@ -17,7 +23,7 @@ import debounce from "lodash/debounce";
 import "./Player.css";
 import { BsPlayFill } from "react-icons/bs";
 import { IoMdPause } from "react-icons/io";
-import { AiOutlineHeart, AiOutlinePlus } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart, AiOutlinePlus } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setAlreadyListened,
@@ -31,6 +37,8 @@ import { ImShuffle } from "react-icons/im";
 import { TbRepeat, TbRepeatOff, TbRepeatOnce } from "react-icons/tb";
 import { AiOutlineSound } from "react-icons/ai";
 import MyTooltip from "./MyTooltip";
+import { editLike } from "../../store/playlist";
+import AddToPlaylist from "./AddToPlaylist";
 
 const Player = ({
   playerTarget,
@@ -47,6 +55,8 @@ const Player = ({
   // changmo
   const [volume, setVolume] = useState(100);
   const [disabledForwardBack, setDisabledForwardBack] = useState(false);
+  const likes = useSelector((state) => state.playlist.likes);
+  const ref = useRef();
   // const [touched, setTouched] = useState(false);
   const dispatch = useDispatch();
   const {
@@ -58,12 +68,7 @@ const Player = ({
     repeat,
   } = useSelector((state) => state.player);
 
-  useEffect(() => {
-    console.log(currentVideo, "this is current video");
-    console.log(queue, "this the queue");
-    console.log(currentIndex, "this is index");
-    console.log(alreadyListened, "this is already listened");
-  }, [currentVideo]);
+  useEffect(() => {}, [currentVideo]);
   //
   const pressSpaceListener = (e) => {
     // e.preventDefault();
@@ -126,6 +131,10 @@ const Player = ({
     dispatch({
       type: "player/setRepeat",
       repeat: Number(localStorage.getItem("repeat")),
+    });
+    dispatch({
+      type: "player/setLikes",
+      likes: JSON.parse(localStorage.getItem("likes")),
     });
 
     // dispatch({
@@ -206,6 +215,7 @@ const Player = ({
         .then((res) => res.json())
         .then((data) => {
           //
+          console.log(data.items[0].id == currentVideo, "data");
           setVideoDetails(data.items[0].snippet);
           setCurrentStatus(-1);
         });
@@ -246,7 +256,6 @@ const Player = ({
             return vol;
             // set the volume
           });
-          console.log(alreadyListened, "already listened latest");
 
           localStorage.setItem("currentSong", currentVideo);
           // e.target.setVolume(100);
@@ -268,7 +277,6 @@ const Player = ({
             if (shuffle) {
               let newNum = Math.floor(Math.random() * queue.length);
 
-              console.log(newNum, "shuffle num");
               while (alreadyListened.includes(newNum)) {
                 if (queue.length == 1) {
                   // the case where theres only 1 song in the playlist
@@ -286,9 +294,8 @@ const Player = ({
                   break;
                 }
                 newNum = Math.floor(Math.random() * queue.length);
-                console.log(newNum, "REROLL shuffle num");
               }
-              console.log(newNum, "UNIQUE shuffle numm");
+
               newIndex = newNum;
             }
           }
@@ -383,13 +390,19 @@ const Player = ({
             </Box>
 
             {/* heart icon & add to playlist */}
-
             <MyTooltip text="Like this Song">
               <Box>
                 <Icon
                   fontSize={22}
-                  color="rgb(186,186,186)"
-                  as={AiOutlineHeart}
+                  color={
+                    likes.includes(currentVideo)
+                      ? "lightgreen"
+                      : "rgb(186, 186, 186)"
+                  }
+                  as={
+                    likes.includes(currentVideo) ? AiFillHeart : AiOutlineHeart
+                  }
+                  borderRadius="100px"
                   _active={{
                     color: "white",
                     transform: "scale(1.1)",
@@ -397,33 +410,58 @@ const Player = ({
                     animationIterationCount: "infinite",
                   }}
                   _hover={{
-                    color: "white",
-                    cursor: "pointer",
-                  }}
-                ></Icon>
-              </Box>
-            </MyTooltip>
+                    color: "lightgreen",
 
-            <MyTooltip text="Add to Playlist">
-              <Box mr={10}>
-                <Icon
-                  ml="7px"
-                  fontSize={22}
-                  color="rgb(186,186,186)"
-                  as={AiOutlinePlus}
-                  _active={{
-                    color: "white",
-                    transform: "scale(1.1)",
-                    animation: "shake 0.5s",
-                    animationIterationCount: "infinite",
-                  }}
-                  _hover={{
-                    color: "white",
                     cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    if (likes.includes(currentVideo)) {
+                      dispatch(editLike(currentVideo, true)); // deletes
+                    } else {
+                      dispatch(editLike(currentVideo));
+                    }
                   }}
                 ></Icon>
               </Box>
             </MyTooltip>
+            <Box>
+              <Menu
+                onClose={() => {
+                  setTimeout(() => {
+                    console.log("exited");
+                    const event = new KeyboardEvent("keydown", {
+                      key: "Escape",
+                    });
+                    document.dispatchEvent(event);
+                  }, 100);
+                }}
+                placement="top"
+                offset={[105, 10]}
+              >
+                <MyTooltip text="Add to Playlist">
+                  <MenuButton ref={ref} mr={10}>
+                    <Icon
+                      ml="7px"
+                      fontSize={22}
+                      color="rgb(186,186,186)"
+                      as={AiOutlinePlus}
+                      _active={{
+                        color: "white",
+                        transform: "scale(1.1)",
+                        animation: "shake 0.5s",
+                        animationIterationCount: "infinite",
+                      }}
+                      _hover={{
+                        color: "white",
+                        cursor: "pointer",
+                      }}
+                    ></Icon>
+                  </MenuButton>
+                </MyTooltip>
+
+                <AddToPlaylist />
+              </Menu>
+            </Box>
           </Box>
         </Box>
         <Box className="playerFlexPortion">
@@ -483,10 +521,6 @@ const Player = ({
                   newIndex = currentIndex - 1;
                   if (shuffle) {
                     if (alreadyListened.length > 1) {
-                      console.log(
-                        alreadyListened.at(-2),
-                        "shuffle backward activated element"
-                      );
                       newIndex = alreadyListened.at(-2);
                       resetAlreadyListened = true;
                     } else {
@@ -496,13 +530,6 @@ const Player = ({
                       }
                       resetAlreadyListened = true;
                       newIndex = newNum;
-                      console.log(
-                        currentIndex,
-                        newNum,
-                        newIndex,
-                        alreadyListened,
-                        "inside back thing"
-                      );
                     }
                   }
                 }
@@ -528,25 +555,21 @@ const Player = ({
                   )
                 );
                 const pauseFix = setInterval(() => {
-                  console.log("((checkking");
                   let playbutton = document.querySelector("#playbutton");
                   let pausebutton = document.querySelector("#pausebutton");
 
-                  console.log(playbutton, "nope");
                   if (playbutton) {
-                    console.log("found it", playbutton);
                     setTimeout(() => {
                       playbutton = document.querySelector("#playbutton");
                       playbutton.click();
                     }, 600);
 
                     clearInterval(pauseFix);
-                    console.log("((RANN BOIII --------");
                   }
 
                   if (pausebutton) {
                     clearInterval(pauseFix);
-                    console.log("((CANCEL CUZ NO NEED --------");
+
                     return;
                   }
                   return playerTarget;
@@ -650,7 +673,7 @@ const Player = ({
                 // currentVideo is the curr song
                 // queue, currentIndex, alreadyListened
                 // disableChange;
-                console.log(playerTarget.getPlayerState(), "stat B444");
+
                 if (disabledForwardBack) return;
                 setDisabledForwardBack(true);
                 setTimeout(() => {
@@ -667,7 +690,6 @@ const Player = ({
                   if (shuffle) {
                     let newNum = Math.floor(Math.random() * queue.length);
 
-                    console.log(newNum, "shuffle num");
                     while (alreadyListened.includes(newNum)) {
                       if (queue.length == 1) {
                         // the case where theres only 1 song in the playlist
@@ -685,9 +707,8 @@ const Player = ({
                         break;
                       }
                       newNum = Math.floor(Math.random() * queue.length);
-                      console.log(newNum, "REROLL shuffle num");
                     }
-                    console.log(newNum, "UNIQUE shuffle numm");
+
                     newIndex = newNum;
                   }
                 }
@@ -700,7 +721,7 @@ const Player = ({
                         ...new Set([...alreadyListened, newIndex]),
                       ])
                 );
-                console.log(queue, newIndex, "pew");
+
                 dispatch(
                   setCurrentSong(
                     queue[newIndex][0].url.replace(
@@ -767,7 +788,6 @@ const Player = ({
               }}
               onClick={() => {
                 dispatch(setRepeat());
-                console.log(repeat, "repeat state here");
               }}
             />
           </Box>

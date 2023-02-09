@@ -46,7 +46,6 @@ const EditPlaylistModal = ({ title, isOpen, onClose }) => {
                 h="100%"
                 onKeyDown={(e) => {
                   if (e.key == "Enter") {
-                    console.log(e.target.value, "ee");
                     dispatch(
                       editPlaylist(
                         currentList.uniqID,
@@ -112,7 +111,6 @@ const EditPlaylistModal = ({ title, isOpen, onClose }) => {
               resize="none"
               onKeyDown={(e) => {
                 if (e.key == "Enter") {
-                  console.log(e.target.value, "ee");
                   dispatch(
                     editPlaylist(
                       currentList.uniqID,

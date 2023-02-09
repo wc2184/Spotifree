@@ -5,6 +5,7 @@ const POPULATE_NEW_USER = "playlist/populateNewUser";
 const HYDRATE_PLAYLISTS_FOR_ONE = "playlist/hydratePlaylistsForOne";
 const SET_PLAYLIST_SONGS_AND_OBJ = "playlist/setPlaylistSongsAndObj";
 const SET_PLAYLIST = "playlist/setPlaylist";
+const SET_LIKES = "playlist/setLikes";
 // date is obtained via new Date(), just copied the string, parse back in downloads/timeparser.js - will
 const initialPlaylists = [
   {
@@ -90,6 +91,85 @@ const initialPlaylists = [
       },
       {
         link: "https://www.youtube.com/watch?v=_Kqtj14rxes",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+    ],
+  },
+  {
+    name: "Chill Songs",
+    description: "Songs to relax and vibe to.",
+    uniqID: "9fa4f757-e2b4-4c6b-b625-a934a4d4902a",
+    songs: [
+      {
+        link: "https://www.youtube.com/watch?v=r7Rn4ryE_w8",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=U7pem9Yl5SY",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=qtgf-sidZrU",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=lzQpS1rH3zI",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=gGdGFtwCNBE",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=X6Kma_HdVHk",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=k5PO17AC3Kg",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=VbrEsOLu75c",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=7aekxC_monc",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=zEVzgqga3lo",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=V5VYKkx7N-g",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=kZFrj2ORq5U",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=4EQkYVtE-28",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=owTWCbq_nSk",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=XsMpXczOIPs",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=COz9lDCFHjw",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=Kp7eSUU9oy8",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=AUAxlOfw2O0",
         time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
       },
     ],
@@ -577,6 +657,10 @@ const initialPlaylists = [
         time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
       },
       {
+        link: "https://www.youtube.com/watch?v=Ewr6snhvnJo",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
         link: "https://www.youtube.com/watch?v=SQnc1QibapQ",
         time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
       },
@@ -739,85 +823,6 @@ const initialPlaylists = [
       },
     ],
   },
-  {
-    name: "Chill Songs",
-    description: "Songs to relax and vibe to.",
-    uniqID: "9fa4f757-e2b4-4c6b-b625-a934a4d4902a",
-    songs: [
-      {
-        link: "https://www.youtube.com/watch?v=r7Rn4ryE_w8",
-        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
-      },
-      {
-        link: "https://www.youtube.com/watch?v=U7pem9Yl5SY",
-        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
-      },
-      {
-        link: "https://www.youtube.com/watch?v=qtgf-sidZrU",
-        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
-      },
-      {
-        link: "https://www.youtube.com/watch?v=lzQpS1rH3zI",
-        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
-      },
-      {
-        link: "https://www.youtube.com/watch?v=gGdGFtwCNBE",
-        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
-      },
-      {
-        link: "https://www.youtube.com/watch?v=X6Kma_HdVHk",
-        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
-      },
-      {
-        link: "https://www.youtube.com/watch?v=k5PO17AC3Kg",
-        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
-      },
-      {
-        link: "https://www.youtube.com/watch?v=VbrEsOLu75c",
-        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
-      },
-      {
-        link: "https://www.youtube.com/watch?v=7aekxC_monc",
-        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
-      },
-      {
-        link: "https://www.youtube.com/watch?v=zEVzgqga3lo",
-        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
-      },
-      {
-        link: "https://www.youtube.com/watch?v=V5VYKkx7N-g",
-        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
-      },
-      {
-        link: "https://www.youtube.com/watch?v=kZFrj2ORq5U",
-        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
-      },
-      {
-        link: "https://www.youtube.com/watch?v=4EQkYVtE-28",
-        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
-      },
-      {
-        link: "https://www.youtube.com/watch?v=owTWCbq_nSk",
-        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
-      },
-      {
-        link: "https://www.youtube.com/watch?v=XsMpXczOIPs",
-        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
-      },
-      {
-        link: "https://www.youtube.com/watch?v=COz9lDCFHjw",
-        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
-      },
-      {
-        link: "https://www.youtube.com/watch?v=Kp7eSUU9oy8",
-        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
-      },
-      {
-        link: "https://www.youtube.com/watch?v=AUAxlOfw2O0",
-        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
-      },
-    ],
-  },
 ];
 
 // this is after the thunk, so the argument passed in is ACTUALLY a json blob
@@ -851,8 +856,6 @@ export const setPlaylistSongsAndObj = (songs, obj) => {
 export const getPlaylists = () => async (dispatch) => {
   let playlists = JSON.parse(localStorage.getItem("playlists"));
   if (playlists === null) {
-    console.log("Populating new user.");
-
     localStorage.setItem("playlists", JSON.stringify(initialPlaylists));
   }
   playlists = JSON.parse(localStorage.getItem("playlists"));
@@ -881,6 +884,21 @@ export const createPlaylist = () => async (dispatch) => {
   // this data2 if .json() will contain the route ('/playlists/12') for your create playlist to go to
 };
 
+export const editLike = (id, del = false) => {
+  let likes = JSON.parse(localStorage.getItem("likes"));
+  if (del) {
+    likes.splice(likes.indexOf(id), 1);
+  } else {
+    likes.push(id);
+  }
+
+  localStorage.setItem("likes", JSON.stringify(likes));
+  return {
+    type: SET_LIKES,
+    likes: likes,
+  };
+};
+
 export const editPlaylist =
   (uniqID, title, description) => (dispatch, getState) => {
     let playlists = JSON.parse(localStorage.getItem("playlists"));
@@ -888,17 +906,21 @@ export const editPlaylist =
     let toEdit = playlists[currentListIndex];
     toEdit.name = title;
     toEdit.description = description;
-    console.log(playlists[currentListIndex], "from redux editPlaylist");
-    console.log(playlists, "all redux");
+
     localStorage.setItem("playlists", JSON.stringify(playlists));
     dispatch(hydratePlaylistsForOne(playlists));
   };
 // potentially remove song from playlist, add song to playlist
 
+export const addToPlaylist = (songId, playlistId) => {
+  // get the playlist from localstorage, add the song
+};
+
 const initialState = {
   list: [], // all playlists
   currentList: null, // object
   songs: [], // array of objects
+  likes: JSON.parse(localStorage.getItem("likes")) || [], //array of strings
 };
 
 export default function playlistReducer(state = initialState, action) {
@@ -909,6 +931,8 @@ export default function playlistReducer(state = initialState, action) {
       return { ...state, list: action.playlists };
     case SET_PLAYLIST_SONGS_AND_OBJ:
       return { ...state, currentList: action.currentList, songs: action.songs };
+    case SET_LIKES:
+      return { ...state, likes: action.likes };
     default:
       return state;
   }

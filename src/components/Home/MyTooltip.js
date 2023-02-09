@@ -1,4 +1,5 @@
 import { Tooltip } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
 const MyTooltip = ({ children, text, gutter = 18, placement = "top" }) => {
   return (

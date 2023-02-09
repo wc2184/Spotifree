@@ -55,11 +55,11 @@ const Sidebar = ({ sidebarwidth }) => {
   }, [dispatch, currentUser]);
 
   // useEffect(() => {
-  //   console.log("Playlists are: ", playlists);
-  //   console.log("changes");
+  //
+  //
   // }, [dispatch, playlists]);
 
-  // console.log(playlists, "changing");
+  //
 
   return (
     <Box className="sidebar">
