@@ -50,10 +50,10 @@ function Root() {
 }
 
 const renderApplication = () => {
-  if (localStorage.getItem("version") != 1.2) {
+  if (localStorage.getItem("version") != 1.3) {
     // RESET LOCAL STORAGE
     localStorage.clear();
-    localStorage.setItem("version", 1.2);
+    localStorage.setItem("version", 1.3);
     localStorage.setItem("repeat", 1);
     localStorage.setItem("shuffle", false);
     localStorage.setItem("likes", JSON.stringify([]));

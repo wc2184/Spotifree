@@ -67,8 +67,7 @@ const Player = ({
     shuffle,
     repeat,
   } = useSelector((state) => state.player);
-
-  useEffect(() => {}, [currentVideo]);
+  console.log(queue, "q");
   //
   const pressSpaceListener = (e) => {
     // e.preventDefault();
