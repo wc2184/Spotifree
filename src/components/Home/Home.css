@@ -79,3 +79,20 @@ div#wave .dot:nth-child(3) {
     transform: translateY(-15px);
   }
 }
+
+.lowerSongs:hover .lowerAddPlaylistButtons {
+  visibility: visible;
+}
+
+.temptemp {
+  background-color: rgb(42, 42, 42);
+  transform: translate(2px);
+
+  transition: ease 0.2s;
+}
+
+.temptemp2 {
+  /* background-color: rgb(83, 83, 83); */
+  transform: scale(1.02);
+  transition: ease 0.3s;
+}

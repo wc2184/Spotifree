@@ -3,12 +3,15 @@ import {
   Button,
   Flex,
   Image,
+  Menu,
+  MenuButton,
   Progress,
   Slider,
   SliderFilledTrack,
   SliderThumb,
   SliderTrack,
   Text,
+  Icon,
 } from "@chakra-ui/react";
 import "./Home.css";
 import SpotifyLogo from "../../SpotifyLogo";
@@ -31,6 +34,8 @@ import { BsPlayFill } from "react-icons/bs";
 import { setSearchLoading } from "../../store/search";
 import { getPlaylists, setPlaylistSongsAndObj } from "../../store/playlist";
 import Playlist from "./Playlist";
+import { AiOutlinePlus } from "react-icons/ai";
+import AddToPlaylist from "./AddToPlaylist";
 
 // plan, use useEffect to update a array with all searchResults from useselector
 
@@ -684,6 +689,10 @@ const Home = () => {
                       Top result
                     </Text>
                     <Box
+                      className={`SONG${noembedDatas[0].url.replace(
+                        "https://www.youtube.com/watch?v=",
+                        ""
+                      )}`}
                       sx={{
                         flex: "1 0 85%",
                         // border: "1px solid white",
@@ -738,21 +747,84 @@ const Home = () => {
                         }, 300);
                       }}
                     >
-                      <Image
-                        w="120px"
-                        h="100px"
-                        mb={5}
-                        borderRadius={10}
-                        boxShadow="0 8px 24px rgb(0, 0, 0, .5)" // goat box shadow
-                        src={
-                          noembedDatas.length > 0 &&
-                          noembedDatas[0].thumbnail_url
-                        }
-                        // src={
-                        //   searchResults.length > 0 &&
-                        //   searchResults[0].snippet.thumbnails.default.url
-                        // }
-                      ></Image>
+                      <Box
+                        display="flex"
+                        justifyContent="space-between"
+                        zIndex={10}
+                      >
+                        <Image
+                          w="120px"
+                          h="100px"
+                          mb={5}
+                          borderRadius={10}
+                          boxShadow="0 8px 24px rgb(0, 0, 0, .5)" // goat box shadow
+                          src={
+                            noembedDatas.length > 0 &&
+                            noembedDatas[0].thumbnail_url
+                          }
+                          // src={
+                          //   searchResults.length > 0 &&
+                          //   searchResults[0].snippet.thumbnails.default.url
+                          // }
+                        ></Image>
+                        <Box>
+                          <Menu mb="auto" closeOnSelect={true} isLazy>
+                            {({ isOpen }) => {
+                              if (isOpen) {
+                                let thing = document.querySelector(
+                                  `.SONG${noembedDatas[0].url.replace(
+                                    "https://www.youtube.com/watch?v=",
+                                    ""
+                                  )}`
+                                );
+                                thing.classList.add("temptemp2");
+                              } else {
+                                let thing = document.querySelector(
+                                  `.SONG${noembedDatas[0].url.replace(
+                                    "https://www.youtube.com/watch?v=",
+                                    ""
+                                  )}`
+                                );
+                                if (thing) thing.classList.remove("temptemp2");
+                              }
+                              return (
+                                <>
+                                  <MenuButton
+                                    mt={1}
+                                    mr={1}
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                    }}
+                                  >
+                                    <Icon
+                                      ml="7px"
+                                      fontSize={26}
+                                      color="rgb(186,186,186)"
+                                      as={AiOutlinePlus}
+                                      _active={{
+                                        color: "white",
+                                        // transform: "scale(1.1)",
+                                        // animation: "shake 0.5s",
+                                        // animationIterationCount: "infinite",
+                                      }}
+                                      _hover={{
+                                        color: "green",
+                                        cursor: "pointer",
+                                      }}
+                                    ></Icon>
+                                  </MenuButton>
+                                  <AddToPlaylist
+                                    song={noembedDatas[0].url.replace(
+                                      "https://www.youtube.com/watch?v=",
+                                      ""
+                                    )}
+                                  />
+                                </>
+                              );
+                            }}
+                          </Menu>
+                        </Box>
+                      </Box>
                       {/* {searchResults.length > 0 && searchResults[0].snippet.title} */}
                       <Box>
                         {/* good parsed title and channel */}
@@ -891,11 +963,12 @@ const Home = () => {
                     </Text>
                     <Box>
                       {noembedDatas.slice(1, 5).map((ele, i) => {
-                        {
-                          //
-                        }
                         return (
                           <Box
+                            className={`SONG${ele.url.replace(
+                              "https://www.youtube.com/watch?v=",
+                              ""
+                            )}`}
                             _hover={{
                               // pointer: "cursor",
                               cursor: "pointer",
@@ -914,6 +987,8 @@ const Home = () => {
                               zIndex: 5,
                               display: "flex",
                               transition: "ease 0.2s",
+                              flex: 1,
+                              mr: "200px",
                             }}
                             onClick={() => {
                               dispatch(
@@ -1016,16 +1091,6 @@ const Home = () => {
                                       .replace(/「Audio」/, ""),
                                   // + "noembed",
                                 }}
-                                // dangerouslySetInnerHTML={{
-                                //   __html:
-                                //     searchResults.length > 0 &&
-                                //     ele.snippet.title.replace(
-                                //       ele.snippet.channelTitle
-                                //         .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-                                //         .replace("VEVO", "") + "- ",
-                                //       ""
-                                //     ),
-                                // }}
                               ></Box>
                               <Box
                                 sx={{
@@ -1041,6 +1106,64 @@ const Home = () => {
                                 }}
                               ></Box>
                             </Box>
+                            <Box ml="auto" display="flex" zIndex={10}>
+                              <Menu closeOnSelect={true} isLazy>
+                                {({ isOpen }) => {
+                                  if (isOpen) {
+                                    let thing = document.querySelector(
+                                      `.SONG${ele.url.replace(
+                                        "https://www.youtube.com/watch?v=",
+                                        ""
+                                      )}`
+                                    );
+                                    thing.classList.add("temptemp");
+                                  } else {
+                                    let thing = document.querySelector(
+                                      `.SONG${ele.url.replace(
+                                        "https://www.youtube.com/watch?v=",
+                                        ""
+                                      )}`
+                                    );
+                                    if (thing)
+                                      thing.classList.remove("temptemp");
+                                  }
+                                  return (
+                                    <>
+                                      <MenuButton
+                                        mt={1}
+                                        mr={1}
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                        }}
+                                      >
+                                        <Icon
+                                          ml="7px"
+                                          fontSize={26}
+                                          color="rgb(186,186,186)"
+                                          as={AiOutlinePlus}
+                                          _active={{
+                                            color: "white",
+                                            // transform: "scale(1.1)",
+                                            animation: "shake 0.5s",
+                                            animationIterationCount: "infinite",
+                                          }}
+                                          _hover={{
+                                            color: "green",
+                                            cursor: "pointer",
+                                          }}
+                                        ></Icon>
+                                      </MenuButton>
+                                      <AddToPlaylist
+                                        song={ele.url.replace(
+                                          "https://www.youtube.com/watch?v=",
+                                          ""
+                                        )}
+                                      />
+                                    </>
+                                  );
+                                }}
+                              </Menu>
+                            </Box>
                           </Box>
                         );
                       })}
@@ -1052,6 +1175,10 @@ const Home = () => {
                   {noembedDatas.slice(5).map((ele, i) => {
                     return (
                       <Box
+                        className={`lowerSongs SONG${ele.url.replace(
+                          "https://www.youtube.com/watch?v=",
+                          ""
+                        )}`}
                         _hover={{
                           // pointer: "cursor",
                           cursor: "pointer",
@@ -1061,7 +1188,7 @@ const Home = () => {
                           transition: "ease 0.2s",
                         }}
                         _active={{
-                          transform: "scale(0.99) translate(-2px)",
+                          transform: "scale(0.99)",
                         }}
                         sx={{
                           height: "60px",
@@ -1071,6 +1198,9 @@ const Home = () => {
                           zIndex: 5,
                           display: "flex",
                           transition: "ease 0.2s",
+                          flex: 1,
+                          mb: 1,
+                          mr: "200px",
                         }}
                         onClick={() => {
                           dispatch(
@@ -1175,16 +1305,6 @@ const Home = () => {
                                   .replace(/「Audio」/, ""),
                               // + "noembed",
                             }}
-                            // dangerouslySetInnerHTML={{
-                            //   __html:
-                            //     searchResults.length > 0 &&
-                            //     ele.snippet.title.replace(
-                            //       ele.snippet.channelTitle
-                            //         .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-                            //         .replace("VEVO", "") + "- ",
-                            //       ""
-                            //     ),
-                            // }}
                           ></Box>
                           <Box
                             sx={{
@@ -1198,14 +1318,70 @@ const Home = () => {
                                   .replace("VEVO", "")
                                   .replace("- Topic", ""),
                             }}
-                            // dangerouslySetInnerHTML={{
-                            //   __html:
-                            //     searchResults.length > 0 &&
-                            //     ele.snippet.channelTitle
-                            //       .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-                            //       .replace("VEVO", ""),
-                            // }}
                           ></Box>
+                        </Box>
+                        <Box
+                          className="lowerAddPlaylistButtons"
+                          sx={{ visibility: "hidden" }}
+                          ml="auto"
+                          display="flex"
+                          zIndex={10}
+                        >
+                          <Menu closeOnSelect={true} isLazy>
+                            {({ isOpen }) => {
+                              if (isOpen) {
+                                let thing = document.querySelector(
+                                  `.SONG${ele.url.replace(
+                                    "https://www.youtube.com/watch?v=",
+                                    ""
+                                  )}`
+                                );
+                                thing.classList.add("temptemp");
+                              } else {
+                                let thing = document.querySelector(
+                                  `.SONG${ele.url.replace(
+                                    "https://www.youtube.com/watch?v=",
+                                    ""
+                                  )}`
+                                );
+                                if (thing) thing.classList.remove("temptemp");
+                              }
+                              return (
+                                <>
+                                  <MenuButton
+                                    mt={1}
+                                    mr={1}
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                    }}
+                                  >
+                                    <Icon
+                                      ml="7px"
+                                      fontSize={26}
+                                      color="rgb(186,186,186)"
+                                      as={AiOutlinePlus}
+                                      _active={{
+                                        color: "white",
+                                        // transform: "scale(1.1)",
+                                        // animation: "shake 0.5s",
+                                        // animationIterationCount: "infinite",
+                                      }}
+                                      _hover={{
+                                        color: "green",
+                                        cursor: "pointer",
+                                      }}
+                                    ></Icon>
+                                  </MenuButton>
+                                  <AddToPlaylist
+                                    song={ele.url.replace(
+                                      "https://www.youtube.com/watch?v=",
+                                      ""
+                                    )}
+                                  />
+                                </>
+                              );
+                            }}
+                          </Menu>
                         </Box>
                       </Box>
                     );

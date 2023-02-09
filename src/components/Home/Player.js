@@ -426,6 +426,7 @@ const Player = ({
             </MyTooltip>
             <Box>
               <Menu
+                isLazy
                 onClose={() => {
                   setTimeout(() => {
                     console.log("exited");
@@ -434,6 +435,13 @@ const Player = ({
                     });
                     document.dispatchEvent(event);
                   }, 100);
+                  setTimeout(() => {
+                    console.log("exited");
+                    const event = new KeyboardEvent("keydown", {
+                      key: "Escape",
+                    });
+                    document.dispatchEvent(event);
+                  }, 200);
                 }}
                 placement="top"
                 offset={[105, 10]}
@@ -459,7 +467,7 @@ const Player = ({
                   </MenuButton>
                 </MyTooltip>
 
-                <AddToPlaylist />
+                <AddToPlaylist redirect />
               </Menu>
             </Box>
           </Box>

@@ -645,7 +645,7 @@ const initialPlaylists = [
         time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
       },
       {
-        link: "https://www.youtube.com/watch?v=AwYQGtwoF68",
+        link: "https://www.youtube.com/watch?v=5rnawnfK2sQ",
         time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
       },
       {
@@ -912,9 +912,40 @@ export const editPlaylist =
   };
 // potentially remove song from playlist, add song to playlist
 
-export const addToPlaylist = (songId, playlistId) => {
+export const addToPlaylist = (songId, playlistId) => (dispatch, getState) => {
   // get the playlist from localstorage, add the song
+  let playlists = JSON.parse(localStorage.getItem("playlists"));
+  let currentListIndex = playlists.findIndex(
+    (list) => playlistId == list.uniqID
+  );
+  let toEdit = playlists[currentListIndex];
+  let newSong = {
+    link: `https://www.youtube.com/watch?v=${songId}`,
+    time: String(new Date()),
+  };
+  toEdit.songs.push(newSong);
+  localStorage.setItem("playlists", JSON.stringify(playlists));
+  // console.log(playlists, playlistId, currentListIndex, toEdit, "the songs");
+  dispatch(getPlaylists());
 };
+
+export const removeFromPlaylist =
+  (songId, playlistId) => (dispatch, getState) => {
+    // get the playlist from localstorage, add the song
+    let playlists = JSON.parse(localStorage.getItem("playlists"));
+    let currentListIndex = playlists.findIndex(
+      (list) => playlistId == list.uniqID
+    );
+    let toEdit = playlists[currentListIndex];
+    let songIndex = toEdit.songs.findIndex(
+      (obj) => obj.link == `https://www.youtube.com/watch?v=${songId}`
+    );
+
+    toEdit.songs.splice(songIndex, 1);
+    localStorage.setItem("playlists", JSON.stringify(playlists));
+    // console.log(playlists, playlistId, currentListIndex, toEdit, "the songs");
+    dispatch(getPlaylists());
+  };
 
 const initialState = {
   list: [], // all playlists
