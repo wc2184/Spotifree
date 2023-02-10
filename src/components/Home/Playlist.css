@@ -2,3 +2,8 @@
   /* display: inline !important; */
   visibility: visible;
 }
+
+.playlistSongBox:hover .hiddenPlaylistSongDelete {
+  visibility: visible;
+  /* damn, the only the child of the parent that is hovered over is affected, not all  */
+}

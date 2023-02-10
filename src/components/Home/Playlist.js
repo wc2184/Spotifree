@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Divider,
   Flex,
   Icon,
@@ -7,8 +8,9 @@ import {
   Input,
   Text,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BsPlayFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -19,7 +21,11 @@ import {
   setIndex,
   setQueue,
 } from "../../store/player";
-import { getCurrentPlaylist, setPlaylist } from "../../store/playlist";
+import {
+  getCurrentPlaylist,
+  removeFromPlaylist,
+  setPlaylist,
+} from "../../store/playlist";
 import "./Playlist.css";
 import MyTooltip from "./MyTooltip";
 import EditPlaylistModal from "./EditPlaylistModal";
@@ -39,9 +45,10 @@ const Playlist = ({
   const songs = useSelector((state) => state.playlist.songs);
   const currentVideo = useSelector((state) => state.player.song);
   const alreadyListened = useSelector((state) => state.player.alreadyListened);
-
+  const ref = useRef();
   const { id } = useParams();
   const dispatch = useDispatch();
+  const toast = useToast();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
@@ -292,7 +299,6 @@ const Playlist = ({
                       top: "4px",
                       visibility: "hidden",
                     }}
-                    clas
                     as="span"
                     pt={8}
                     className="editButton"
@@ -378,6 +384,7 @@ const Playlist = ({
           dateCreated = dateCreated.join(" ");
           return (
             <Box
+              className="playlistSongBox"
               _hover={{
                 cursor: "pointer",
                 backgroundColor: "rgb(42, 42, 42)",
@@ -530,8 +537,39 @@ const Playlist = ({
                       .replace("- Topic", "")}
                 </Box>
               </Box>
-              <Box zIndex={2} ml="auto" color="#b3b3b3" mt={3} mr="3px">
-                {dateCreated}
+
+              <Box display="flex" zIndex={2} ml="auto" color="#b3b3b3" mr="3px">
+                <Box
+                  as={Button}
+                  colorScheme="red"
+                  alignSelf="center"
+                  className="hiddenPlaylistSongDelete"
+                  sx={{ visibility: "hidden" }}
+                  ref={ref}
+                  zIndex={2}
+                  mr={5}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    //
+                    dispatch(
+                      removeFromPlaylist(
+                        ele.url.replace("https://www.youtube.com/watch?v=", ""),
+                        currentList.uniqID
+                      )
+                    );
+
+                    toast({
+                      title: "Song removed!",
+                      description: `Removed from ${currentList.name}`,
+                      status: "info",
+                      duration: 2500,
+                      isClosable: true,
+                    });
+                  }}
+                >
+                  Delete
+                </Box>
+                <Text alignSelf="center">{dateCreated}</Text>
               </Box>
             </Box>
           );

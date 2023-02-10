@@ -54,7 +54,7 @@ const AddToPlaylist = ({ redirect = false, song }) => {
                       }
                       onClick={(e) => {
                         e.stopPropagation();
-                        console.log(list.uniqID, "uniqIDDD");
+
                         if (
                           !list.songs.some((arr) =>
                             arr.link.includes(currentSong)
@@ -78,7 +78,6 @@ const AddToPlaylist = ({ redirect = false, song }) => {
                             }, 700);
                           }
                         } else {
-                          console.log("running remove");
                           dispatch(
                             removeFromPlaylist(currentSong, list.uniqID)
                           );

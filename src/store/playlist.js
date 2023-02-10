@@ -925,7 +925,7 @@ export const addToPlaylist = (songId, playlistId) => (dispatch, getState) => {
   };
   toEdit.songs.push(newSong);
   localStorage.setItem("playlists", JSON.stringify(playlists));
-  // console.log(playlists, playlistId, currentListIndex, toEdit, "the songs");
+  //
   dispatch(getPlaylists());
 };
 
@@ -943,7 +943,7 @@ export const removeFromPlaylist =
 
     toEdit.songs.splice(songIndex, 1);
     localStorage.setItem("playlists", JSON.stringify(playlists));
-    // console.log(playlists, playlistId, currentListIndex, toEdit, "the songs");
+    //
     dispatch(getPlaylists());
   };
 

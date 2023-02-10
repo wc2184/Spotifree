@@ -67,7 +67,7 @@ const Player = ({
     shuffle,
     repeat,
   } = useSelector((state) => state.player);
-  console.log(queue, "q");
+
   //
   const pressSpaceListener = (e) => {
     // e.preventDefault();
@@ -214,7 +214,7 @@ const Player = ({
         .then((res) => res.json())
         .then((data) => {
           //
-          console.log(data.items[0].id == currentVideo, "data");
+
           setVideoDetails(data.items[0].snippet);
           setCurrentStatus(-1);
         });
@@ -428,14 +428,12 @@ const Player = ({
                 isLazy
                 onClose={() => {
                   setTimeout(() => {
-                    console.log("exited");
                     const event = new KeyboardEvent("keydown", {
                       key: "Escape",
                     });
                     document.dispatchEvent(event);
                   }, 100);
                   setTimeout(() => {
-                    console.log("exited");
                     const event = new KeyboardEvent("keydown", {
                       key: "Escape",
                     });
