@@ -21,7 +21,7 @@
 <br/>
 <p></p>
 <br/><br/>
-
+<!-- 
 Todo:
 
 - Sample playlists w/ songs in localStorage
@@ -44,4 +44,4 @@ WAY LATER:
 - include a gif of the mobile responsive design
 - default to /search 
 
-
+-->
