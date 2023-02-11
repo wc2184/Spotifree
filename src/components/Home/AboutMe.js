@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { BsGithub } from "react-icons/bs";
 import { AiFillLinkedin } from "react-icons/ai";
+import { RiComputerLine } from "react-icons/ri";
 
 const AboutMe = ({ isOpen, onClose }) => {
   //   1372;
@@ -86,7 +87,7 @@ const AboutMe = ({ isOpen, onClose }) => {
             }}
             colorScheme="yellow"
             fontSize={isLessThan1372 ? "14px" : "1.15rem"}
-            leftIcon={<BsGithub />}
+            leftIcon={<RiComputerLine />}
             flex={1}
           >
             <Text mt="3px">My Website</Text>
