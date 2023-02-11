@@ -33,7 +33,6 @@ const WelcomeBack = ({ library }) => {
     };
     fetchNoembedData();
   }, [playlists]);
-  console.log(noembedDatas);
   if (playlistLoading) return;
   return (
     <>
@@ -197,6 +196,9 @@ const WelcomeBack = ({ library }) => {
                 //   alignSelf: "start",
                 minWidth: "300px",
               }}
+              onClick={() => {
+                history.push(`/liked`);
+              }}
             >
               <Box
                 sx={{
@@ -257,7 +259,7 @@ const WelcomeBack = ({ library }) => {
                   h="100px"
                   mr={5}
                   boxShadow="0 8px 24px rgb(0, 0, 0, .5)"
-                  src="https://i1.sndcdn.com/artworks-y6qitUuZoS6y8LQo-5s2pPA-t500x500.jpg"
+                  src="https://res.cloudinary.com/dkg7lxnj2/image/upload/v1676106493/image_5_zvbqcf.png"
                 ></Image>
 
                 <Box

@@ -38,6 +38,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import AddToPlaylist from "./AddToPlaylist";
 import WelcomeBack from "./WelcomeBack";
 import RecentlyPlayed from "./RecentlyPlayed";
+import Liked from "./Liked";
 
 // plan, use useEffect to update a array with all searchResults from useselector
 
@@ -1046,6 +1047,26 @@ const Home = () => {
           colors={colors}
         >
           <Playlist
+            playerTarget={playerTarget}
+            setPlayerTarget={setPlayerTarget}
+            loading={loading}
+            setLoading={setLoading}
+            visualLoading={visualLoading}
+            setVisualLoading={setVisualLoading}
+            playlistLoading={playlistLoading}
+            setPlaylistLoading={setPlaylistLoading}
+          />
+        </MainContentWrapper>
+      </Route>
+      <Route path="/liked">
+        <MainContentWrapper
+          sidebarwidth={sidebarwidth}
+          playlistLoading={playlistLoading}
+          setPlaylistLoading={setPlaylistLoading}
+          hashCode={hashCode}
+          colors={colors}
+        >
+          <Liked
             playerTarget={playerTarget}
             setPlayerTarget={setPlayerTarget}
             loading={loading}

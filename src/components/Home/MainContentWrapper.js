@@ -56,7 +56,8 @@ const MainContentWrapper = ({
           }}
         ></Box>
       ) : (
-        !location.pathname.includes("search") && (
+        !location.pathname.includes("search") &&
+        !location.pathname.includes("liked") && (
           <Box
             sx={{
               display: "block",
@@ -73,6 +74,23 @@ const MainContentWrapper = ({
             }}
           ></Box>
         )
+      )}
+      {location.pathname.includes("liked") && (
+        <Box
+          sx={{
+            display: "block",
+            height: "440px",
+            position: "absolute",
+            width: `calc(100% - ${sidebarwidth}px)`,
+            zIndex: 0,
+            top: 0,
+            left: 0,
+            // backgroundColor: "rgb(184, 8, 24)",
+            backgroundImage: `linear-gradient(to bottom, rgb(134, 237, 170), rgb(18,18,18));`,
+            opacity: 0.8,
+            marginLeft: sidebarwidth,
+          }}
+        ></Box>
       )}
       {children}
     </div>
