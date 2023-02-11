@@ -541,7 +541,7 @@ const Playlist = ({
               <Box display="flex" zIndex={2} ml="auto" color="#b3b3b3" mr="3px">
                 <Box
                   as={Button}
-                  colorScheme="red"
+                  colorScheme="whiteAlpha"
                   alignSelf="center"
                   className="hiddenPlaylistSongDelete"
                   sx={{ visibility: "hidden" }}
@@ -565,6 +565,14 @@ const Playlist = ({
                       duration: 2500,
                       isClosable: true,
                     });
+
+                    // setTimeout(() => {
+                    //   setNoembedDatas((prev) => {
+                    //     dispatch(setQueue(prev));
+
+                    //     return prev;
+                    //   });
+                    // }, 1000);
                   }}
                 >
                   Delete

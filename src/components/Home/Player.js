@@ -551,6 +551,14 @@ const Player = ({
                         ...new Set([...alreadyListened, newIndex]),
                       ])
                 );
+                console.log(
+                  queue,
+                  "this queue",
+                  newIndex,
+                  "new Index",
+                  currentIndex,
+                  "curr index"
+                );
                 dispatch(
                   setCurrentSong(
                     queue[newIndex][0].url.replace(

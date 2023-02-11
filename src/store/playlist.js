@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import csrfFetch from "./csrf";
+import { setIndex, setQueue } from "./player";
 
 const POPULATE_NEW_USER = "playlist/populateNewUser";
 const HYDRATE_PLAYLISTS_FOR_ONE = "playlist/hydratePlaylistsForOne";
@@ -284,6 +285,10 @@ const initialPlaylists = [
       },
       {
         link: "https://www.youtube.com/watch?v=HtbnfBFIJls",
+        time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
+      },
+      {
+        link: "https://www.youtube.com/watch?v=SBLLkWbymlE",
         time: "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)",
       },
       {
@@ -912,26 +917,40 @@ export const editPlaylist =
   };
 // potentially remove song from playlist, add song to playlist
 
-export const addToPlaylist = (songId, playlistId) => (dispatch, getState) => {
-  // get the playlist from localstorage, add the song
-  let playlists = JSON.parse(localStorage.getItem("playlists"));
-  let currentListIndex = playlists.findIndex(
-    (list) => playlistId == list.uniqID
-  );
-  let toEdit = playlists[currentListIndex];
-  let newSong = {
-    link: `https://www.youtube.com/watch?v=${songId}`,
-    time: String(new Date()),
+export const addToPlaylist =
+  (songId, playlistId) => async (dispatch, getState) => {
+    // get the playlist from localstorage, add the song
+    let playlists = JSON.parse(localStorage.getItem("playlists"));
+    let currentListIndex = playlists.findIndex(
+      (list) => playlistId == list.uniqID
+    );
+    let toEdit = playlists[currentListIndex];
+    let newSong = {
+      link: `https://www.youtube.com/watch?v=${songId}`,
+      time: String(new Date()),
+    };
+    toEdit.songs.push(newSong);
+    localStorage.setItem("playlists", JSON.stringify(playlists));
+    //
+    dispatch(getPlaylists());
+    let res = await fetch(
+      `https://noembed.com/embed?url=https://www.youtube.com/watch?v=${songId}`
+    );
+    let data = await res.json();
+
+    dispatch(
+      setQueue([
+        ...getState().player.queue,
+        [data, "Wed Feb 01 2023 03:06:47 GMT-0500 (Eastern Standard Time)"],
+      ])
+    );
   };
-  toEdit.songs.push(newSong);
-  localStorage.setItem("playlists", JSON.stringify(playlists));
-  //
-  dispatch(getPlaylists());
-};
 
 export const removeFromPlaylist =
   (songId, playlistId) => (dispatch, getState) => {
     // get the playlist from localstorage, add the song
+    let currIndex = getState().player.index;
+    let oldArr = getState().player.queue;
     let playlists = JSON.parse(localStorage.getItem("playlists"));
     let currentListIndex = playlists.findIndex(
       (list) => playlistId == list.uniqID
@@ -945,6 +964,16 @@ export const removeFromPlaylist =
     localStorage.setItem("playlists", JSON.stringify(playlists));
     //
     dispatch(getPlaylists());
+
+    let deletedI = oldArr.findIndex(
+      (el) => el[0].url == `https://www.youtube.com/watch?v=${songId}`
+    );
+
+    oldArr.splice(deletedI, 1);
+    dispatch(setQueue(oldArr));
+    if (currIndex > deletedI) {
+      dispatch(setIndex(currIndex - 1));
+    }
   };
 
 const initialState = {
