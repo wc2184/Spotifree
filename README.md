@@ -15,7 +15,7 @@
   <img src="https://res.cloudinary.com/dkg7lxnj2/image/upload/v1674802505/test_vrduhd.gif" />
 </p>
 <h1 align="center">
-<a href="https://spotifreeWilliam.vercel.app/search">Live Link</a>
+<a href="https://www.spotifree.app/search">Live Link</a>
 <p></p>
 </h1>
 <br/>
