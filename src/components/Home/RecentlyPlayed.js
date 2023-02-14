@@ -40,7 +40,7 @@ const RecentlyPlayed = ({
     oneFromEachPlaylist.splice([summ % oneFromEachPlaylist.length], 1);
     summ += 21;
   }
-  console.log(twelve, "ALL SONGS");
+
   //   = playlists.map((list) => {
   //     if (list.songs.length > 0) return { ...list, link: list.songs[0].link };
   //     else return null;
@@ -68,7 +68,7 @@ const RecentlyPlayed = ({
     };
     fetchNoembedData();
   }, [playlists]);
-  console.log(noembedDatas);
+
   if (playlistLoading) return;
   return (
     <>
