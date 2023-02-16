@@ -459,6 +459,7 @@ const Playlist = ({
                 alignItems="center"
                 ml={1}
                 mr={5}
+                width="10px"
                 zIndex="2"
               >
                 {i + 1}
