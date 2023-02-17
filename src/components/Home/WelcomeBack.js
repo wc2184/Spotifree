@@ -36,7 +36,7 @@ const WelcomeBack = ({ library }) => {
   if (playlistLoading) return;
   return (
     <>
-      <Box width="100%" zIndex={1} mb="93px">
+      <Box width="100%" zIndex={1} mb={library && "93px"}>
         <Text
           sx={{ flex: "1 0 15%" }}
           color="white"

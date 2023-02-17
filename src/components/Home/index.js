@@ -180,7 +180,7 @@ const Home = () => {
           colors={colors}
         >
           <Box
-            mt="100px"
+            mt="70px"
             // width={`calc(100vw - ${sidebarwidth}px)`}
             sx={{
               display: "flex",
