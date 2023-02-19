@@ -41,7 +41,7 @@ const AboutMe = ({ isOpen, onClose }) => {
           <br></br> <br></br>
           <br></br> <br></br>{" "}
           <span style={{ fontWeight: "bold" }}>
-            P.S. As a recent CS college grad, I'm currently looking for work, so
+            P.S. I'm currently looking for work, so
             if you loved this site- feel free to reach out to me!
           </span>
         </ModalBody>
